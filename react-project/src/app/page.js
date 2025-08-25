@@ -13,14 +13,37 @@ export default function Home() {
         <p className="text-lg text-gray-700 mb-6">
           Hvad vil du gerne nu?
         </p>
-        <a
-          href="/events"
-          className="inline-block bg-purple-600 text-white px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-700 transition-transform hover:scale-105"
-        >
-          View Events
+        
+        <a href="/hjem"
+          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
+          Hjem
+        </a>
+        <a href="/stævner"
+          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
+          Stævner
+        </a>
+        <a href="/profil"
+          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
+          Profil
+        </a>
+        <a href="/hest"
+          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
+          Hest
+        </a>
+        <a href="/chatbot"
+          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
+          Chatbot
+        </a>
+        <a href="/hjælp-og-support"
+        className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
+          Hjælp & Support
         </a>
       </div>
     </main>
   );
 }
 
+
+          //Hest
+          //Chatbot
+          //help og support
