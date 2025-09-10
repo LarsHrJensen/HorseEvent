@@ -1,8 +1,17 @@
+'use client';
+import{ useRouter} from "next/navigation";
 import Image from "next/image";
 import "./profil.css";
 
 
+
 export default function Profilpage() {
+const router = useRouter();
+
+const handleSignupClick = ()  => {
+  router.push('/signup');
+};
+
   return (
     
     <main className= "profil-wrapper">  
@@ -21,7 +30,7 @@ export default function Profilpage() {
       
 
       <div className="profil-buttons">
-          <button className="profilknap">Opret profil</button>
+          <button className="profilknap"onClick={handleSignupClick}>Opret profil</button>
           <button className="profilknap">Log ind</button>
          <button className="profilknap">Glemt password?</button>
         </div>
