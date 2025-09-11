@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import "./page.css";
 
@@ -43,8 +45,8 @@ export default function CreateHorsePage() {
     
     
     return (
-        <div className="createHorseConatiner">
-            <h1> opret hest </h1>
+        <div className="createHorseContainer">
+            <h1> Opret hest </h1>
             <p>Udfyld detaljerne nedenfor for at oprette en ny hest</p>
             <form>
                 <input
@@ -55,6 +57,7 @@ export default function CreateHorsePage() {
                 onChange={handleChange}
                 required>
                 </input>
+
                 <input
                 type="text"
                 name="horseId"
@@ -63,6 +66,7 @@ export default function CreateHorsePage() {
                 onChange={handleChange}
                 required>
                 </input>
+
                 <input
                 type="number"
                 name="height"
@@ -71,6 +75,7 @@ export default function CreateHorsePage() {
                 onChange={handleChange}
                 required>
                 </input>
+
                 <input
                 type="number"
                 name="birthyear"
