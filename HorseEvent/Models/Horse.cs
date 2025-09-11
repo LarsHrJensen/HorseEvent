@@ -2,7 +2,7 @@
 {
     public class Horse
     {
-        public int HorseId { get; set; }
+        public string HorseId { get; set; }
         public string? HorseName { get; set; }
         public decimal Height { get; set; }
         public int BirthYear { get; set; }
