@@ -1,9 +1,7 @@
 ﻿using Contracts;
 using HorseRider.Application.Commands;
-using HorseRider.Application.DTO_s;
 using HorseRider.Application.Handlers;
 using HorseRider.Application.Queries;
-using HorseRider.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
