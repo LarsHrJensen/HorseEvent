@@ -23,7 +23,7 @@ export default function CreateHorsePage() {
         e.preventDefault();
 
         try{
-            const response = await fetch("https://localhost:5001/api/horses", { //opdater med rigtig URL
+            const response = await fetch("https://localhost:7265/api/horse", { //opdater med rigtig URL
                 method: "POST",
                 headers: {
                     "Conent-Type": "application/json"
