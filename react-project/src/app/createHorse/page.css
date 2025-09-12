@@ -3,6 +3,9 @@
     margin: 3rem auto;
     padding: 2rem;
     background: #faf6f2;
+    color: #2d2d2d;
+    font-size: 1.1rem;
+    line-height: 1.6;
     border-radius: 1.5rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
@@ -27,4 +30,8 @@
     color: white;
     font-weight: bold;
     cursor: pointer;
+}
+
+.createHorseContainer h1 {
+font-size: 2rem;
 }

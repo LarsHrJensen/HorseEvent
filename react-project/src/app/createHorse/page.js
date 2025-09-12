@@ -13,7 +13,7 @@ export default function CreateHorsePage() {
     });
 
     // Handle changes of input
-    const handleChange = (e) => {
+    const handleChange = (e) => {kk
         const {name, value} = e.target;
         setHorseData({...horseData, [name]: value});
     };
@@ -46,7 +46,7 @@ export default function CreateHorsePage() {
     
     return (
         <div className="createHorseContainer">
-            <h1> Opret hest </h1>
+            <h1 className="font-size-10"> Opret hest </h1>
             <p>Udfyld detaljerne nedenfor for at oprette en ny hest</p>
             <form>
                 <input
