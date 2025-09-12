@@ -4,87 +4,55 @@ import { useState } from "react";
 import "./page.css";
 
 export default function CreateHorsePage() {
-    // Data for horses = basis for input fields for create object
     const [horseData, setHorseData] = useState({
-        name: "",
-        id: "",
-        height: "", 
-        birthyear: ""
+        Name: "",
+        HorseId: "",
+        Height: "",
+        BirthYear: ""
     });
 
+
     // Handle changes of input
-    const handleChange = (e) => {kk
-        const {name, value} = e.target;
-        setHorseData({...horseData, [name]: value});
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setHorseData({ ...horseData, [name]: value });
     };
-    
-    
-    const handleSumbit = async (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try{
-            const response = await fetch("https://localhost:5001/api/horses", { //opdater med rigtig URL
+        try {
+            const response = await fetch("https://localhost:7265/api/horse", {
                 method: "POST",
                 headers: {
-                    "Conent-Type": "application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(horseData)
             });
 
-            if(response.ok) {
+            if (response.ok) {
                 alert("Hest oprettet!");
-                setHorseData({name: "", id: "", height: "", birthyear: ""})
+                setHorseData({ name: "", id: "", height: "", birthyear: "" });
             } else {
-                alert("Der opstod en fejl.")
+                alert("Der opstod en fejl.");
             }
         } catch (error) {
             console.error(error);
-            alert("Something went wrong, womp womp")
+            alert("Something went wrong, womp womp");
         }
     };
-    
-    
+
     return (
         <div className="createHorseContainer">
-            <h1 className="font-size-10"> Opret hest </h1>
+            <h1>Opret hest</h1>
             <p>Udfyld detaljerne nedenfor for at oprette en ny hest</p>
-            <form>
-                <input
-                type="text"
-                name="name"
-                placeholder="Horse name"
-                value={horseData.name}
-                onChange={handleChange}
-                required>
-                </input>
+            <form onSubmit={handleSubmit}>
+                <input type="text" name="Name" placeholder="Horse name" value={horseData.Name} onChange={handleChange} required />
+                <input type="text" name="HorseId" placeholder="Horse ID" value={horseData.HorseId} onChange={handleChange} required />
+                <input type="number" name="Height" placeholder="Height" value={horseData.Height} onChange={handleChange} required />
+                <input type="number" name="BirthYear" placeholder="Birthyear" value={horseData.BirthYear} onChange={handleChange} required />
 
-                <input
-                type="text"
-                name="horseId"
-                placeholder="horse id"
-                value={horseData.horseId}
-                onChange={handleChange}
-                required>
-                </input>
-
-                <input
-                type="number"
-                name="height"
-                placeholder="height"
-                value={horseData.height}
-                onChange={handleChange}
-                required>
-                </input>
-
-                <input
-                type="number"
-                name="birthyear"
-                placeholder="birthyear"
-                value={horseData.birthyear}
-                onChange={handleChange}
-                required>
-                </input>
-                <button type="sumbit">Opret Hest</button>
+                <button type="submit">Opret Hest</button>
             </form>
         </div>
     );

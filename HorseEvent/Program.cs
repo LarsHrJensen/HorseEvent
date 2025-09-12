@@ -1,36 +1,65 @@
+using Microsoft.AspNetCore.Builder;
+
 namespace HorseEvent
 {
     public class Program
     {
-        public static void Main(string[] args)
+           public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            ////// Tilføj DbContext (PostgreSQL)
+            //builder.Services.AddDbContext<RiderDbContext>(options =>
+            //    options.UseNpgsql(builder.Configuration.GetConnectionString("HorseRiderDB")));
+
+            //// Registrer repository
+            //builder.Services.AddScoped<IRiderRepository, RiderRepository>();
+
+            //// Registrer command handlers
+            //builder.Services.AddScoped<CreateRiderCommandHandler>();
+
+            ////Tilføj MediatR(scanner hele Application-laget for handlers)
+            //builder.Services.AddMediatR(cfg =>
+            //{
+            //    cfg.RegisterServicesFromAssembly(typeof(CreateRiderCommandHandler).Assembly);
+            //});
+
+            builder.Services.AddControllers();
+
+            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            builder.Services.AddOpenApi();
+
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003") // Next.js frontend
+                           .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.MapOpenApi();
             }
 
+
+            app.UseCors();
+
             app.UseHttpsRedirection();
-            app.UseRouting();
 
             app.UseAuthorization();
 
-            app.MapStaticAssets();
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
-                .WithStaticAssets();
+
+            app.MapControllers();
 
             app.Run();
         }
     }
 }
+
