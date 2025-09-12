@@ -67,3 +67,9 @@ margin-bottom: 1rem;
     margin-bottom: 0.25rem;
     display: block;
 }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2 rem;
+}
