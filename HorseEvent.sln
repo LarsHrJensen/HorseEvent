@@ -28,9 +28,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendAPI", "BackendAPI\Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{0CCA3FF7-1D60-4C5F-A323-029D54FBC1F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseRider", "HorseRider\HorseRider.csproj", "{79238F21-7686-44AB-A87A-D7FF8E7C3857}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseRiderContext", "HorseRider\HorseRiderContext.csproj", "{79238F21-7686-44AB-A87A-D7FF8E7C3857}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "SharedKernel\SharedKernel.csproj", "{66AF3224-4822-4B29-B7EB-C3B9F8992A82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementContext", "UserManagementContext\UserManagementContext.csproj", "{70B21C0C-0A3D-4C1B-860E-54A2BA0BC8B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{66AF3224-4822-4B29-B7EB-C3B9F8992A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66AF3224-4822-4B29-B7EB-C3B9F8992A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66AF3224-4822-4B29-B7EB-C3B9F8992A82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B21C0C-0A3D-4C1B-860E-54A2BA0BC8B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B21C0C-0A3D-4C1B-860E-54A2BA0BC8B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B21C0C-0A3D-4C1B-860E-54A2BA0BC8B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B21C0C-0A3D-4C1B-860E-54A2BA0BC8B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
