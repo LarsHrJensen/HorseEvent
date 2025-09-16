@@ -47,10 +47,10 @@ export default function CreateHorsePage() {
             <h1>Opret hest</h1>
             <p>Udfyld detaljerne nedenfor for at oprette en ny hest.</p>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="Name" placeholder="Horse name" value={horseData.Name} onChange={handleChange} required />
-                <input type="text" name="HorseId" placeholder="Horse ID" value={horseData.HorseId} onChange={handleChange} required />
-                <input type="number" name="Height" placeholder="Height" value={horseData.Height} onChange={handleChange} required />
-                <input type="number" name="BirthYear" placeholder="Birthyear" value={horseData.BirthYear} onChange={handleChange} required />
+                <input type="text" name="Name" placeholder="Hestens navn" value={horseData.Name} onChange={handleChange} required />
+                <input type="text" name="HorseId" placeholder="Hestens ID nummer" value={horseData.HorseId} onChange={handleChange} required />
+                <input type="number" name="Height" placeholder="Højde i cm" value={horseData.Height} onChange={handleChange} required />
+                <input type="number" name="BirthYear" placeholder="Hestens fødselsår" value={horseData.BirthYear} onChange={handleChange} required />
 
                 <button type="submit">Opret Hest</button>
             </form>
