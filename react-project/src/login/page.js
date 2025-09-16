@@ -1,25 +1,25 @@
 'use client';
-import "./signin.css";
+import "./login.css";
 import Image from "next/image";
 
 export default function Page() {
   return (
-    <main className= "signin-wrapper"> 
-    <div className= "signin-content">
+    <main className= "login-wrapper"> 
+    <div className= "login-content">
 
       <h1>Log in her</h1>
-            <div className= "signin-image">
+            <div className= "login-image">
               <Image
-                src="/kvindehest.webp"
-                alt="kvindehest"
+                src="/Horse_girl.png"
+                alt="Horse_girl"
                 width={600}
                 height={500}
                />
             </div>
         </div>
         
-        <div className= "signin-box">    
-          <h1 className="signin-title">Opret dig som bruger i Hesteland! </h1>
+        <div className= "login-box">    
+          <h1 className="login-title">Log ind på Hesteland! </h1>
 
           <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -32,8 +32,9 @@ export default function Page() {
             </div>
 
 
-            <form className="signin-form">
-           <button className="signin-button">Opret</button>
+            <form className="login-form">
+           <button className="login-button"onClick={handleSignupClick}>Log ind</button>
+
            </form>
        </div>
          

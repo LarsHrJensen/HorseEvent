@@ -48,6 +48,15 @@ margin: bottom 4px;
 font-weight:bold;
 }
 
+/*overskrift*/
+.signup-title {
+font-size: 32px;
+font-weight: bold;
+color: #3b82f6;
+margin-bottom: 40px;
+text-align: center;
+}
+
 form-group input {
 padding: 10px;
 border: 1px solid #ccc;

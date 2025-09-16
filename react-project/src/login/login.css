@@ -1,4 +1,4 @@
-.signin-wrapper {
+.login-wrapper {
 background-color: #e0f2ff;
 padding: 60px;
 min-height: 100vh;
@@ -8,7 +8,7 @@ align-items: flex-start;
 }
 
 /*Hvid kasse*/
-.signin-box {
+.login-box {
 background-color: white;
 padding: 40px;
 border-radius: 12px;
@@ -18,7 +18,7 @@ width: 100%;
 }
 
  /*flex layout: billede + knapper*/
-.signin-content{
+.login-content{
 display: flex;
 flex-direction: row;
 justify-content: flex-start;
@@ -27,12 +27,12 @@ gap: 40px;
 }
 
 /*billedet*/
-.signin-image{
+.login-image{
 flex-shrink: 0;
 width: 600px;
 }
 
-.signin-form{
+.login-form{
 display:flex;
 flex-direction: column;
 gap: 16px;
@@ -44,17 +44,17 @@ flex-direction: column;
 }
 
 .form-group label{
-margin: bottom 4px;
+margin-bottom: 4px;
 font-weight:bold;
 }
 
-form-group input {
+.form-group input {
 padding: 10px;
 border: 1px solid #ccc;
 border-radius: 6px;
 }
 
-.signin-button{
+.login-button{
 background-color: #007bff;
 color: white;
 padding: 12px 16px;
@@ -63,6 +63,6 @@ border-radius: 6px;
 cursor: pointer;
 }
 
-.signin-button:hover {
+.login-button:hover {
 background-color: #0056b3;
 }

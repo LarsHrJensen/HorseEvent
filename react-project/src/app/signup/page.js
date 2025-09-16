@@ -3,6 +3,7 @@ import{ useRouter} from "next/navigation";
 import "./signup.css";
 import Image from "next/image";
 
+
 export default function Page() {
   return (
     <main className= "signup-wrapper"> 
