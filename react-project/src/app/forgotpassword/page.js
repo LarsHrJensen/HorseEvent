@@ -1,7 +1,7 @@
 'use client';
 import{ useRouter} from "next/navigation";
-import "./forgotpassword.css";
-import Topbar from "./topbar";
+import "./page.css";
+import Topbar from "../profil/topbar";
 
 export default function ForgotPassword() {
     const router = useRouter();
