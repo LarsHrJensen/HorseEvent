@@ -45,7 +45,7 @@ export default function CreateHorsePage() {
     return (
         <div className="createHorseContainer">
             <h1>Opret hest</h1>
-            <p>Udfyld detaljerne nedenfor for at oprette en ny hest</p>
+            <p>Udfyld detaljerne nedenfor for at oprette en ny hest.</p>
             <form onSubmit={handleSubmit}>
                 <input type="text" name="Name" placeholder="Horse name" value={horseData.Name} onChange={handleChange} required />
                 <input type="text" name="HorseId" placeholder="Horse ID" value={horseData.HorseId} onChange={handleChange} required />
