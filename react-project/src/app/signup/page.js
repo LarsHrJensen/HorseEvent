@@ -1,6 +1,6 @@
 'use client';
 import{ useRouter} from "next/navigation";
-import "./signup.css";
+import "./page.css";
 import Image from "next/image";
 
 

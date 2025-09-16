@@ -1,7 +1,7 @@
 'use client';
 import{ useRouter} from "next/navigation";
 import Image from "next/image";
-import "./profil.css";
+import "./page.css";
 import Topbar from "./topbar";
 
 
@@ -21,12 +21,9 @@ const handleForgotPasswordClick = ()  => {
     
     <main className= "profil-wrapper">  
     <Topbar />{/*Topbar med login-knap*/}
-    <div className= "login-button-container">
-    
-      
+    <div className= "login-button-container"> </div>
 
-
-
+    <div className="profil-box">
     <div className= "profil-content">
       <div className= "profil-image">
         <Image

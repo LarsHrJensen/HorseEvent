@@ -1,5 +1,5 @@
 'use client';
-import "./login.css";
+import "./page.css";
 import Image from "next/image";
 
 export default function Page() {
