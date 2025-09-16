@@ -3,11 +3,6 @@ using HorseRider.Application.DTO_s;
 using HorseRider.Application.Interfaces;
 using HorseRider.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseRider.Application.Handlers
 {

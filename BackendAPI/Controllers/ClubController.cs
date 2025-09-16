@@ -1,28 +1,26 @@
 ﻿using Contracts;
 using HorseRider.Application.Commands;
-using HorseRider.Application.Handlers;
-using HorseRider.Application.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ReactApp1.Server.Controllers
+namespace BackendAPI.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class HorseController : ControllerBase
+    [ApiController]
+    public class ClubController : ControllerBase
     {
 
-        //private readonly CreateHorseHandler _createHorseHandler;
         private readonly IMediator _mediator;
 
-        public HorseController(CreateHorseHandler createBookHandler, IMediator mediator)
+        public ClubController(IMediator mediator)
         {
-            //_createHorseHandler = createBookHandler;
             _mediator = mediator;
         }
-        // POST: api/heste
+
+        // POST: api/klubber
         [HttpPost]
-        public async Task<IActionResult> CreateHorseAsync([FromBody] CreateHorseRequest request)
+        public async Task<IActionResult> CreateClubAsync([FromBody] CreateHorseRequest request)
         {
             if (request == null)
                 return BadRequest(new { message = "Hest data er tomt." });
@@ -42,23 +40,6 @@ namespace ReactApp1.Server.Controllers
             };
 
             return Ok(response); // Returnér altid JSON
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllHorses()
-        {
-            var horsesDTO = await _mediator.Send(new GetHorsesQuery());
-
-            var response = horsesDTO.Select(h => new HorseResponse
-            {
-                HorseId = h.Id,
-                Name = h.HorseName,
-                Height = h.HorseHeight,
-                BirthYear = h.BirthYear
-            });
-
-            return Ok(response);
         }
     }
 }

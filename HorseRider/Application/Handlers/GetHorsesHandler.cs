@@ -16,9 +16,9 @@ namespace HorseRider.Application.Handlers
 
         public async Task<List<HorseDTO>> Handle(GetHorsesQuery request, CancellationToken cancellationToken)
         {
-            var books = await _horseRepository.GetAllAsync();
+            var horses = await _horseRepository.GetAllAsync();
 
-            return books.Select(h => new HorseDTO
+            return horses.Select(h => new HorseDTO
             {
                 HorseName = h.Name,
                 Id = h.Id,
@@ -28,6 +28,4 @@ namespace HorseRider.Application.Handlers
             }).ToList();
         }
     }
-    
-
 }
