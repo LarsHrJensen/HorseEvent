@@ -1,14 +1,13 @@
 'use client';
 import{ useRouter} from "next/navigation";
 import "./page.css";
-import Topbar from "../profil/topbar";
 
 export default function ForgotPassword() {
     const router = useRouter();
     return (
 
         <main>
-            <Topbar></Topbar>
+          
             <div className="reset-container">
                 <h2>Nulstil din adgangskode </h2>
     <form

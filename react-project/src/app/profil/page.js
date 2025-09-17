@@ -2,7 +2,7 @@
 import{ useRouter} from "next/navigation";
 import Image from "next/image";
 import "./page.css";
-import Topbar from "./topbar";
+import Topbar from "../components/Header";
 
 
 
@@ -20,8 +20,9 @@ const handleForgotPasswordClick = ()  => {
   return (
     
     <main className= "profil-wrapper">  
-    <Topbar />{/*Topbar med login-knap*/}
-    <div className= "login-button-container"> </div>
+    <div className= "login-button-container"> 
+      <button className="login-button" onClick={() => router.push('/login')}>Log ind</button>
+    </div>
 
     <div className="profil-box">
     <div className= "profil-content">
