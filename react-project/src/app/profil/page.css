@@ -11,10 +11,10 @@
         /*Hvid kasse*/
         .profil-box{
           background-color: white;
-          padding: 40px;
-          border-radius: 12px;
+          padding: 60px;
+          border-radius: 25px;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          max-width: 1000px;
+          max-width: none;
           width: 100%;
       
         }
@@ -40,6 +40,7 @@
          .profil-image{
             flex-shrink: 0;
             width: 400px;
+            margin-left:-20px;
           
           }
          /*knapper*/
@@ -80,7 +81,9 @@
           padding: 10px 16px;
           border-radius: 5px;
           cursor: pointer;
-          font-size: bold;
+          font-weight: bold;
+          font-size: 16px;
+          margin-top: -20px;
         }
 
         .logind-button:hover {

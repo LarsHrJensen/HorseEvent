@@ -3,11 +3,15 @@ import "./page.css";
 import Image from "next/image";
 
 export default function Page() {
+  function handleSignupClick(e) {
+    e.preventDefault();
+    console.log("Login clicked");
+  }
   return (
     <main className= "login-wrapper"> 
     <div className= "login-content">
 
-      <h1>Log in her</h1>
+      
             <div className= "login-image">
               <Image
                 src="/Horse_girl.png"
@@ -32,10 +36,10 @@ export default function Page() {
             </div>
 
 
-            <form className="login-form">
+            <div className="login-form">
            <button className="login-button"onClick={handleSignupClick}>Log ind</button>
 
-           </form>
+           </div>
        </div>
          
     </main>
