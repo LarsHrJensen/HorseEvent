@@ -20,10 +20,12 @@ namespace HorseRider.Application.Handlers
 
             return horses.Select(h => new HorseDTO
             {
+                Id = h.HorseId,
                 HorseName = h.Name,
-                Id = h.Id,
+                UELN = h.UELN,
                 HorseHeight = h.Height,
-                BirthYear = h.BirthYear
+                BirthYear = h.BirthYear,
+                Category = h.Category
 
             }).ToList();
         }
