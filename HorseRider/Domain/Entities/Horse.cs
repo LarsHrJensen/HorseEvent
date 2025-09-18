@@ -17,13 +17,22 @@ namespace HorseRider.Domain.Entities
                             Height <= 140 ? "Kat 2" :
                             Height <= 148 ? "Kat 1" : "Hest";
 
-        public Horse(string name, string id, int height, int birthYear)
+        public Horse(string name, string ueln, int height, int birthYear)
         {
             Name = name;
-            UELN = id;
+            UELN = ueln;
             Height = height;
             BirthYear = birthYear;
         }
+        public Horse(int id, string name, string ueln, int height, int birthYear)
+        {
+            HorseId = id;
+            Name = name;
+            UELN = ueln;
+            Height = height;
+            BirthYear = birthYear;
+        }
+        public Horse() { }
     }
 }
 

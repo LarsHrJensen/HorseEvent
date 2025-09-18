@@ -43,9 +43,33 @@ namespace HorseRider.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Horse>> GetAllAsync()
+        public async Task<List<Horse>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var horses = new List<Horse>();
+
+            await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
+            await conn.OpenAsync();
+
+            string sql = "SELECT HorseId, UELN, HorseName, Height, BirthYear FROM Horse";
+
+            using var cmd = new SqlCommand(sql, conn);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                var horse = new Horse
+                {
+                    HorseId = (int)reader["HorseId"],
+                    UELN = reader["UELN"].ToString()!,
+                    Name = reader["HorseName"].ToString()!,
+                    Height = (int)(decimal)reader["Height"],
+                    BirthYear = (int)reader["BirthYear"],
+                };
+
+                horses.Add(horse);
+            }
+
+            return horses;
         }
 
         public Task<Horse?> GetByIdAsync(int id)

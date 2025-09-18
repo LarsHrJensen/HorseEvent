@@ -24,11 +24,10 @@ namespace HorseRider.Application.Handlers
                 HorseName = h.Name,
                 UELN = h.UELN,
                 HorseHeight = h.Height,
-                BirthYear = h.BirthYear
+                BirthYear = h.BirthYear,
+                Category = h.Category
 
             }).ToList();
         }
     }
-    
-
 }

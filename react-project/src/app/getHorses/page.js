@@ -10,7 +10,7 @@ export default function HorseListPage() {
     useEffect(() => {
         async function fetchHorses() {
             try {
-                const response = await fetch("https://localhost:7265/api/horse"); // Din API
+                const response = await fetch("https://localhost:7265/api/horse");
                 if (!response.ok) throw new Error("Fejl ved hentning af heste");
                 const data = await response.json();
                 setHorses(data);
@@ -33,19 +33,23 @@ export default function HorseListPage() {
             <table>
                 <thead>
                     <tr>
-                        <th>Navn</th>
                         <th>ID</th>
-                        <th>Højde (cm)</th>
+                        <th>Navn</th>
                         <th>Fødselsår</th>
+                        <th>UELN</th>
+                        <th>Højde (cm)</th>
+                        <th>Kategori</th>
                     </tr>
                 </thead>
                 <tbody>
                     {horses.map((horse) => (
-                        <tr key={horse.horseId}>
+                        <tr key={horse.id}>
+                            <td>{horse.id}</td>
                             <td>{horse.name}</td>
-                            <td>{horse.horseId}</td>
-                            <td>{horse.height}</td>
                             <td>{horse.birthYear}</td>
+                            <td>{horse.ueln}</td>
+                            <td>{horse.height}</td>
+                            <td>{horse.category}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -53,3 +57,4 @@ export default function HorseListPage() {
         </div>
     );
 }
+
