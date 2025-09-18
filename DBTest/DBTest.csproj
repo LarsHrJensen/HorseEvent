@@ -14,9 +14,9 @@
 	  
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <ProjectReference Include="..\HorseEvent\HorseEvent.csproj" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
