@@ -2,6 +2,7 @@ using HorseRider.Application.Handlers;
 using HorseRider.Application.Handlers.HorseRider.Application.Handlers;
 using HorseRider.Application.Interfaces;
 using HorseRider.Infrastructure.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BackendAPI
 {
@@ -14,19 +15,19 @@ namespace BackendAPI
             // Hent connection string fra appsettings.json
             var horseRiderConnectionString = builder.Configuration.GetConnectionString("HorseRidersContext");
 
-            // Registrer repository med vanilla SQL
-            builder.Services.AddScoped<IRiderRepository>(provider =>
-                new RiderRepository(horseRiderConnectionString));
+            // Registrer DbConnectionFactory (kan bruges af alle repositories)
+            builder.Services.AddScoped<IDbConnectionFactory>(sp =>
+                new SqlDbConnectionFactory(horseRiderConnectionString));
 
-            builder.Services.AddScoped<IHorseRepository>(provider =>
-                new HorseRepository(horseRiderConnectionString));
+            // Registrer repositories
+            builder.Services.AddScoped<IHorseRepository, HorseRepository>();
+            builder.Services.AddScoped<IRiderRepository, RiderRepository>();
 
             // Registrer command handlers
             builder.Services.AddScoped<CreateRiderHandler>();
             builder.Services.AddScoped<CreateHorseHandler>();
 
-
-            // Tilføj MediatR (scanner hele Application-laget for handlers)
+            // Tilføj MediatR (scanner Application-laget for handlers)
             builder.Services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(CreateRiderHandler).Assembly);
