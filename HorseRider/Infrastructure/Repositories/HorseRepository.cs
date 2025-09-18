@@ -38,9 +38,25 @@ namespace HorseRider.Infrastructure.Repositories
             Console.WriteLine($"Hesten {entity.Name} blev oprettet i databasen.");
         }
 
-        public Task DeleteAsync(Horse entity)
+        public async Task DeleteAsync(Horse entity)
         {
-            throw new NotImplementedException();
+            await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
+            await conn.OpenAsync();
+
+            string sql = "DELETE FROM  Horse WHERE HorseUELN = @HorseUELN";
+            using var cmd = new SqlCommand(sql, conn);
+
+            cmd.Parameters.AddWithValue("@HorseUELN", entity.UELN);
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                Console.WriteLine($"Hesten med UELN {entity.UELN} blev slettet fra databasen.");
+            }
+            else
+            {
+                Console.WriteLine($"Ingen hest fundet med UELN {entity.UELN}.");
+            }
         }
 
         public async Task<List<Horse>> GetAllAsync()
@@ -72,14 +88,62 @@ namespace HorseRider.Infrastructure.Repositories
             return horses;
         }
 
-        public Task<Horse?> GetByIdAsync(int id)
+        public async Task<Horse?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
-        }
+            await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
+            await conn.OpenAsync();
 
-        public Task UpdateAsync(Horse entity)
+            string sql = "SELECT HorseId, HorseUELN, HorseName, Height, BirthYear, Category FROM Horse WHERE HorseId = @HorseId";
+
+            using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@HorseId", id);
+
+            using var reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return new Horse
+                {
+                    HorseId = (int)reader["HorseId"],
+                    UELN = reader["HorseUELN"].ToString()!,
+                    Name = reader["HorseName"].ToString()!,
+                    Height = (int)(decimal)reader["Height"],
+                    BirthYear = (int)reader["BirthYear"],
+                };
+            }
+
+            return null!;
+        }
+        
+
+        public async Task UpdateAsync(Horse entity)
         {
-            throw new NotImplementedException();
+            await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
+            await conn.OpenAsync();
+
+
+            string sql = @"
+                           UPDATE Horse 
+                           SET HorseUELN = @HorseUELN, 
+                               HorseName = @HorseName, 
+                               Height = @Height, 
+                               BirthYear = @BirthYear, 
+                               Category = @Category
+                           WHERE HorseId = @HorseId";
+
+            using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@HorseId", entity.HorseId);
+            cmd.Parameters.AddWithValue("@HorseUELN", entity.UELN);
+            cmd.Parameters.AddWithValue("@HorseName", entity.Name);
+            cmd.Parameters.AddWithValue("@Height", entity.Height);
+            cmd.Parameters.AddWithValue("@BirthYear", entity.BirthYear);
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+                Console.WriteLine($"Hesten med ID {entity.HorseId} blev opdateret.");
+            else
+                Console.WriteLine($"Ingen hest fundet med ID {entity.HorseId}.");
         }
     }
 }
