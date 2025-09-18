@@ -28,7 +28,7 @@ namespace HorseRider.Application.Handlers
             return new HorseDTO
             {
                 HorseName = horse.Name,
-                Id = horse.Id,
+                UELN = horse.UELN,
                 HorseHeight = horse.Height,
                 BirthYear = horse.BirthYear
             };

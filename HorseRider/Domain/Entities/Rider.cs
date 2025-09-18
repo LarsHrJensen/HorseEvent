@@ -8,8 +8,9 @@ namespace HorseRider.Domain.Entities
 {
     public class Rider
     {
-        public string RiderName { get; set; } = string.Empty;
         public int Id { get; set; }
+        public string RiderName { get; set; } = string.Empty;
+        public string? DRFLicense { get; set; } //Danish Riding Federation License
         public string Email { get; set; }
         public int BirthYear { get; set; }
 

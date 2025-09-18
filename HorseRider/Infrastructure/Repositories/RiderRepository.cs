@@ -10,11 +10,11 @@ namespace HorseRider.Infrastructure.Repositories
 {
     public class RiderRepository : IRiderRepository
     {
-        private readonly string _connectionString;
+        private readonly IDbConnectionFactory _dbConnectionFactory;
 
-        public RiderRepository(string connectionString)
+        public RiderRepository(IDbConnectionFactory dbConnectionFactory)
         {
-            _connectionString = connectionString;
+            _dbConnectionFactory = dbConnectionFactory;
         }
 
         public Task AddAsync(Rider entity)

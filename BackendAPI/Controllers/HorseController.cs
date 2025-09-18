@@ -35,7 +35,8 @@ namespace ReactApp1.Server.Controllers
 
             var response = new HorseResponse
             {
-                HorseId = horseDTO.Id,
+                Id = horseDTO.Id,
+                UELN = horseDTO.UELN,
                 Name = horseDTO.HorseName,
                 Height = horseDTO.HorseHeight,
                 BirthYear = horseDTO.BirthYear
@@ -52,7 +53,7 @@ namespace ReactApp1.Server.Controllers
 
             var response = horsesDTO.Select(h => new HorseResponse
             {
-                HorseId = h.Id,
+                UELN = h.UELN,
                 Name = h.HorseName,
                 Height = h.HorseHeight,
                 BirthYear = h.BirthYear
