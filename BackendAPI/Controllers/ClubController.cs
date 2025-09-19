@@ -22,21 +22,17 @@ namespace BackendAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateClubAsync([FromBody] CreateHorseRequest request)
         {
-            if (request == null)
-                return BadRequest(new { message = "Hest data er tomt." });
+            //if (request == null)
+            //    return BadRequest(new { message = "Hest data er tomt." });
 
-            var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear);
-            var horseDTO = await _mediator.Send(command);
+            //var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear);
+            //var horseDTO = await _mediator.Send(command);
 
-            if (horseDTO == null)
-                return StatusCode(500, new { message = "Kunne ikke oprette hesten." });
+            //if (horseDTO == null)
+            //    return StatusCode(500, new { message = "Kunne ikke oprette hesten." });
 
             var response = new HorseResponse
             {
-                HorseId = horseDTO.Id,
-                Name = horseDTO.HorseName,
-                Height = horseDTO.HorseHeight,
-                BirthYear = horseDTO.BirthYear
             };
 
             return Ok(response); // Returnér altid JSON

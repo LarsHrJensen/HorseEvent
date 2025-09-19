@@ -24,14 +24,7 @@ namespace HorseRider.Domain.Entities
             Height = height;
             BirthYear = birthYear;
         }
-        public Horse(int id, string name, string ueln, int height, int birthYear)
-        {
-            HorseId = id;
-            Name = name;
-            UELN = ueln;
-            Height = height;
-            BirthYear = birthYear;
-        }
+  
         public Horse() { }
     }
 }

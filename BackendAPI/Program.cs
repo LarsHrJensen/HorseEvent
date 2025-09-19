@@ -1,8 +1,15 @@
+using ClubContext.Application.Interfaces;
+using ClubContext.Infrastructure;
+using ClubContext.ClubInfrastructure.Repositories;
 using HorseRider.Application.Handlers;
 using HorseRider.Application.Handlers.HorseRider.Application.Handlers;
 using HorseRider.Application.Interfaces;
 using HorseRider.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SharedKernel.Interfaces;
+using ClubContext.Infrastructure.Repositories;
+using ClubContext.Application.Handlers;
 
 namespace BackendAPI
 {
@@ -14,6 +21,7 @@ namespace BackendAPI
 
             // Hent connection string fra appsettings.json
             var horseRiderConnectionString = builder.Configuration.GetConnectionString("HorseRidersContext");
+            var clubConnectionString = builder.Configuration.GetConnectionString("ClubDb");
 
             // Registrer DbConnectionFactory (kan bruges af alle repositories)
             builder.Services.AddScoped<IDbConnectionFactory>(sp =>
@@ -27,10 +35,19 @@ namespace BackendAPI
             builder.Services.AddScoped<CreateRiderHandler>();
             builder.Services.AddScoped<CreateHorseHandler>();
 
+            // Registrer DbContext for ClubContext
+            builder.Services.AddDbContext<ClubDbContext>(options =>
+               options.UseNpgsql(clubConnectionString));
+
+            builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+            builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
+
             // Tilføj MediatR (scanner Application-laget for handlers)
             builder.Services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(CreateRiderHandler).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(GetCountriesHandler).Assembly);
+
             });
 
             builder.Services.AddControllers();
