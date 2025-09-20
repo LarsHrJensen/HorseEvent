@@ -10,6 +10,8 @@ using HorseRider.Application.Interfaces;
 using HorseRider.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel.Interfaces;
+using UserManagementContext.Infrastructure.Repositories;
+using UserManagementContext.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,10 +31,12 @@ builder.Services.AddScoped<IHorseRepository, HorseRepository>();
 builder.Services.AddScoped<IRiderRepository, RiderRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
-builder.Services.AddScoped<IClubRepository, ClubRepository>(); // husk denne
+builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // 5. Command / Query Handlers (hvis du bruger MediatR)
 builder.Services.AddScoped<CreateRiderHandler>();

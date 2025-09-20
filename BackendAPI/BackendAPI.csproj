@@ -15,6 +15,7 @@
     <ProjectReference Include="..\ClubContext\ClubContext.csproj" />
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\HorseRider\HorseRiderContext.csproj" />
+    <ProjectReference Include="..\UserManagementContext\UserManagementContext.csproj" />
   </ItemGroup>
 
 </Project>
