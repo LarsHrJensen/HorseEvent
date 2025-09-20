@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
+	  <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
+	  <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
+	  
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <ProjectReference Include="..\HorseEvent\HorseEvent.csproj" />
+  </ItemGroup>-->
+
+  <ItemGroup>
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+  </ItemGroup>
+
+</Project>
