@@ -1,7 +1,5 @@
-﻿using Contracts;
-using HorseRider.Application.Commands;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using ClubContext.Application.Interfaces;
+using Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackendAPI.Controllers
@@ -10,32 +8,36 @@ namespace BackendAPI.Controllers
     [ApiController]
     public class ClubController : ControllerBase
     {
+        private readonly IClubService _clubService;
 
-        private readonly IMediator _mediator;
-
-        public ClubController(IMediator mediator)
+        public ClubController(IClubService clubService)
         {
-            _mediator = mediator;
+            _clubService = clubService;
         }
 
         // POST: api/klubber
         [HttpPost]
-        public async Task<IActionResult> CreateClubAsync([FromBody] CreateHorseRequest request)
+        public async Task<IActionResult> CreateClubAsync([FromBody] CreateClubRequest request)
         {
-            //if (request == null)
-            //    return BadRequest(new { message = "Hest data er tomt." });
 
-            //var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear);
-            //var horseDTO = await _mediator.Send(command);
+            if (request == null)
+                   return BadRequest(new { message = "club data er tomt." });
 
-            //if (horseDTO == null)
-            //    return StatusCode(500, new { message = "Kunne ikke oprette hesten." });
+            var result = await _clubService.CreateClubAsync(
+                request.Name,
+          new ClubContext.Application.DTOs.AddressDto
+          {
+              StreetName = request.Address.StreetName,
+              StreetNumber = request.Address.StreetNumber,
+              City = request.Address.City,
+              PostalCode = request.Address.PostalCode,
+              CountryCode = request.Address.CountryCode,
+              CountryName = request.Address.CountryName
+          }
+      );
 
-            var response = new HorseResponse
-            {
-            };
+            return Ok(result);
 
-            return Ok(response); // Returnér altid JSON
         }
     }
 }

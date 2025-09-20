@@ -11,7 +11,27 @@ namespace ClubContext.Domain.ValueObjects
         public string StreetName { get; }
         public string HouseNumber { get; }
         public string? Apartment { get; }  // Optional
-        public PostalCodeCity PostalCodeCity { get; }
-        public Country Country { get; }
+        public string PostalCode { get; }
+        public string City { get; }
+        public string CountryCode { get; }
+        public string CountryName { get; }
+
+        public Adress(
+            string streetName,
+            string houseNumber,
+            string postalCode,
+            string city,
+            string countryCode,
+            string countryName,
+            string? apartment = null)
+        {
+            StreetName = streetName;
+            HouseNumber = houseNumber;
+            Apartment = apartment;
+            PostalCode = postalCode;
+            City = city;
+            CountryCode = countryCode;
+            CountryName = countryName;
+        }
     }
 }
