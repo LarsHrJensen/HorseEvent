@@ -11,7 +11,7 @@ namespace UserManagementContext.Application.Interfaces
     public interface IUserService
     {
         // Opretter en ny bruger (koblet til et eksisterende Member via MemberId)
-        Task<UserDto> RegisterAsync(RegisterUserDto dto);
+        public Task<UserDto> RegisterAsync(RegisterUserDto registerDto);
 
         // Login med brugernavn/email + password
         Task<AuthResult> AuthenticateAsync(LoginDto dto);

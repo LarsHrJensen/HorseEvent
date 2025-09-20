@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using SharedKernel.Interfaces;
 using UserManagementContext.Infrastructure.Repositories;
 using UserManagementContext.Application.Interfaces;
+using UserManagementContext.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,6 +1,8 @@
 ﻿using Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserManagementContext.Application.DTOs;
+using UserManagementContext.Application.Interfaces;
 
 
 namespace BackendAPI.Controllers
@@ -9,35 +11,33 @@ namespace BackendAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _clubService;
+        private readonly IUserService _userService;
 
-        public UserController(IUserService clubService)
+        public UserController(IUserService userService)
         {
-            _clubService = clubService;
+            _userService = userService;
         }
-        // POST: api/klubber
+        // POST: api/users
         [HttpPost]
-        public async Task<IActionResult> CreateClubAsync([FromBody] CreateClubRequest request)
+        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequest request)
         {
-
             if (request == null)
-                return BadRequest(new { message = "´bruger data er tomt." });
+                return BadRequest(new { message = "Brugerdata er tomt." });
 
-            var result = await _clubService.CreateClubAsync(
-                request.Name,
-          new ClubContext.Application.DTOs.AddressDto
-          {
-              StreetName = request.Address.StreetName,
-              StreetNumber = request.Address.StreetNumber,
-              City = request.Address.City,
-              PostalCode = request.Address.PostalCode,
-              CountryCode = request.Address.CountryCode,
-              CountryName = request.Address.CountryName
-          }
-      );
+            // map til DTO
+            var registerDto = new RegisterUserDto
+            {
+                Username = request.Username,
+                Email = request.Email,
+                Password = request.Password,
+            };
+
+            var result = await _userService.RegisterAsync(registerDto);
+
+            if (result == null)
+                return BadRequest(new { message = "Kunne ikke oprette bruger." });
 
             return Ok(result);
-
         }
     }
 }

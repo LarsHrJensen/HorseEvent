@@ -10,7 +10,7 @@ namespace UserManagementContext.Application.DTOs
     {
         public bool Success { get; set; }
         public string? Token { get; set; }  // JWT eller session token
-        public UserDTO? User { get; set; }
+        public UserDto? User { get; set; }
         public IEnumerable<string> Errors { get; set; } = new List<string>();
     }
 }

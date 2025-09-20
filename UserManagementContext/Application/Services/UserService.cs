@@ -30,7 +30,7 @@ namespace UserManagementContext.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<UserDto> RegisterAsync(RegisterUserDto dto)
+        public Task<UserDto> RegisterAsync(RegisterUserDto registerDto)
         {
             throw new NotImplementedException();
         }
@@ -54,5 +54,7 @@ namespace UserManagementContext.Application.Services
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }
