@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import Header from "./components/NavBar"
+import NavBar from "./components/NavBar"
 import "./globals.css";
 import React from "react";
 
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: {children: React.ReactNode}) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex min-h-screen`}
       >
-        <Header/>
+        <NavBar/>
         <main className="flex-1 bg-gray-50 p-8">
           {children}
         </main>

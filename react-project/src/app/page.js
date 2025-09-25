@@ -7,7 +7,7 @@ export default function Home() {
     <main className="flex flex-col items-center justify-center min-h-screen bg-sky-100">
       <div className="max-w-2xl bg-white shadow-2xl rounded-2xl p-10 text-center">
         <h1 className="text-4xl font-bold mb-4 text-blue-400">
-          🐎Hesteland! 
+          Hesteland! 
         </h1>
         <h2 className="text-2xl font-bold mb-4 text-black">
           Velkommen til hesteland

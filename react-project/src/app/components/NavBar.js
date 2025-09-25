@@ -1,0 +1,60 @@
+
+import {House, CircleUser, MessageCircleMore, CircleQuestionMark, CalendarDays, LogOut, Settings, Trophy} from "lucide-react";
+import Link from "next/link";
+import "./NavBar.css"
+
+export default function NavBar(){
+    return(
+        <aside className="bg-white w-70 min-h-screen flex flex-col items-center py-8 space-y-6">
+            <nav className="max-w-6x1 mx-auto flex flex-col space-y-10 py-4 space-x-8">
+                <Link
+                href="/"
+                className="nav-link">
+                    <House className="nav-icon"/>
+                    <span> Hjem </span>
+                </Link>
+                
+                <Link href="/events"
+                className="nav-link">
+                    <Trophy className="nav-icon"/>
+                    <span> Stævner </span>
+                </Link>
+
+                <Link href="/horses"
+                className="nav-link">
+                    <span>Mine Heste</span>
+                </Link>
+
+                <Link href="/calendar"
+                className="nav-link">
+                    <CalendarDays className="nav-icon"/>
+                    <span>Kalender</span>
+                </Link>
+
+                <Link href="/chatbot"
+                className="nav-link">
+                    <MessageCircleMore className="nav-icon"/>
+                    <span>Chat Bot</span>
+                </Link>
+
+                <Link href="/settings"
+                className="nav-link">
+                    <Settings className="nav-icon"/>
+                    <span>Indstillinger</span>
+                </Link>
+
+                <Link href="/help"
+                className="nav-link">
+                    <CircleQuestionMark className="nav-icon"/>
+                    <span>Hjælp & Support</span>
+                </Link>
+
+                <Link href="/logout"
+                className="nav-link">
+                    <LogOut className="nav-icon"/>
+                    <span> Log ud </span>
+                </Link>
+            </nav>
+        </aside>
+    );
+}
