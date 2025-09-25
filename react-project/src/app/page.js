@@ -1,4 +1,6 @@
 //import Image from "next/image";
+import {House, CircleUser, MessageCircleMore, CircleQuestionMark} from "lucide-react";
+import "./page.css"
 
 export default function Home() {
   return (
@@ -14,30 +16,35 @@ export default function Home() {
           Hvad vil du gerne nu?
         </p>
         
-        <a href="/hjem"
-          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
-          Hjem
-        </a>
-        <a href="/stævner"
-          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
-          Stævner
-        </a>
-        <a href="/profil"
-          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
-          Profil
-        </a>
-        <a href="/hest"
-          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
-          Hest
-        </a>
-        <a href="/chatbot"
-          className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
-          Chatbot
-        </a>
-        <a href="/hjælp-og-support"
-        className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
-          Hjælp & Support
-        </a>
+        <div className="grid grid-cols-3 gap-4">
+          <a href="/hjem" className="btn-icon">
+          <House className="icon"/>
+          <span> Hjem </span>
+          </a>
+
+          <a href="/stævner" className="btn-icon">
+          <span> Stævner </span>
+          </a>
+
+          <a href="/profil" className="btn-icon">
+          <CircleUser className="icon"/>
+          <span> Profil </span>
+          </a>
+
+          <a href="/hest" className="btn-icon">
+          <span> Hest </span>
+          </a>
+
+          <a href="/chatbot" className="btn-icon">
+          <MessageCircleMore className="icon"/>
+          <span> Chatbot </span>
+          </a>
+
+          <a href="/hjælp-og-support" className="btn-icon">
+          <CircleQuestionMark className="icon"/>
+          <span> Hjælp & Support </span>
+          </a>
+        </div>
       </div>
     </main>
   );

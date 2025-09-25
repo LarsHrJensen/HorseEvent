@@ -1,15 +1,8 @@
-import { Header } from "next/dist/lib/load-custom-routes";
 import Link from "next/link";
-import { StringifyOptions } from "querystring";
 
-interface HeaderProps {
-    className?: string;
-}
-
-
-export default function Header({className}: HeaderProps){
+export default function Header(){
     return(
-        <aside className={"bg-white w-70 min-h-screen flex flex-col items-center py-8 space-y-6 ${className}"}>
+        <aside className="bg-white w-70 min-h-screen flex flex-col items-center py-8 space-y-6">
             <nav className="max-w-6x1 mx-auto flex flex-col space-y-10 py-4 space-x-8">
                 <Link
                 href="/"
