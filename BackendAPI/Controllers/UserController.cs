@@ -2,6 +2,7 @@
 using UserManagementContext.Application.Interfaces;
 using Contracts;
 using Contracts.User;
+using Microsoft.AspNetCore.Identity.Data;
 
 namespace BackendAPI.Controllers
 {
@@ -37,6 +38,22 @@ namespace BackendAPI.Controllers
 
             return Ok(response);
 
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginAsync([FromBody] UserLoginRequest request)
+        {
+            var user = await _userService.LoginAsync(request);
+            if (user == null)
+                return Unauthorized("Invalid email or password");
+
+            var response = new UserResponse
+            {
+                Id = user.Id,
+                UserName = user.Username,
+                Email = user.Email
+            };
+
+            return Ok(response); // evt. sammen med JWT-token
         }
     }
 }

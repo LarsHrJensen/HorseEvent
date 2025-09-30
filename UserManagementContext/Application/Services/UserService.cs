@@ -70,6 +70,25 @@ namespace UserManagementContext.Application.Services
                 return sb.ToString();
             }
         }
+
+        public async Task<UserDto?> LoginAsync(UserLoginRequest request)
+        {
+           UserEntity userEntity = await _userRepository.GetByUsernameAsync(request.UserName);
+            if (userEntity == null)
+                return null;
+            string hashedInputPassword = HashPasswordWithSaltAndPepper(request.Password, userEntity.Salt);
+
+            if (hashedInputPassword == userEntity.PasswordHash)
+            {
+                return new UserDto
+                {
+                    Id = userEntity.Id,
+                    Username = userEntity.Username,
+                    Email = userEntity.Email
+                };
+            }
+            else return null;
+        }
     }
     
 }

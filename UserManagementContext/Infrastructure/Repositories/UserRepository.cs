@@ -1,5 +1,6 @@
 ﻿using ClubContext.Domain.Entities;
 using ClubContext.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using UserManagementContext.Application.Interfaces;
 using UserManagementContext.Domain.Entities;
 
@@ -39,6 +40,16 @@ namespace UserManagementContext.Infrastructure.Repositories
         public Task<UserEntity?> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<UserEntity?> GetByUsernameAsync(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                throw new ArgumentException("Username cannot be null or empty", nameof(username));
+
+            // Find brugeren i databasen asynkront
+            return await _dbContext.Users
+                .FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public Task UpdateAsync(UserEntity entity)
