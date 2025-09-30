@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UserManagementContext.Application.DTOs;
+using UserManagementContext.Application.Interfaces;
 using UserManagementContext.Application.Interfaces;
 using Contracts;
 using Contracts.User;
@@ -12,18 +14,31 @@ namespace BackendAPI.Controllers
     {
         private readonly IUserService _userService;
 
-        public UserController(IUserService clubService)
+        public UserController(IUserService userService)
         {
+            _userService = userService;
             _userService = clubService;
         }
+        // POST: api/users
         // POST: api/brugere
         [HttpPost]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequest request)
         {
-
             if (request == null)
-                return BadRequest(new { message = "´bruger data er tomt." });
+                return BadRequest(new { message = "Brugerdata er tomt." });
 
+            // map til DTO
+            var registerDto = new RegisterUserDto
+            {
+                Username = request.Username,
+                Email = request.Email,
+                Password = request.Password,
+            };
+
+            var result = await _userService.RegisterAsync(registerDto);
+
+            if (result == null)
+                return BadRequest(new { message = "Kunne ikke oprette bruger." });
             var userDTO = await _userService.CreateUserAsync(request);
 
             if (userDTO == null)
@@ -46,6 +61,7 @@ namespace BackendAPI.Controllers
             if (user == null)
                 return Unauthorized("Invalid email or password");
 
+            return Ok(result);
             var response = new UserResponse
             {
                 Id = user.Id,
