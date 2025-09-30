@@ -1,0 +1,12 @@
+﻿namespace HorseEvent.Views.ViewModel
+{
+    
+}
+
+@model HorseEvent.Views.ViewModel.LoginViewModel
+<form asp-action="Login" method="post">
+    <input asp-for="Email" placeholder="Brugernavn"/>
+    <input asp-for="Password" type="password" placeholder="Adgangskode"/>
+	<button type="submit">Log ind</button>
+</form>
+
