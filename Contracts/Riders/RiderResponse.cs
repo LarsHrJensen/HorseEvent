@@ -1,4 +1,4 @@
-namespace Contracts
+namespace Contracts.Riders
 {
     public class RiderResponse
     {

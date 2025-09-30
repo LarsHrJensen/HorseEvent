@@ -12,16 +12,21 @@ using Microsoft.EntityFrameworkCore;
 using SharedKernel.Interfaces;
 using UserManagementContext.Infrastructure.Repositories;
 using UserManagementContext.Application.Interfaces;
+using UserManagementContext.Application.Services;
+using UserManagementContext.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Connection strings
 var horseRiderConnectionString = builder.Configuration.GetConnectionString("HorseRidersContext");
 var clubConnectionString = builder.Configuration.GetConnectionString("ClubDb");
+var userConnectionString = builder.Configuration.GetConnectionString("UserManagementDB");
 
 // 2. DbContext
 builder.Services.AddDbContext<ClubDbContext>(options =>
     options.UseNpgsql(clubConnectionString));
+builder.Services.AddDbContext<UserManagementDbContext>(options =>
+    options.UseNpgsql(userConnectionString));
 
 // 3. Repositories
 builder.Services.AddScoped<IDbConnectionFactory>(sp =>

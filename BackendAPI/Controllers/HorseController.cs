@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Horses;
 using HorseRider.Application.Commands;
 using HorseRider.Application.Handlers;
 using HorseRider.Application.Queries;

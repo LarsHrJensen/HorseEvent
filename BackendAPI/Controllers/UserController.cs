@@ -1,7 +1,7 @@
-﻿using Contracts;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿using Microsoft.AspNetCore.Mvc;
+using UserManagementContext.Application.Interfaces;
+using Contracts;
+using Contracts.User;
 
 namespace BackendAPI.Controllers
 {
@@ -9,34 +9,33 @@ namespace BackendAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _clubService;
+        private readonly IUserService _userService;
 
         public UserController(IUserService clubService)
         {
-            _clubService = clubService;
+            _userService = clubService;
         }
-        // POST: api/klubber
+        // POST: api/brugere
         [HttpPost]
-        public async Task<IActionResult> CreateClubAsync([FromBody] CreateClubRequest request)
+        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequest request)
         {
 
             if (request == null)
                 return BadRequest(new { message = "´bruger data er tomt." });
 
-            var result = await _clubService.CreateClubAsync(
-                request.Name,
-          new ClubContext.Application.DTOs.AddressDto
-          {
-              StreetName = request.Address.StreetName,
-              StreetNumber = request.Address.StreetNumber,
-              City = request.Address.City,
-              PostalCode = request.Address.PostalCode,
-              CountryCode = request.Address.CountryCode,
-              CountryName = request.Address.CountryName
-          }
-      );
+            var userDTO = await _userService.CreateUserAsync(request);
 
-            return Ok(result);
+            if (userDTO == null)
+                return StatusCode(500, new { message = "Kunne ikke oprette brugeren." });
+
+            var response = new UserResponse
+            {
+                Id = userDTO.Id,
+                UserName = userDTO.Username,
+                Email = userDTO.Email
+            };
+
+            return Ok(response);
 
         }
     }

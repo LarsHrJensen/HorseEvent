@@ -1,13 +1,29 @@
-﻿using UserManagementContext.Application.Interfaces;
+﻿using ClubContext.Domain.Entities;
+using ClubContext.Infrastructure;
+using UserManagementContext.Application.Interfaces;
 using UserManagementContext.Domain.Entities;
 
 namespace UserManagementContext.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public Task AddAsync(UserEntity entity)
+        private readonly UserManagementDbContext _dbContext;
+
+        public UserRepository(UserManagementDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+       
+        public async Task AddAsync(UserEntity entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            // Tilføj klubben til DbContext
+            await _dbContext.Users.AddAsync(entity);
+
+            // Gem ændringer i databasen
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task DeleteAsync(UserEntity entity)
