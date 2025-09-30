@@ -31,7 +31,7 @@ export default function Page() {
             if (response.ok) {
                 const data = await response.json();
                 console.log("Login succesful:", data);
-                setMessage(`Velkommen, ${data.UserName}!`);
+                setMessage(`Velkommen, ${data.userName}!`);
                 // evt. redirect eller gem JWT-token her
             } else if (response.status === 401) {
                 setMessage("Forkert brugernavn eller adgangskode");

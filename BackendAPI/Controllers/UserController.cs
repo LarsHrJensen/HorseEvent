@@ -17,25 +17,17 @@ namespace BackendAPI.Controllers
         public UserController(IUserService userService)
         {
             _userService = userService;
-            _userService = clubService;
         }
-        // POST: api/users
         // POST: api/brugere
         [HttpPost]
-        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequest request)
+        public async Task<IActionResult> CreateUserAsync([FromBody] Contracts.User.CreateUserRequest request)
         {
             if (request == null)
                 return BadRequest(new { message = "Brugerdata er tomt." });
 
-            // map til DTO
-            var registerDto = new RegisterUserDto
-            {
-                Username = request.Username,
-                Email = request.Email,
-                Password = request.Password,
-            };
 
-            var result = await _userService.RegisterAsync(registerDto);
+
+            var result = await _userService.CreateUserAsync(request);
 
             if (result == null)
                 return BadRequest(new { message = "Kunne ikke oprette bruger." });
@@ -61,7 +53,6 @@ namespace BackendAPI.Controllers
             if (user == null)
                 return Unauthorized("Invalid email or password");
 
-            return Ok(result);
             var response = new UserResponse
             {
                 Id = user.Id,
@@ -69,7 +60,8 @@ namespace BackendAPI.Controllers
                 Email = user.Email
             };
 
-            return Ok(response); // evt. sammen med JWT-token
+            return Ok(response);
+            
         }
     }
 }
