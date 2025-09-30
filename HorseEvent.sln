@@ -3,7 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseEvent", "HorseEvent\HorseEvent.csproj", "{E363FBDB-4384-4EFE-AFEF-7BBAC1722EBF}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "react-project", "react-project\", "{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_57184"
+		Debug.AspNetCompiler.PhysicalPath = "react-project\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57184\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_57184"
+		Release.AspNetCompiler.PhysicalPath = "react-project\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57184\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "57184"
+		SlnRelativePath = "react-project\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendAPI", "BackendAPI\BackendAPI.csproj", "{4333C33E-C9E5-4056-B971-F80A3AA052C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{0CCA3FF7-1D60-4C5F-A323-029D54FBC1F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseRider", "HorseRider\HorseRider.csproj", "{79238F21-7686-44AB-A87A-D7FF8E7C3857}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "SharedKernel\SharedKernel.csproj", "{66AF3224-4822-4B29-B7EB-C3B9F8992A82}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBTest", "DBTest\DBTest.csproj", "{29C6FF76-65D0-491F-AC57-B56C01F66AF8}"
 EndProject
@@ -13,10 +40,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E363FBDB-4384-4EFE-AFEF-7BBAC1722EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E363FBDB-4384-4EFE-AFEF-7BBAC1722EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E363FBDB-4384-4EFE-AFEF-7BBAC1722EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E363FBDB-4384-4EFE-AFEF-7BBAC1722EBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{4333C33E-C9E5-4056-B971-F80A3AA052C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4333C33E-C9E5-4056-B971-F80A3AA052C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4333C33E-C9E5-4056-B971-F80A3AA052C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4333C33E-C9E5-4056-B971-F80A3AA052C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CCA3FF7-1D60-4C5F-A323-029D54FBC1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CCA3FF7-1D60-4C5F-A323-029D54FBC1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CCA3FF7-1D60-4C5F-A323-029D54FBC1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CCA3FF7-1D60-4C5F-A323-029D54FBC1F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79238F21-7686-44AB-A87A-D7FF8E7C3857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79238F21-7686-44AB-A87A-D7FF8E7C3857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79238F21-7686-44AB-A87A-D7FF8E7C3857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79238F21-7686-44AB-A87A-D7FF8E7C3857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66AF3224-4822-4B29-B7EB-C3B9F8992A82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66AF3224-4822-4B29-B7EB-C3B9F8992A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66AF3224-4822-4B29-B7EB-C3B9F8992A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66AF3224-4822-4B29-B7EB-C3B9F8992A82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{29C6FF76-65D0-491F-AC57-B56C01F66AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29C6FF76-65D0-491F-AC57-B56C01F66AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29C6FF76-65D0-491F-AC57-B56C01F66AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
