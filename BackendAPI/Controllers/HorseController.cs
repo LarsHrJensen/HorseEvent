@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Contracts.Horses;
 using HorseRider.Application.Commands;
 using HorseRider.Application.Handlers;
 using HorseRider.Application.Queries;
@@ -12,12 +13,12 @@ namespace ReactApp1.Server.Controllers
     public class HorseController : ControllerBase
     {
 
-        private readonly CreateHorseHandler _createHorseHandler;
+        //private readonly CreateHorseHandler _createHorseHandler;
         private readonly IMediator _mediator;
 
         public HorseController(CreateHorseHandler createBookHandler, IMediator mediator)
         {
-            _createHorseHandler = createBookHandler;
+            //_createHorseHandler = createBookHandler;
             _mediator = mediator;
         }
         // POST: api/heste
@@ -35,7 +36,8 @@ namespace ReactApp1.Server.Controllers
 
             var response = new HorseResponse
             {
-                HorseId = horseDTO.Id,
+                Id = (int)horseDTO.Id,
+                UELN = horseDTO.UELN,
                 Name = horseDTO.HorseName,
                 Height = horseDTO.HorseHeight,
                 BirthYear = horseDTO.BirthYear
@@ -52,10 +54,12 @@ namespace ReactApp1.Server.Controllers
 
             var response = horsesDTO.Select(h => new HorseResponse
             {
-                HorseId = h.Id,
+                Id = (int)h.Id,
+                UELN = h.UELN,
                 Name = h.HorseName,
                 Height = h.HorseHeight,
-                BirthYear = h.BirthYear
+                BirthYear = h.BirthYear,
+                Category = h.Category
             });
 
             return Ok(response);

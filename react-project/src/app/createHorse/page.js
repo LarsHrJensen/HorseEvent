@@ -20,25 +20,35 @@ export default function CreateHorsePage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setMessage("");
+
+        if (password !== confirmPassword) {
+            setMessage("Adgangskoderne matcher ikke");
+            return;
+        }
 
         try {
-            const response = await fetch("https://localhost:7265/api/horse", {
+            const response = await fetch("https://localhost:7265/api/user", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(horseData)
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
             });
 
+            const data = await response.json(); // rettet fra 'res' til 'response'
+
             if (response.ok) {
-                alert("Hest oprettet!");
-                setHorseData({ name: "", id: "", height: "", birthyear: "" });
+                setMessage("Bruger oprettet!");
+                // Reset felterne efter succes
+                setUsername("");
+                setPassword("");
+                setConfirmPassword("");
+                // router.push('/login'); // evt. redirect
             } else {
-                alert("Der opstod en fejl.");
+                setMessage(data.message || "Fejl ved oprettelse");
             }
         } catch (error) {
             console.error(error);
-            alert("Something went wrong, womp womp");
+            setMessage("Serverfejl");
         }
     };
 
