@@ -4,9 +4,6 @@ import Image from "next/image";
 import "./page.css";
 import Topbar from "../components/Header";
 
-
-
-
 export default function Profilpage() {
 const router = useRouter();
 
@@ -32,7 +29,7 @@ const handleForgotPasswordClick = ()  => {
           alt="Hest"
           width={400}
           height={200}
-        />
+        />cd react-proje
       </div>
       
 
