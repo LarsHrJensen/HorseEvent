@@ -1,6 +1,6 @@
-﻿namespace HorseEvent.Views.ViewModel
+﻿namespace HorseEvent.Views.Model
 {
-    public class LoginViewModel
+    public class LoginModel
     {
         public string Email { get; set; }
         public string Password { get; set; }
