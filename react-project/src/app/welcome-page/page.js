@@ -1,4 +1,5 @@
 
+//tror bare den her fil skal slettes?
 export default function Home() {
     return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-sky-100">

@@ -8,7 +8,7 @@ export default function NavBar(){
         <aside className="bg-white w-70 min-h-screen flex flex-col items-center py-8 space-y-6">
             <nav className="max-w-6x1 mx-auto flex flex-col space-y-10 py-4 space-x-8">
                 <Link
-                href="/"
+                href="/home"
                 className="nav-link">
                     <House className="nav-icon"/>
                     <span className="text-colour-blue"> Hjem </span>
