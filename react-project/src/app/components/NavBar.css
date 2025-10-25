@@ -1,0 +1,32 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background: white;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.nav-link:hover {
+    color: #6b46c1; /* purple-ish highlight */
+    transform: scale(1.1);
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    color: rgb(93, 128, 241);
+    margin-right: 0.3rem; 
+    gap: 1rem;
+}
