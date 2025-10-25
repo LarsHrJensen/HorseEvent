@@ -1,5 +1,5 @@
 //import Image from "next/image";
-import {House, CircleUser, MessageCircleMore, CircleQuestionMark} from "lucide-react";
+import {House, CircleUser, MessageCircleMore, CircleQuestionMark, Trophy} from "lucide-react";
 import "./page.css"
 
 export default function Home() {
@@ -23,6 +23,7 @@ export default function Home() {
           </a>
 
           <a href="/stævner" className="btn-icon">
+          <Trophy className="icon"/>
           <span> Stævner </span>
           </a>
 
