@@ -1,4 +1,4 @@
-﻿namespace Contracts
+﻿namespace Contracts.Club
 {
     public class CreateClubRequest
     {
@@ -11,7 +11,7 @@
         public string StreetNumber { get; set; }
         public string PostalCode { get; set; }
         public string CountryCode { get; set; }
-        public string  CountryName { get; set; }
+        public string CountryName { get; set; }
         public string City { get; set; }
     }
 }

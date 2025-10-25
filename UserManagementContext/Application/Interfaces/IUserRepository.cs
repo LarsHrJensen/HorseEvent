@@ -10,5 +10,6 @@ namespace UserManagementContext.Application.Interfaces
 {
     public interface IUserRepository: ICrudRepository<UserEntity>
     {
+       Task<UserEntity> GetByUsernameAsync(string username);
     }
 }

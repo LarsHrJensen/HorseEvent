@@ -1,5 +1,5 @@
 ﻿using ClubContext.Application.Interfaces;
-using Contracts;
+using Contracts.Club;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackendAPI.Controllers

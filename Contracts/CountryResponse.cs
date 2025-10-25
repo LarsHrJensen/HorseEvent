@@ -9,6 +9,6 @@ namespace Contracts
     public class CountryResponse
     {
         public string Code { get; set; }   // fx "DK"
-        public string Name { get; set; }   // fx "Denmark"
+        public string Name { get; set; }   // fx "Denmark" hej
     }
 }

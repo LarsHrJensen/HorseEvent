@@ -1,60 +1,96 @@
-﻿using UserManagementContext.Application.DTOs;
+﻿using Contracts.User;
+using System.CodeDom.Compiler;
+using System.Security.Cryptography;
+using System.Text;
+using UserManagementContext.Application.DTOs;
 using UserManagementContext.Application.Interfaces;
+using UserManagementContext.Domain.Entities;
 
 namespace UserManagementContext.Application.Services
 {
     public class UserService : IUserService
     {
-        public Task<AuthResult> AuthenticateAsync(LoginDto dto)
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
+        }
+        public async Task<UserDto> CreateUserAsync(CreateUserRequest dto)
+        {
+            // Lav nyt domæne-objekt
+            var userEntity = new UserEntity();
+
+            userEntity.Username = dto.UserName;
+            userEntity.Salt = GenerateSalt();
+            userEntity.PasswordHash = HashPasswordWithSaltAndPepper(dto.Password, userEntity.Salt);
+            userEntity.Email = dto.Email;
+
+            // Gem i repository
+            await _userRepository.AddAsync(userEntity);
+
+            // Map til DTO
+            var userDto = new UserDto
+            {
+                Id = userEntity.Id,
+                Username = userEntity.Username,
+                Email = userEntity.Email
+            };
+
+            return userDto;
         }
 
-        public Task DeleteAsync(int userId)
+        private string GenerateSalt(int size = 16)
         {
-            throw new NotImplementedException();
+            byte[] salt = new byte[size];
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+            return Convert.ToBase64String(salt);
         }
 
-        public Task<UserDto?> GetByEmailAsync(string email)
+        //TODO SIKKERHED: Implementer en sikker hashing-algoritme med salt og pepper 
+        public string HashPasswordWithSaltAndPepper(string password, string salt)
         {
-            throw new NotImplementedException();
+            string saltedAndPepperedPassword = password + salt; /*+ SecretPepper;*/
+
+
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(saltedAndPepperedPassword);
+
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                // Convert to a readable hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hashBytes)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+                return sb.ToString();
+            }
         }
 
-        public Task<UserDto?> GetByIdAsync(int userId)
+        public async Task<UserDto?> LoginAsync(UserLoginRequest request)
         {
-            throw new NotImplementedException();
-        }
+           UserEntity userEntity = await _userRepository.GetByUsernameAsync(request.UserName);
+            if (userEntity == null)
+                return null;
+            string hashedInputPassword = HashPasswordWithSaltAndPepper(request.Password, userEntity.Salt);
 
-        public Task<UserDto?> GetByUsernameAsync(string username)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserDto> RegisterAsync(RegisterUserDto registerDto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task RequestPasswordResetAsync(string email)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task ResetPasswordAsync(string resetToken, string newPassword)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateEmailAsync(int userId, string newEmail)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdatePasswordAsync(int userId, string currentPassword, string newPassword)
-        {
-            throw new NotImplementedException();
+            if (hashedInputPassword == userEntity.PasswordHash)
+            {
+                return new UserDto
+                {
+                    Id = userEntity.Id,
+                    Username = userEntity.Username,
+                    Email = userEntity.Email
+                };
+            }
+            else return null;
         }
 
        
     }
+    
 }
