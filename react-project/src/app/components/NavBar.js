@@ -11,48 +11,48 @@ export default function NavBar(){
                 href="/"
                 className="nav-link">
                     <House className="nav-icon"/>
-                    <span> Hjem </span>
+                    <span className="text-colour-blue"> Hjem </span>
                 </Link>
                 
                 <Link href="/events"
                 className="nav-link">
                     <Trophy className="nav-icon"/>
-                    <span> Stævner </span>
+                    <span className="text-colour-blue"> Stævner </span>
                 </Link>
 
                 <Link href="/horses"
                 className="nav-link">
-                    <span>Mine Heste</span>
+                    <span className="text-colour-blue">Mine Heste</span>
                 </Link>
 
                 <Link href="/calendar"
                 className="nav-link">
                     <CalendarDays className="nav-icon"/>
-                    <span>Kalender</span>
+                    <span className="text-colour-blue">Kalender</span>
                 </Link>
 
                 <Link href="/chatbot"
                 className="nav-link">
-                    <MessageCircleMore className="nav-icon"/>
-                    <span>Chat Bot</span>
+                    <MessageCircleMore className="nav-icon-p"/>
+                    <span className="text-colour-purple">Chat Bot</span>
                 </Link>
 
                 <Link href="/settings"
                 className="nav-link">
                     <Settings className="nav-icon"/>
-                    <span>Indstillinger</span>
+                    <span className="text-colour-blue">Indstillinger</span>
                 </Link>
 
                 <Link href="/help"
                 className="nav-link">
                     <CircleQuestionMark className="nav-icon"/>
-                    <span>Hjælp & Support</span>
+                    <span className="text-colour-blue">Hjælp & Support</span>
                 </Link>
 
                 <Link href="/logout"
                 className="nav-link">
-                    <LogOut className="nav-icon"/>
-                    <span> Log ud </span>
+                    <LogOut className="nav-icon-p"/>
+                    <span className="text-colour-purple"> Log ud </span>
                 </Link>
             </nav>
         </aside>

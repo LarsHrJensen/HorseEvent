@@ -30,3 +30,18 @@
     margin-right: 0.3rem; 
     gap: 1rem;
 }
+.nav-icon-p {
+    width: 24px;
+    height: 24px;
+    color: rgb(111, 27, 130);
+    margin-right: 0.3rem; 
+    gap: 1rem;
+}
+
+.text-colour-purple {
+color: rgb(111, 27, 130);
+}
+
+.text-colour-blue {
+    color: rgb(93, 128, 241);
+}
