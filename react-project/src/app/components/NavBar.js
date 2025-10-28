@@ -20,6 +20,12 @@ export default function NavBar(){
                     <span className="text-colour-blue"> Stævner </span>
                 </Link>
 
+                <Link href="/profil"
+                className="nav-link">
+                    <CircleUser className="nav-icon"/>
+                    <span className="text-colour-blue"> Profil </span>
+                </Link>
+
                 <Link href="/horses"
                 className="nav-link">
                     <span className="text-colour-blue">Mine Heste</span>

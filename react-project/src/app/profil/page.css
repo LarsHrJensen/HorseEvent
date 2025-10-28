@@ -2,8 +2,8 @@
 /*lyseblå baggrund*/
 .profil-wrapper {
   background-color: #e0f2ff;
-  padding:60px;
-  min-height: 100vh;
+  /*padding:60px;*/ /* Skal fjernes - laver en kant af hvid*/
+  /* min-height: 100vh;*/ /* Skal fjernes - laver en kant af hvid*/
   display: flex;
   justify-content: center;
   align-items: flex-start;
