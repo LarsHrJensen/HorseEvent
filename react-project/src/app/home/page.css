@@ -66,11 +66,6 @@
     padding: 0 40px;
 }
 
-.box-wrapper--highlighted {
-    background-color: #ffe5e5;
-    border: 2px solid red;
-}
-
 .box-content {
     flex: 1;
     padding: 1.5rem;

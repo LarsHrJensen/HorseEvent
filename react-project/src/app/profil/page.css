@@ -1,5 +1,5 @@
 
-/*lyseblå baggrund*/
+/*lyseblå baggrund  ~~ er lavet som global layout <3*/
 .profil-wrapper {
   background-color: #e0f2ff;
   /*padding:60px;*/ /* Skal fjernes - laver en kant af hvid*/
@@ -54,7 +54,7 @@
 .profilknap {
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #0070f3;
+  background-color: #4a90e2;
   color: white;
   border: none;
   border-radius: 6px;
@@ -64,7 +64,7 @@
 
 
 .profilknap:hover {
-  background-color: #005bb5;
+  background-color: #78b0f0;
 }
 
 .login-button-container {
@@ -75,7 +75,7 @@
 }
 
 .login-button{
-  background-color: #0070f3;
+  background-color: #4a90e2;
   color: white;
   border: none;
   padding: 10px 16px;

@@ -26,7 +26,7 @@ export default function NavBar(){
                     <span className="text-colour-blue"> Profil </span>
                 </Link>
 
-                <Link href="/horses"
+                <Link href="/my-horses"
                 className="nav-link">
                     <span className="text-colour-blue">Mine Heste</span>
                 </Link>

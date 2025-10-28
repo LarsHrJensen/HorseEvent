@@ -2,7 +2,6 @@
 import{ useRouter} from "next/navigation";
 import Image from "next/image";
 import "./page.css";
-import Topbar from "../components/topbar";
 
 
 
