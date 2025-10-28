@@ -56,6 +56,14 @@
     background-color: #8e44ad;
     height: 100px;
     width: 840px;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px #0000001a;
+
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
 }
 
 .box-wrapper--highlighted {

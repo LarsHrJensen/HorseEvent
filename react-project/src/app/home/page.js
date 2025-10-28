@@ -14,7 +14,7 @@ export default function HomePage() {
             
             <div className="flex space-x-6">
                 <div className="box-wrapper box-wrapper--small">
-                    <h1 className="text-2xl font-bold mb-4 text-center text-top text-[#1B2D5E]">Competition overview</h1>
+                    <p className="text-[#1B2D5E]"> Competition overview</p>
                 </div>
 
                 <div className="box-wrapper box-wrapper--small">
@@ -31,7 +31,7 @@ export default function HomePage() {
             </div>
 
 
-            <div className="box-wrapper box-wrapper--info flex justify-between items-center w-full">
+            <div className="box-wrapper box-wrapper--info">
                 <p>competition progess</p>
                 <div className="flex gap-x-4">
                     <button className="btn-default btn-default--w text-[#8e44ad]"> Se Live Opdateringer</button>
@@ -46,7 +46,7 @@ export default function HomePage() {
                         <div className="actions">
                             <input type="text" 
                                 placeholder="Search participants..."></input>
-                            <button className="btn-small text-[#8e44ad]"> Filtrer </button>
+                            <button className="btn-small text-[#4a90e2]"> Filtrer </button>
                         </div>
                     </div>
 
@@ -59,7 +59,7 @@ export default function HomePage() {
                     <div className="box-topbar">
                         <h2>Schedule</h2>
                         <div className="actions">
-                            <button className="btn-small text-[#8e44ad]"> Add Event </button>
+                            <button className="btn-small text-[#4a90e2]"> Add Event </button>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@ export default function HomePage() {
                     <div className="box-topbar">
                         <h2 className="text-[#1B2D5E]"> Results </h2>
                         <div className="actions">
-                            <button className="btn-small text-[#8e44ad]"> Export </button>
+                            <button className="btn-small text-[#4a90e2]"> Export </button>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ export default function HomePage() {
                     <div className="box-topbar">
                         <h2>Judges & Officials</h2>
                         <div className="actions">
-                            <button className="btn-small text-[#8e44ad]"> Add Judge </button>
+                            <button className="btn-small text-[#4a90e2]"> Add Judge </button>
                         </div>
                     </div>
                 </div>
