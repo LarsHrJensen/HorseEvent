@@ -1,92 +1,92 @@
 
-        /*lyseblå baggrund*/
-        .profil-wrapper {
-          background-color: #e0f2ff;
-          padding:60px;
-          min-height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: flex-start;
-        }
-        /*Hvid kasse*/
-        .profil-box{
-          background-color: white;
-          padding: 60px;
-          border-radius: 25px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          max-width: none;
-          width: 100%;
-      
-        }
-        /*overskrift*/
-        .profil-title {
-          font-size: 32px;
-          font-weight: bold;
-          color: #3b82f6;
-          margin-bottom: 40px;
-          text-align: center;
-        }
-        /*flex layout: billede + knapper*/
-        .profil-content{
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-          align-items: flex-start;
-          gap: 40px;
-          
-         }
+/*lyseblå baggrund*/
+.profil-wrapper {
+  background-color: #e0f2ff;
+  padding:60px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+/*Hvid kasse*/
+.profil-box{
+  background-color: white;
+  padding: 60px;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: none;
+  width: 100%;
 
-         /*billedet*/
-         .profil-image{
-            flex-shrink: 0;
-            width: 400px;
-            margin-left:-20px;
-          
-          }
-         /*knapper*/
-         .profil-buttons{
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: flex-start;
+}
+/*overskrift*/
+.profil-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #3b82f6;
+  margin-bottom: 40px;
+  text-align: center;
+}
+/*flex layout: billede + knapper*/
+.profil-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 40px;
+  
+}
 
-         }
-        .profilknap {
-          padding: 12px 24px;
-          font-size: 16px;
-          background-color: #0070f3;
-          color: white;
-          border: none;
-          border-radius: 6px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-        }
+/*billedet*/
+.profil-image{
+  flex-shrink: 0;
+  width: 400px;
+  margin-left:-20px;
+  
+  }
+/*knapper*/
+.profil-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
 
-     
-        .profilknap:hover {
-          background-color: #005bb5;
-        }
+}
+.profilknap {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-        .login-button-container {
-          position:absolute;
-          top: 20px;
-          right: 20px;
-          z-index: 1000;
-        }
 
-        .login-button{
-          background-color: #0070f3;
-          color: white;
-          border: none;
-          padding: 10px 16px;
-          border-radius: 5px;
-          cursor: pointer;
-          font-weight: bold;
-          font-size: 16px;
-          margin-top: -20px;
-        }
+.profilknap:hover {
+  background-color: #005bb5;
+}
 
-        .logind-button:hover {
-          background-color: #005bb5;
-        }
-    
+.login-button-container {
+  position:absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.login-button{
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: -20px;
+}
+
+.logind-button:hover {
+  background-color: #005bb5;
+}
+

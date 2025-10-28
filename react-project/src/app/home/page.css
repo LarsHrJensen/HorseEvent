@@ -23,10 +23,32 @@
 .box-wrapper--info {
     background-color: #8e44ad;
     height: 100px;
-    width: 775px;
+    width: 840px;
 }
 
 .box-wrapper--highlighted {
     background-color: #ffe5e5;
     border: 2px solid red;
+}
+
+.btn-default {
+    background-color: #4a90e2;
+    box-shadow: 0 4px 12px #0000001a;
+    border-radius: 15px;
+    width: 175px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.btn-default--p {
+    background-color: #8e44ad;
+}
+
+.btn-default--w {
+    background-color: #ffffff;
+
+}
+
+.btn-default:hover {
+    background-color: #78b0f0;
 }
