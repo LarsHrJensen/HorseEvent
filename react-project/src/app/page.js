@@ -4,7 +4,7 @@ import "./page.css"
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-[#f0f4ff]">
+    <main className="flex flex-col items-center justify-center h-screen">
       <div className="max-w-2xl bg-white shadow-2xl rounded-2xl p-10 text-center">
         <h1 className="text-4xl font-bold mb-4 text-[#5d80f1]">
           Hesteland! 

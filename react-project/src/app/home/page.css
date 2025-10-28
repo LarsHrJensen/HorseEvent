@@ -1,0 +1,32 @@
+.box-wrapper {
+    background-color: white;
+    padding: 60px;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px #0000001a;
+    max-width: none;
+    height: 350px;
+    width: 375px;
+}
+
+.box-wrapper--small {
+    padding: 30px;
+    height: 300px;
+    width: 265px;
+}
+
+.box-wrapper--big {
+    padding: 80px;
+    height: 400px;
+    width: 450px;
+}
+
+.box-wrapper--info {
+    background-color: #8e44ad;
+    height: 100px;
+    width: 775px;
+}
+
+.box-wrapper--highlighted {
+    background-color: #ffe5e5;
+    border: 2px solid red;
+}
