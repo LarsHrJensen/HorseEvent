@@ -30,33 +30,58 @@ export default function HomePage() {
                 </div>
             </div>
 
-            <div>
-                <div className="box-wrapper box-wrapper--info flex justify-between items-center w-full">
-                    <p>competition progess</p>
-                    <div className="flex gap-x-4">
-                        <button className="btn-default btn-default--w text-[#8e44ad]"> Se Live Opdateringer</button>
-                        <button className="btn-default btn-default--w text-[#8e44ad]"> Download Tidsplan</button>
+
+            <div className="box-wrapper box-wrapper--info flex justify-between items-center w-full">
+                <p>competition progess</p>
+                <div className="flex gap-x-4">
+                    <button className="btn-default btn-default--w text-[#8e44ad]"> Se Live Opdateringer</button>
+                    <button className="btn-default btn-default--w text-[#8e44ad]"> Download Tidsplan</button>
+                </div>
+            </div>
+
+            <div className="flex space-x-6">
+                <div className="box-wrapper box-wrapper--with-topbar">
+                    <div className="box-topbar">
+                        <h2>Participants</h2>
+                        <div className="actions">
+                            <input type="text" 
+                                placeholder="Search participants..."></input>
+                            <button className="btn-small text-[#8e44ad]"> Filtrer </button>
+                        </div>
+                    </div>
+
+                    <div className="box-content">
+                        <p> Participant info or something...</p>
+                    </div>
+                </div>
+
+                <div className="box-wrapper box-wrapper--with-topbar">
+                    <div className="box-topbar">
+                        <h2>Schedule</h2>
+                        <div className="actions">
+                            <button className="btn-small text-[#8e44ad]"> Add Event </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div className="flex space-x-6">
-                <div className="box-wrapper">
-                    <p className="text-[#1B2D5E]">participants</p>
+                <div className="box-wrapper box-wrapper--with-topbar">
+                    <div className="box-topbar">
+                        <h2 className="text-[#1B2D5E]"> Results </h2>
+                        <div className="actions">
+                            <button className="btn-small text-[#8e44ad]"> Export </button>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="box-wrapper">
-                    <p className="text-[#1B2D5E]">schedule</p>
-                </div>
-            </div>
-
-            <div className="flex space-x-6">
-                <div className="box-wrapper">
-                    <p className="text-[#1B2D5E]">results</p>
-                </div>
-
-                <div className="box-wrapper">
-                    <p className="text-[#1B2D5E]">judges & officials</p>
+                <div className="box-wrapper box-wrapper--with-topbar">
+                    <div className="box-topbar">
+                        <h2>Judges & Officials</h2>
+                        <div className="actions">
+                            <button className="btn-small text-[#8e44ad]"> Add Judge </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
