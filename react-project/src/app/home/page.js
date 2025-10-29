@@ -34,7 +34,7 @@ export default function HomePage() {
             <div className="box-wrapper box-wrapper--info">
                 <p>Competition Progess</p>
                 <div className="flex gap-x-4">
-                    <button className="btn-default btn-default--w text-[#8e44ad]"> Se Live Opdateringer</button>
+                    <button className="btn-default btn-default--w text-[#8e44ad]"> Live Opdateringer</button>
                     <button className="btn-default btn-default--w text-[#8e44ad]"> Download Tidsplan</button>
                 </div>
             </div>

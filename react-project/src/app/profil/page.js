@@ -20,7 +20,7 @@ const handleForgotPasswordClick = ()  => {
     
     <main className= "profil-wrapper">  
     <div className= "login-button-container"> 
-      <button className="login-button" onClick={() => router.push('/login')}>Log ind</button>
+     {/* <button className="login-button" onClick={() => router.push('/login')}>Log ind</button> */}
     </div>
 
     <div className="profil-box">
