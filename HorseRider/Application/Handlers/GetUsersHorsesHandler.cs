@@ -1,9 +1,9 @@
-﻿using global::HorseRider.Application.DTO_s;
+﻿using HorseRider.Application.DTO_s;
 using HorseRider.Application.Interfaces;
 using HorseRider.Application.Queries;
 using MediatR;
 
-namespace HorseRider.Application.Handlers
+namespace HorseRiderContext.Application.Handlers
 {
     public class GetUsersHorsesHandler : IRequestHandler<GetHorsesQuery, List<HorseDTO>>
     {
@@ -16,7 +16,7 @@ namespace HorseRider.Application.Handlers
 
         public async Task<List<HorseDTO>> Handle(GetHorsesQuery request, CancellationToken cancellationToken)
         {
-            var horses = await _horseRepository.GetAllAsync();
+            var horses = await _horseRepository.GetByUserAsync();
 
             return horses.Select(h => new HorseDTO
             {

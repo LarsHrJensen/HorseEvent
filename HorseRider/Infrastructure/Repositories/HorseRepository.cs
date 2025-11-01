@@ -115,7 +115,11 @@ namespace HorseRider.Infrastructure.Repositories
 
             return null!;
         }
-        
+
+        public Task<IEnumerable<Horse>> GetByUserAsync()
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task UpdateAsync(Horse entity)
         {

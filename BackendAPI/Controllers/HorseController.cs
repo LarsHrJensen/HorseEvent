@@ -64,5 +64,23 @@ namespace ReactApp1.Server.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUsersHorses()
+        {
+            var horsesDTO = await _mediator.Send(new GetUsersHorsesQuery());
+
+            var response = horsesDTO.Select(h => new HorseResponse
+            {
+                Id = (int)h.Id,
+                UELN = h.UELN,
+                Name = h.HorseName,
+                Height = h.HorseHeight,
+                BirthYear = h.BirthYear,
+                Category = h.Category
+            });
+
+            return Ok(response);
+        }
     }
 }
