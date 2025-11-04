@@ -1,5 +1,6 @@
 ﻿using ClubContext.Application.Interfaces;
 using ClubContext.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClubContext.Infrastructure.Repositories
 {
@@ -28,9 +29,9 @@ namespace ClubContext.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Club>> GetAllAsync()
+        public async Task<List<Club>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Clubs.ToListAsync();
         }
 
         public Task<Club?> GetByIdAsync(int id)

@@ -1,14 +1,26 @@
 "use client";
-
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CreateEventPage() {
-    // Hardcoded choices (you asked hardcoded for now)
-    const clubs = [
-        { id: "club-1", name: "Randers Riding Club" },
-        { id: "club-2", name: "East Valley Equestrian" },
-        { id: "club-3", name: "North Field Riders" },
-    ];
+
+    const [clubs, setClubs] = useState([]);
+    const [loadingClubs, setLoadingClubs] = useState(true);
+
+    useEffect(() => {
+        async function fetchClubs() {
+            try {
+                const response = await fetch("https://localhost:7265/api/club");
+                if (!response.ok) throw new Error("Network response was not ok");
+                const data = await response.json();
+                setClubs(data);
+            } catch (error) {
+                console.error("Error fetching clubs:", error);
+            } finally {
+                setLoadingClubs(false);
+            }
+        }
+        fetchClubs();
+    }, []);
 
     const disciplines = [
         { id: "dressage", label: "Dressage" },
@@ -32,7 +44,7 @@ export default function CreateEventPage() {
     // Event state
     const [event, setEvent] = useState({
         name: "",
-        clubId: clubs[0].id,
+        clubId: null,
         level: eventLevels[0],
         startDate: "",
         endDate: "",
@@ -131,12 +143,16 @@ export default function CreateEventPage() {
                                 value={event.clubId}
                                 onChange={(e) => updateEventField("clubId", e.target.value)}
                             >
+                                {loadingClubs && <option>Loading clubs...</option>}
+                                {!loadingClubs && clubs.length === 0 && <option>No clubs found</option>}
+
                                 {clubs.map((c) => (
                                     <option key={c.id} value={c.id}>
                                         {c.name}
                                     </option>
                                 ))}
                             </select>
+
                         </label>
 
                         <label>
@@ -333,13 +349,6 @@ export default function CreateEventPage() {
                 <div className="mt-6 flex justify-end gap-3">
                     <button onClick={saveEvent} className="px-4 py-2 bg-blue-600 text-white rounded">Save event</button>
                 </div>
-            </div>
-
-            <div className="max-w-3xl mx-auto mt-4 text-xs text-gray-500">
-                <p>
-                    Notes: This is a fairly raw implementation (client-side only) with hardcoded reference data. Hook it up to an
-                    API or a database (e.g. using a POST to /api/events) and add server-side validation for production.
-                </p>
             </div>
         </div>
     );

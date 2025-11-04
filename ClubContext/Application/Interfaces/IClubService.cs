@@ -12,5 +12,6 @@ namespace ClubContext.Application.Interfaces
         Task<ClubDto> CreateClubAsync(string name, AddressDto address);
         Task<ClubDto?> GetClubAsync(int id);
         Task<IEnumerable<ClubDto>> GetAllClubsAsync();
+      
     }
 }
