@@ -14,6 +14,8 @@ using UserManagementContext.Infrastructure.Repositories;
 using UserManagementContext.Application.Interfaces;
 using UserManagementContext.Application.Services;
 using UserManagementContext.Infrastructure;
+using EventSchedulingContext.Application.Interfaces;
+using EventSchedulingContext.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +44,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDisciplineService, DisciplinService >();
 
 // 5. Command / Query Handlers (hvis du bruger MediatR)
 builder.Services.AddScoped<CreateRiderHandler>();
