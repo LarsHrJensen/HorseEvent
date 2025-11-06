@@ -25,6 +25,7 @@ var builder = WebApplication.CreateBuilder(args);
 var horseRiderConnectionString = builder.Configuration.GetConnectionString("HorseRidersContext");
 var clubConnectionString = builder.Configuration.GetConnectionString("ClubDb");
 var userConnectionString = builder.Configuration.GetConnectionString("UserManagementDB");
+var eventschedulingConnectionString = builder.Configuration.GetConnectionString("EventSchedulingDB");
 
 // 2. DbContext
 builder.Services.AddDbContext<ClubDbContext>(options =>
@@ -32,7 +33,7 @@ builder.Services.AddDbContext<ClubDbContext>(options =>
 builder.Services.AddDbContext<UserManagementDbContext>(options =>
     options.UseNpgsql(userConnectionString));
 builder.Services.AddDbContext<EventSchedulingDbContext>(options =>
-    options.UseNpgsql(userConnectionString));
+    options.UseNpgsql(eventschedulingConnectionString));
 
 // 3. Repositories
 builder.Services.AddScoped<IDbConnectionFactory>(sp =>

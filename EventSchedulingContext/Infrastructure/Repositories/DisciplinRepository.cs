@@ -13,7 +13,7 @@ namespace EventSchedulingContext.Infrastructure.Repositories
         }
         public async Task<List<Disciplin>> GetAllAsync()
         {
-            return await _dbContext.disciplins
+            return await _dbContext.Disciplines
                  .ToListAsync();
         }
 

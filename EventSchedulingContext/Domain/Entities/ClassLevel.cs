@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventSchedulingContext.Domain.Entities
 {
-    public class ClassCategory
+    public class ClassLevel
     {
         public int Id { get; set; }
         public string Name { get; set; }

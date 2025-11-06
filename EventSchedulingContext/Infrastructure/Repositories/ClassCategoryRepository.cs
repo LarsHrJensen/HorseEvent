@@ -17,13 +17,13 @@ namespace EventSchedulingContext.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<List<ClassCategory>> GetAllAsync()
+        public async Task<List<ClassLevel>> GetAllAsync()
         {
-            return await _dbContext.classCategories
+            return await _dbContext.ClassLevels
                  .ToListAsync();
         }
 
-        public Task<ClassCategory?> GetByIdAsync(int id)
+        public Task<ClassLevel?> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
