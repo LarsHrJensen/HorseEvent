@@ -17,13 +17,13 @@ namespace BackendAPI.Controllers
         }
         // GET: api/discipliner
         [HttpGet]
-        public async Task<IActionResult> GetAllClubs()
+        public async Task<IActionResult> GetAllDisciplines()
         {
-            var ClubDTO = await _disciplinService.GetAllDisciplinesAsync();
+            var disciplines = await _disciplinService.GetAllDisciplinesAsync();
 
             //Mapping
 
-            return Ok(ClubDTO);
+            return Ok(disciplines);
         }
     }
 }

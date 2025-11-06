@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EventSchedulingContext.Infrastructure.Repositories
 {
-    internal class ClassCategoryRepository : IClassCategoryRepository
+    public class ClassCategoryRepository : IClassCategoryRepository
     {
         private readonly EventSchedulingDbContext _dbContext;
 

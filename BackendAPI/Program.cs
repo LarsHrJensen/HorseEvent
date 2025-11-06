@@ -2,20 +2,22 @@ using ClubContext.Application.Handlers;
 using ClubContext.Application.Interfaces;
 using ClubContext.Application.Services;
 using ClubContext.ClubInfrastructure.Repositories;
-using ClubContext.Infrastructure.Repositories;
 using ClubContext.Infrastructure;
-using HorseRider.Application.Handlers.HorseRider.Application.Handlers;
+using ClubContext.Infrastructure.Repositories;
+using EventSchedulingContext.Application.Interfaces;
+using EventSchedulingContext.Application.Services;
+using EventSchedulingContext.Infrastructure;
+using EventSchedulingContext.Infrastructure.Repositories;
 using HorseRider.Application.Handlers;
+using HorseRider.Application.Handlers.HorseRider.Application.Handlers;
 using HorseRider.Application.Interfaces;
 using HorseRider.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel.Interfaces;
-using UserManagementContext.Infrastructure.Repositories;
 using UserManagementContext.Application.Interfaces;
 using UserManagementContext.Application.Services;
 using UserManagementContext.Infrastructure;
-using EventSchedulingContext.Application.Interfaces;
-using EventSchedulingContext.Application.Services;
+using UserManagementContext.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,10 +31,13 @@ builder.Services.AddDbContext<ClubDbContext>(options =>
     options.UseNpgsql(clubConnectionString));
 builder.Services.AddDbContext<UserManagementDbContext>(options =>
     options.UseNpgsql(userConnectionString));
+builder.Services.AddDbContext<EventSchedulingDbContext>(options =>
+    options.UseNpgsql(userConnectionString));
 
 // 3. Repositories
 builder.Services.AddScoped<IDbConnectionFactory>(sp =>
     new SqlDbConnectionFactory(horseRiderConnectionString));
+
 
 builder.Services.AddScoped<IHorseRepository, HorseRepository>();
 builder.Services.AddScoped<IRiderRepository, RiderRepository>();
@@ -40,6 +45,8 @@ builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
 builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IClassCategoryRepository, ClassCategoryRepository>();
+builder.Services.AddScoped<IDisciplineRepository, DisciplinRepository>();
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();

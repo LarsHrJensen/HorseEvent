@@ -32,7 +32,7 @@ export default function CreateEventPage() {
 
     // Class-levels per discipline
     const dressageLevels = ["LD1", "LA5", "LA3", "MB"];
-    const jumpingLevels = ["LB*", "LB", "BOM (on ground)", "MB"];
+    const jumpingLevels = ["LB*", "LB", "Bom på jorden", "MB"];
 
     const statuses = [
         { id: "draft", label: "Draft" },

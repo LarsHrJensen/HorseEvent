@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EventSchedulingContext.Application.Interfaces
 {
-    internal interface IDisciplineRepository : IReadRepository<Disciplin>
+    public interface IDisciplineRepository : IReadRepository<Disciplin>
     {
     }
 }

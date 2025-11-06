@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventSchedulingContext.Infrastructure.Repositories
 {
-    internal class DisciplinRepository : IDisciplineRepository
+    public class DisciplinRepository : IDisciplineRepository
     {
         private readonly EventSchedulingDbContext _dbContext;
         public DisciplinRepository(EventSchedulingDbContext dbContext)
