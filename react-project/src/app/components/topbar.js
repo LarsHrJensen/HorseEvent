@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import "./Topbar.css"
 
 export default function Topbar() {
     const router= useRouter();
@@ -11,11 +11,19 @@ export default function Topbar() {
     }
 
     return (
-        <>
-            <button className="login-button" onClick={() => router.push('/login')}>Log ind</button>
-            <button className="signup-button" onClick={handleSignupClick}>Sign up</button>
-            <h1 className="topbar-title">Opret din profil</h1>
-            <div className="spacer"></div>
-        </>
+        <aside className="topbar">
+            <div className="topbar-content">
+                
+                <h1 className="topbar-title"> Hesteland </h1>
+                {/*<button className="btn-default"
+                        onClick={handleSignupClick}>
+                    Sign Up
+                </button> */}
+                <button className="btn-default"
+                        onClick={() => router.push('/login')}>
+                    Log ind
+                </button>
+            </div>
+        </aside>
     );
 }

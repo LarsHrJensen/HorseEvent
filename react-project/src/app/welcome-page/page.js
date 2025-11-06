@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+//tror bare den her fil skal slettes?
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-sky-100">

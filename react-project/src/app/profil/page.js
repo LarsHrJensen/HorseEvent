@@ -2,8 +2,13 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "./page.css";
+<<<<<<< HEAD
 import Topbar from "../components/Header";
 import { useEffect, useState } from "react";
+=======
+
+
+>>>>>>> d4ada567527eb8194026ec5b1684b95ff4a34915
 
 
 export default function Profilpage() {
@@ -28,7 +33,14 @@ const [staevner, setStaevner] = useState([]);
     }
     fetchNyheder();
     
+<<<<<<< HEAD
   }, []);
+=======
+    <main className= "profil-wrapper">  
+    <div className= "login-button-container"> 
+     {/* <button className="login-button" onClick={() => router.push('/login')}>Log ind</button> */}
+    </div>
+>>>>>>> d4ada567527eb8194026ec5b1684b95ff4a34915
 
   useEffect(() => {
     async function fetchStaevner() {
