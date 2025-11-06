@@ -13,14 +13,13 @@ namespace EventSchedulingContext.Application.Services
         }
         public async Task<IEnumerable<DisciplinDTO>> GetAllDisciplinesAsync()
         {
-           List<DisciplinDTO> disciplins = await _disciplinRepository.GetAllAsync()
-                .ContinueWith(task => task.Result
-                .Select(d => new DisciplinDTO
-                {
-                    Id = d.Id,
-                    Name = d.Name
-                }).ToList());
-            return disciplins;
+            var disciplins = await _disciplinRepository.GetAllAsync();
+
+            return disciplins.Select(d => new DisciplinDTO
+            {
+                Id = d.Id,
+                Name = d.Name
+            });
         }
     }
 }

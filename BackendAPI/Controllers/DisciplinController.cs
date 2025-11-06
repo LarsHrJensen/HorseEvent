@@ -21,8 +21,6 @@ namespace BackendAPI.Controllers
         {
             var disciplines = await _disciplinService.GetAllDisciplinesAsync();
 
-            //Mapping
-
             return Ok(disciplines);
         }
     }

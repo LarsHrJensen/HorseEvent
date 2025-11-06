@@ -36,20 +36,22 @@ namespace EventSchedulingContext.Infrastructure
             // ---------------------------
             // ClassLevel
             // ---------------------------
-            //modelBuilder.Entity<ClassLevel>(entity =>
-            //{
-            //    entity.ToTable("class_category", "public");
+            modelBuilder.Entity<ClassLevel>(entity =>
+            {
+                entity.ToTable("class_level", "public");
 
-            //    entity.HasKey(c => c.Id);
+                entity.HasKey(c => c.Id);
 
-            //    entity.Property(c => c.Id)
-            //          .HasColumnName("id");
+                entity.Property(c => c.Id)
+                      .HasColumnName("class_level_id");
 
-            //    entity.Property(c => c.Name)
-            //          .HasMaxLength(150)
-            //          .IsRequired()
-            //          .HasColumnName("name");
-            //});
+                entity.Property(c => c.Name)
+                      .HasMaxLength(150)
+                      .IsRequired()
+                      .HasColumnName("name");
+
+                entity.Property(c => c.DisciplineId).HasColumnName("discipline_id");
+            });
 
             base.OnModelCreating(modelBuilder);
         }

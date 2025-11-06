@@ -46,13 +46,14 @@ builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
 builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IClassCategoryRepository, ClassCategoryRepository>();
+builder.Services.AddScoped<IClassLevelRepository, ClassLevelRepository>();
 builder.Services.AddScoped<IDisciplineRepository, DisciplinRepository>();
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDisciplineService, DisciplinService >();
+builder.Services.AddScoped<IClassLevelService, ClassLevelService>();
 
 // 5. Command / Query Handlers (hvis du bruger MediatR)
 builder.Services.AddScoped<CreateRiderHandler>();

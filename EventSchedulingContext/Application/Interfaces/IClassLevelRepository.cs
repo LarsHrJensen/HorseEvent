@@ -3,7 +3,7 @@ using SharedKernel.Interfaces.Base;
 
 namespace EventSchedulingContext.Application.Interfaces
 {
-    public interface IClassCategoryRepository : IReadRepository<ClassLevel>
+    public interface IClassLevelRepository : IReadRepository<ClassLevel>
     {
 
     }
