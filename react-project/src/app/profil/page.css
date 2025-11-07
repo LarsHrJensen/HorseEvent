@@ -1,4 +1,48 @@
 
+<<<<<<< HEAD
+        /*lyseblå baggrund*/
+        .profil-wrapper {
+          background-color: #e0f2ff;
+          padding:60px;
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+        }
+        /*Hvid kasse*/
+        .profil-box{
+          background-color: white;
+          padding: 60px;
+          border-radius: 25px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          max-width: none;
+          width: 100%;
+      
+        }
+        /*overskrift*/
+        .profil-title {
+          font-size: 32px;
+          font-weight: bold;
+          color: #3b82f6;
+          margin-bottom: 40px;
+          text-align: center;
+        }
+        /*flex layout: billede + knapper*/
+        .profil-content{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 40px;
+          
+         }
+         .profile-left-section{
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+          align-items: flex-start;
+         }
+=======
 /*lyseblå baggrund  ~~ er lavet som global layout <3*/
 .profil-wrapper {
   background-color: #e0f2ff;
@@ -16,6 +60,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: none;
   width: 100%;
+>>>>>>> d4ada567527eb8194026ec5b1684b95ff4a34915
 
 }
 /*overskrift*/
@@ -90,3 +135,99 @@
   background-color: #005bb5;
 }
 
+<<<<<<< HEAD
+        .login-button:hover {
+          background-color: #005bb5;
+        }
+    
+        .profile-image img{
+
+          border-radius: 50%;
+          object-fit: cover;
+          width: 200px;
+          height: 200px;
+          
+        }
+
+        .profile-billede{
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .profil-info-box{
+          background-color: rgb(5, 146, 47);
+          border: 1px solid #ccc;
+          border-radius: 12px;
+          padding: 20px;
+          margin-top: 12px;
+          width: fit-content;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+
+          .profil-info-text{
+            border: 1px solid #ccc; 
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 12px;
+            width: fit-content;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+          }
+
+          .profile-sidebokse{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 300px;
+
+          }
+
+          .sideboks{
+          background-color: rgb(230, 113, 177);
+          border: 1px solid #ccc;
+          border-radius: 12px;
+          padding: 20px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+
+          .topboks{
+            height: 150px;
+          }
+
+          .bottomboks{
+            height: 150px;
+          }
+
+          .nyheds-liste{
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+          }
+
+          .nyhed-liste li{
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+          }
+
+          .nyheds-liste a {
+            text-decoration: none;
+            color: #333;
+          }
+
+          .nyheds-liste a:hover {
+            text-decoration: underline;
+            color: #0070f3;
+          }
+
+          .staevne-liste{
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+          }
+
+          .staevne-liste li{
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+          }
+=======
+>>>>>>> d4ada567527eb8194026ec5b1684b95ff4a34915
