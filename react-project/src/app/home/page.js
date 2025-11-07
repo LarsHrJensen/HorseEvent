@@ -6,7 +6,7 @@ export default function HomePage() {
         <main className="flex flex-col items-center justify-center min-h-screen space-y-6">
             <div className="flex space-x-6">
                 <h1 className="text-4xl font-bold mb-4 text-center text-top text-[#243C80]"> 
-                    Welcome back, User! 
+                    Velkommen Bruger! 
                 </h1>
                 <button type="button" className="btn-default"> Stævner </button>
                 <button type="buton" className="btn-default btn-default--p"> Hjem </button>
