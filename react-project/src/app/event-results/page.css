@@ -3,6 +3,7 @@
     --secondary: #8e44ad; /* accent text */
     --background: #f8faff; /*  */
     --card-bg: #ffffff; /*  */
+    --header-bg:linear-gradient(90deg, #a3c1ee, #c6dcff);
     --text-main: #1B2D5E; /*  */
     --text-muted: #6B7280; /*  */
     --border: #e5e7eb; /*  */
@@ -25,7 +26,7 @@
 }
 
 .event-header {
-    background: var(--card-bg);
+    background: var(--header-bg);
     box-shadow: var(--shadow);
     border-radius: var(--radius);
     padding: 2rem;
@@ -34,6 +35,8 @@
 .event-header h1 {
     color: var(--primary);
     margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .event-details {
@@ -41,7 +44,6 @@
     flex-wrap: wrap;
     gap: 1rem;
     font-size: 0.95rem;
-    color: var(--text-muted);
 }
 
 .icon {
