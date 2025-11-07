@@ -1,29 +1,51 @@
-"use client";
+"use client"; // Next.js specielt: fortæller at denne komponent køres på client-side
+
 import { useState, useEffect } from "react";
 
+// Dette er hovedkomponenten for siden, hvor vi opretter et event
 export default function CreateEventPage() {
 
-    const [clubs, setClubs] = useState([]);
-    const [loadingClubs, setLoadingClubs] = useState(true);
+    // -------------------------
+    // 1. State til data fra API
+    // -------------------------
+    const [clubs, setClubs] = useState([]); // klubber hentet fra API
+    const [loadingClubs, setLoadingClubs] = useState(true); // loader-status
 
+    const [disciplines, setDisciplines] = useState([]); // disciplin-typer
+    const [loadingDisciplines, setLoadingDisciplines] = useState(true);
+
+    const [classLevels, setClassLevels] = useState([]); // klasseniveauer
+    const [loadingClassLevels, setLoadingClassLevels] = useState(true);
+
+    // -------------------------
+    // 2. Hent data fra API
+    // -------------------------
     useEffect(() => {
         async function fetchClubs() {
             try {
                 const response = await fetch("https://localhost:7265/api/club");
                 if (!response.ok) throw new Error("Network response was not ok");
+
                 const data = await response.json();
                 setClubs(data);
+
+                // Sæt automatisk første klub som valgt, hvis der er nogen
+                if (data.length > 0) {
+                    setEvent((prev) => ({
+                        ...prev,
+                        clubId: data[0].id, // brug det hentede data
+                    }));
+                }
+
             } catch (error) {
                 console.error("Error fetching clubs:", error);
             } finally {
                 setLoadingClubs(false);
             }
         }
-        fetchClubs();
-    }, []);
 
-    const [disciplines, setDisciplines] = useState([]);
-    const [loadingDisciplines, setLoadingDisciplines] = useState(true);
+        fetchClubs();
+    }, []); // tom array betyder: kør kun én gang når komponenten mountes
 
     useEffect(() => {
         async function fetchDisciplines() {
@@ -41,9 +63,6 @@ export default function CreateEventPage() {
         fetchDisciplines();
     }, []);
 
-    const [classLevels, setClassLevels] = useState([]);
-    const [loadingClassLevels, setLoadingClassLevels] = useState(true);
-
     useEffect(() => {
         async function fetchClassLevels() {
             try {
@@ -52,20 +71,18 @@ export default function CreateEventPage() {
                 const data = await response.json();
                 setClassLevels(data);
             } catch (error) {
-                console.error("Error fetching disciplinesLevels:", error);
+                console.error("Error fetching class levels:", error);
             } finally {
                 setLoadingClassLevels(false);
             }
         }
         fetchClassLevels();
-        
     }, []);
 
-
-    // Event-level: only level E allowed now
-    const eventLevels = ["E"];
-
-
+    // -------------------------
+    // 3. Statisk data
+    // -------------------------
+    const eventLevels = ["E"]; // event-niveau
     const statuses = [
         { id: "draft", label: "Draft" },
         { id: "open", label: "Open for entries" },
@@ -73,7 +90,9 @@ export default function CreateEventPage() {
         { id: "cancelled", label: "Cancelled" },
     ];
 
-    // Event state
+    // -------------------------
+    // 4. State til event og klasser
+    // -------------------------
     const [event, setEvent] = useState({
         name: "",
         clubId: 0,
@@ -84,11 +103,10 @@ export default function CreateEventPage() {
         status: "draft",
     });
 
-    // Classes state
-    const [classes, setClasses] = useState([]);
-    const [adding, setAdding] = useState(false);
+    const [classes, setClasses] = useState([]); // listen af klasser
+    const [adding, setAdding] = useState(false); // om vi er i gang med at tilføje en klasse
 
-    // Temp class form
+    // Midlertidig formular til ny klasse
     const emptyClass = {
         id: null,
         name: "",
@@ -102,12 +120,14 @@ export default function CreateEventPage() {
 
     const [classForm, setClassForm] = useState(emptyClass);
 
-    // Handlers
+    // -------------------------
+    // 5. Handlers til formularer
+    // -------------------------
     const updateEventField = (field, value) =>
-        setEvent((s) => ({ ...s, [field]: value }));
+        setEvent((prev) => ({ ...prev, [field]: value }));
 
     const startAddClass = () => {
-        setClassForm({ ...emptyClass, id: Date.now().toString() });
+        setClassForm({ ...emptyClass, id: Date.now().toString() }); // unik id
         setAdding(true);
     };
 
@@ -117,56 +137,57 @@ export default function CreateEventPage() {
     };
 
     const saveClass = () => {
-        // basic validation
+        // Grundlæggende validering
         if (!classForm.name || !classForm.date || !classForm.price) {
             alert("Please fill name, date and price for the class.");
             return;
         }
-        setClasses((c) => [...c, classForm]);
+        setClasses((prev) => [...prev, classForm]); // tilføj klassen
         setClassForm(emptyClass);
         setAdding(false);
     };
 
-    const removeClass = (id) => setClasses((c) => c.filter((x) => x.id !== id));
+    const removeClass = (id) => setClasses((prev) => prev.filter((c) => c.id !== id));
 
+    // Skift af disciplin opdaterer automatisk classLevel
     const handleDisciplineChange = (val) => {
-        const levelsForDiscipline = classLevels.filter(cl => cl.disciplineId === val);
-        setClassForm((s) => ({
-            ...s,
+        const levelsForDiscipline = classLevels.filter((cl) => cl.disciplineId === val);
+        setClassForm((prev) => ({
+            ...prev,
             discipline: val,
             classLevel: levelsForDiscipline.length > 0 ? levelsForDiscipline[0].id : null,
         }));
     };
 
+    // -------------------------
+    // 6. Gem event til API
+    // -------------------------
     const saveEvent = async () => {
-        // Basic validation
+        // Validering
         if (!event.name) return alert("Please give the event a name.");
         if (!event.startDate || !event.endDate) return alert("Please set start and end dates.");
-        if (!event.clubId || event.clubId==0) return alert("Please select a club.");
+        if (!event.clubId || event.clubId === 0) return alert("Please select a club.");
         if (new Date(event.startDate) > new Date(event.endDate))
             return alert("Start date must be before end date.");
-
         if (classes.length === 0) return alert("Please add at least one class.");
 
-        // Byg payload
+        // Byg payload til backend
         const payload = {
             ...event,
-            clubId: Number(event.clubId), // <--- sikrer int
-            classes: classes.map(c => ({
+            clubId: Number(event.clubId), // sikrer at det er et tal
+            classes: classes.map((c) => ({
                 ...c,
                 discipline: Number(c.discipline),
                 classLevel: Number(c.classLevel),
                 price: Number(c.price),
-                maxParticipants: c.maxParticipants ? Number(c.maxParticipants) : null
-            }))
+                maxParticipants: c.maxParticipants ? Number(c.maxParticipants) : null,
+            })),
         };
 
         try {
             const response = await fetch("https://localhost:7265/api/event", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
             });
 
@@ -179,12 +200,14 @@ export default function CreateEventPage() {
             alert(`Event saved successfully! Event ID: ${result.id}`);
             console.log("Saved event:", result);
 
-            setClasses([]);
+            setClasses([]); // nulstil klasser
         } catch (error) {
             console.error("Error saving event:", error);
             alert("Error saving event: " + error.message);
         }
     };
+
+
 
 
     return (
