@@ -17,7 +17,7 @@ export default function ResultsPage() {
         setResults([
             {
                 id: 1,
-                name: "Mia Pedersen",
+                name: "Mie Pedersen",
                 horse: {
                     name:"BILLESKÆRS MONIQUE",
                     category: "1",
@@ -112,23 +112,18 @@ export default function ResultsPage() {
 
                         return (
                             <div key={rider.id} className={`result-card ${rankClass}`}>
-                                <div className="rider-top">
-                                    <div className="rider">
-                                        <h2> {rider.name} </h2>
-                                        <p className="horse-name"> {rider.horse.name} ({rider.horse.category}) </p>
-                                        <p className="horse-info">
-                                            {rider.horse.gender} | {rider.horse.pedigree} | {rider.horse.birthYear} |
-                                            {rider.horse.father} x {rider.horse.mothersFather} | {rider.horse.breeder}
-                                        </p>
-                                    </div>
-                                    <div className="program-info">
-                                        {rider.program}
-                                    </div>
-
+                                <div className="left-column">
+                                    <h2> {rider.name} </h2>
+                                    <p className="horse-name"> {rider.horse.name} ({rider.horse.category}) </p>
+                                    <p className="horse-info">
+                                        {rider.horse.gender} | {rider.horse.pedigree} | {rider.horse.birthYear} |
+                                        {rider.horse.father} x {rider.horse.mothersFather} | {rider.horse.breeder}
+                                    </p>
                                 </div>
 
-                                <div className="scores">
-                                    <div>
+                                <div className="right-column">
+                                    <div className="program-info"> {rider.program} </div>
+                                    <div className="scores">
                                         <span> Total </span>
                                         <strong> {rider.total} </strong>
                                     </div>
