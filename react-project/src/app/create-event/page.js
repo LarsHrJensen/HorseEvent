@@ -76,7 +76,7 @@ export default function CreateEventPage() {
     // Event state
     const [event, setEvent] = useState({
         name: "",
-        clubId: null,
+        clubId: 0,
         level: eventLevels[0],
         startDate: "",
         endDate: "",
@@ -138,18 +138,54 @@ export default function CreateEventPage() {
         }));
     };
 
-    const saveEvent = () => {
-        // basic validation
+    const saveEvent = async () => {
+        // Basic validation
         if (!event.name) return alert("Please give the event a name.");
         if (!event.startDate || !event.endDate) return alert("Please set start and end dates.");
+        if (!event.clubId || event.clubId==0) return alert("Please select a club.");
         if (new Date(event.startDate) > new Date(event.endDate))
             return alert("Start date must be before end date.");
 
-        const payload = { ...event, classes };
-        // For now: show in console (later: POST to API / persist to DB)
-        console.log("Save event payload:", payload);
-        alert("Event saved — check console for payload (dev mode).\nYou can now extend this to POST to an API endpoint.");
+        if (classes.length === 0) return alert("Please add at least one class.");
+
+        // Byg payload
+        const payload = {
+            ...event,
+            clubId: Number(event.clubId), // <--- sikrer int
+            classes: classes.map(c => ({
+                ...c,
+                discipline: Number(c.discipline),
+                classLevel: Number(c.classLevel),
+                price: Number(c.price),
+                maxParticipants: c.maxParticipants ? Number(c.maxParticipants) : null
+            }))
+        };
+
+        try {
+            const response = await fetch("https://localhost:7265/api/event", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || "Failed to save event");
+            }
+
+            const result = await response.json();
+            alert(`Event saved successfully! Event ID: ${result.id}`);
+            console.log("Saved event:", result);
+
+            setClasses([]);
+        } catch (error) {
+            console.error("Error saving event:", error);
+            alert("Error saving event: " + error.message);
+        }
     };
+
 
     return (
         <div className="min-h-screen bg-gray-50 p-6">
@@ -172,14 +208,14 @@ export default function CreateEventPage() {
                             <div className="text-sm font-medium mb-1">Organising club</div>
                             <select
                                 className="w-full border rounded px-3 py-2"
-                                value={event.clubId}
-                                onChange={(e) => updateEventField("clubId", e.target.value)}
+                                value={event.clubId ?? ""}
+                                onChange={(e) => updateEventField("clubId", Number(e.target.value))}
                             >
+                                <option value="" disabled>Select a club</option>
                                 {loadingClubs && <option>Loading clubs...</option>}
                                 {!loadingClubs && clubs.length === 0 && <option>No clubs found</option>}
-
                                 {clubs.map((c) => (
-                                    <option key={c.id} value={c.id}>
+                                    <option key={c.id} value={Number(c.id)}>
                                         {c.name}
                                     </option>
                                 ))}
