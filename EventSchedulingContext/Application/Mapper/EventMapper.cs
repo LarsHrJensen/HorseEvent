@@ -28,7 +28,7 @@ namespace EventSchedulingContext.Application.Mapper
                     Id = null,
                     Name = c.Name,
                     Level = c.Level,
-                    DisciplineId = c.Discipline,
+                    DisciplineId = c.DisciplineId,
                     ClassLevelId = c.ClassLevel,
                     Date = c.Date,
                     Price = c.Price,

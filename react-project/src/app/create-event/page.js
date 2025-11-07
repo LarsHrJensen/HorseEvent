@@ -54,6 +54,13 @@ export default function CreateEventPage() {
                 if (!response.ok) throw new Error("Network response was not ok");
                 const data = await response.json();
                 setDisciplines(data);
+
+                if (data.length > 0) {
+                    setClassForm((prev) => ({
+                        ...prev,
+                        disciplineId: data[0].id, // brug det hentede data
+                    }));
+                }
             } catch (error) {
                 console.error("Error fetching disciplines:", error);
             } finally {
@@ -111,8 +118,8 @@ export default function CreateEventPage() {
         id: null,
         name: "",
         level: "E",
-        discipline: null,
-        classLevel: null,
+        disciplineId: 0,
+        classLevel: 0,
         date: "",
         price: "",
         maxParticipants: "",
@@ -127,9 +134,15 @@ export default function CreateEventPage() {
         setEvent((prev) => ({ ...prev, [field]: value }));
 
     const startAddClass = () => {
-        setClassForm({ ...emptyClass, id: Date.now().toString() }); // unik id
+        setClassForm({
+            ...emptyClass,
+            id: Date.now().toString(),
+            disciplineId: disciplines[0]?.id ?? null,
+            classLevel: classLevels.filter(cl => cl.disciplineId === disciplines[0]?.id)[0]?.id ?? null
+        });
         setAdding(true);
     };
+
 
     const cancelAdd = () => {
         setClassForm(emptyClass);
@@ -154,7 +167,7 @@ export default function CreateEventPage() {
         const levelsForDiscipline = classLevels.filter((cl) => cl.disciplineId === val);
         setClassForm((prev) => ({
             ...prev,
-            discipline: val,
+            disciplineId: val,
             classLevel: levelsForDiscipline.length > 0 ? levelsForDiscipline[0].id : null,
         }));
     };
@@ -177,7 +190,7 @@ export default function CreateEventPage() {
             clubId: Number(event.clubId), // sikrer at det er et tal
             classes: classes.map((c) => ({
                 ...c,
-                discipline: Number(c.discipline),
+                disciplineId: Number(c.disciplineId),
                 classLevel: Number(c.classLevel),
                 price: Number(c.price),
                 maxParticipants: c.maxParticipants ? Number(c.maxParticipants) : null,
@@ -349,17 +362,22 @@ export default function CreateEventPage() {
                                     {loadingDisciplines ? (
                                         <div className="text-gray-500 text-sm italic">Loading disciplines...</div>
                                     ) : (
-                                        <select
-                                            className="w-full border rounded px-3 py-2"
-                                            value={classForm.discipline}
-                                            onChange={(e) => handleDisciplineChange(Number(e.target.value))}
-                                        >
-                                            {disciplines.map((d) => (
-                                                <option key={d.id} value={d.id}>
-                                                    {d.name}
-                                                </option>
-                                            ))}
-                                        </select>
+                                            <select
+                                                className="w-full border rounded px-3 py-2"
+                                                value={classForm.disciplineId ?? ""}
+                                                onChange={(e) => handleDisciplineChange(Number(e.target.value))}
+                                                disabled={disciplines.length === 0}
+                                            >
+                                                {disciplines.length === 0 ? (
+                                                    <option>Ingen discipliner tilgængelige</option>
+                                                ) : (
+                                                    disciplines.map((d) => (
+                                                        <option key={d.id} value={d.id}>
+                                                            {d.name}
+                                                        </option>
+                                                    ))
+                                                )}
+                                            </select>
                                     )}
                                 </label>
                             </div>
@@ -374,7 +392,7 @@ export default function CreateEventPage() {
                                     >
                                         {
                                             classLevels
-                                                .filter(cl => cl.disciplineId === classForm.discipline)
+                                                .filter(cl => cl.disciplineId === classForm.disciplineId)
                                                 .map(cl => (
                                                     <option key={cl.id} value={cl.id}>{cl.name}</option>
                                                 ))

@@ -45,7 +45,7 @@ namespace Contracts.Events
         /// <summary>
         /// FK til Discipline (Dressur, Springning, etc.)
         /// </summary>
-        public int Discipline { get; set; }
+        public int DisciplineId { get; set; }
 
         /// <summary>
         /// FK til ClassLevel (eks. LD1, LC2, LB etc.)
