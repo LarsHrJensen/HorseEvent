@@ -11,6 +11,7 @@ export default function CreateHorsePage() {
         BirthYear: ""
     });
 
+    const [message, setMessage] = useState("");
 
     // Handle changes of input
     const handleChange = (e) => {
