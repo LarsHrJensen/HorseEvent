@@ -1,26 +1,20 @@
-﻿"use client"; // gør komponenten til en klientkomponent (Next.js)
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
-import "./chatbot.css"; // importerer styling til chatbotten
+import "./chatbot.css";
 
-// URL til backend-API'et
-const API_URL = "http://localhost:8000";
+const API_URL = "http://localhost:8000"; // backend-url
 
 export default function ChatbotPage() {
-    // State til at gemme beskeder i chatten
     const [messages, setMessages] = useState([
         {
-            id: "welcome", // unik ID
-            sender: "bot", // afsender (bot eller user)
+            id: "welcome",
+            sender: "bot",
             text:
                 "Hej. Jeg er din HorseEvent AI-assistent.\n",
         },
     ]);
-
-    // State til brugerens inputfelt
     const [input, setInput] = useState("");
-
-    // State til at vise om der sendes/loading
     const [loading, setLoading] = useState(false);
 
     // Reference til chatvinduet (for at kunne auto-scrrolle)
@@ -84,18 +78,23 @@ export default function ChatbotPage() {
                 },
             ]);
         } finally {
-            setLoading(false); // færdig med at loade
+            setLoading(false);
         }
     };
 
     // HTML-layout til chatgrænsefladen
     return (
         <div className="chatbotContainer">
-            <h1>HorseEvent AI-chatbot</h1>
-            <p>
-                Stil mig et spørgsmål og jeg vil forsøge mit bedste at hjælpe dig!
-
-            </p>
+            {/* Header ala screenshot */}
+            <div className="chatHeader">
+                <div className="chatHeaderAvatar">🐴</div>
+                <div className="chatHeaderText">
+                    <h1>Hestebotten</h1>
+                    <p className="chatHeaderSubtitle">
+                        Din venlige heste-care assistent
+                    </p>
+                </div>
+            </div>
 
             {/* Besked-vindue */}
             <div className="chatWindow" ref={chatWindowRef}>
