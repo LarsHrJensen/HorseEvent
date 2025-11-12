@@ -15,7 +15,7 @@ namespace UserManagementContext.Infrastructure.Repositories
             _dbContext = dbContext;
         }
        
-        public async Task AddAsync(UserEntity entity)
+        public async Task<int> AddAsync(UserEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -25,6 +25,7 @@ namespace UserManagementContext.Infrastructure.Repositories
 
             // Gem ændringer i databasen
             await _dbContext.SaveChangesAsync();
+            return entity.Id;
         }
 
         public Task DeleteAsync(UserEntity entity)

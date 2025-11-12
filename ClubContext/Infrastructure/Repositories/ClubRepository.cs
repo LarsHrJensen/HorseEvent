@@ -12,7 +12,7 @@ namespace ClubContext.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task AddAsync(Club entity)
+        public async Task<int> AddAsync(Club entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -22,6 +22,8 @@ namespace ClubContext.Infrastructure.Repositories
 
             // Gem ændringer i databasen
             await _dbContext.SaveChangesAsync();
+
+            return entity.Id;
         }
 
         public Task DeleteAsync(Club entity)

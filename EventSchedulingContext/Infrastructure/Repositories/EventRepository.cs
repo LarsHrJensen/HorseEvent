@@ -17,18 +17,19 @@ namespace EventSchedulingContext.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task AddAsync(Event entity)
+        public async Task<int> AddAsync(Event entity)
         {
-            {
-                if (entity == null)
-                    throw new ArgumentNullException(nameof(entity));
+            
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-                // Tilføj klubben til DbContext
-                await _dbContext.Events.AddAsync(entity);
+            // Tilføj klubben til DbContext
+            await _dbContext.Events.AddAsync(entity);
 
-                // Gem ændringer i databasen
-                await _dbContext.SaveChangesAsync();
-            }
+            // Gem ændringer i databasen
+            await _dbContext.SaveChangesAsync();
+            
+            return entity.Id;
         }
 
         public Task DeleteAsync(Event entity)
