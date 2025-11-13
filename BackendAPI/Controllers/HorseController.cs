@@ -12,12 +12,12 @@ namespace ReactApp1.Server.Controllers
     public class HorseController : ControllerBase
     {
 
-        private readonly CreateHorseHandler _createHorseHandler;
+        //private readonly CreateHorseHandler _createHorseHandler;
         private readonly IMediator _mediator;
 
         public HorseController(CreateHorseHandler createBookHandler, IMediator mediator)
         {
-            _createHorseHandler = createBookHandler;
+            //_createHorseHandler = createBookHandler;
             _mediator = mediator;
         }
         // POST: api/heste
