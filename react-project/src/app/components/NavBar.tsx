@@ -44,6 +44,10 @@ export default function Header({className}: HeaderProps){
                 className="text-[#6da8ff] hover:text-[#FFA500] font-semibold transition-colors duration-300">
                     Log ud
                 </Link>
+                <Link href="/startandresults"
+                className="text-[#6da8ff] hover:text-[#FFA500] font-semibold transition-colors duration-300">
+                    Startlister & Resultater
+                </Link>
             </nav>
         </aside>
     );
