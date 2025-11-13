@@ -47,22 +47,22 @@ namespace BackendAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = newResult.ResultId }, newResult);
         }
 
-        [HttpGet("class/{classId}")]
-        public async Task<IActionResult> GetByClass(int classid)
-        {
-            var classEntity = await _classRepository.GetByIdAsync(classid);
-            if (classEntity == null)
-                return NotFound($"Class with ID {classid} not found.");
+        //[HttpGet("class/{classId}")]
+        //public async Task<IActionResult> GetByClass(int classid)
+        //{
+        //    var classEntity = await _classRepository.GetByIdAsync(classid);
+        //    if (classEntity == null)
+        //        return NotFound($"Class with ID {classid} not found.");
 
-            var results = await _resultRepository.GetByClassIdAsync(classid);
+        //    var results = await _resultRepository.GetByClassIdAsync(classid);
 
-            if (classEntity.Discipline == "Dressage")
-            {
-                results = results.OrderBy(r => r.Score).ToList();
-            }
+        //    if (classEntity.Discipline == "Dressage")
+        //    {
+        //        results = results.OrderBy(r => r.Score).ToList();
+        //    }
 
-            return Ok(results);
-        }
+        //    return Ok(results);
+        //}
 
     }
 }

@@ -22,6 +22,7 @@ namespace BackendAPI
             // Registrer repositories
             builder.Services.AddScoped<IHorseRepository, HorseRepository>();
             builder.Services.AddScoped<IRiderRepository, RiderRepository>();
+            builder.Services.AddScoped<StartListRepository>();
 
             // Registrer command handlers
             builder.Services.AddScoped<CreateRiderHandler>();
