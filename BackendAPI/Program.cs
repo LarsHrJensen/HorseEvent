@@ -46,6 +46,7 @@ builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
 builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<StartListRepository>();
 builder.Services.AddScoped<IClassLevelRepository, ClassLevelRepository>();
 builder.Services.AddScoped<IDisciplineRepository, DisciplinRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
