@@ -1,6 +1,7 @@
 ﻿using HorseRider.Application.Interfaces;
 using HorseRider.Domain.Entities;
 using Microsoft.Data.SqlClient;
+using SharedKernel.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;

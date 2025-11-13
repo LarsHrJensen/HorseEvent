@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HorseRider.Application.Interfaces;
 using HorseRider.Domain.Entities;
 using Microsoft.Data.SqlClient;
+using SharedKernel.Interfaces;
 
 
 namespace HorseRider.Infrastructure.Repositories
