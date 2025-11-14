@@ -1,4 +1,4 @@
-﻿using HorseRider.Application.Interfaces;
+﻿using CompetitionExecutionContext.Domain.Entities;
 using HorseRider.Domain.Entities;
 using Microsoft.Data.SqlClient;
 using SharedKernel.Interfaces;
@@ -7,8 +7,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace HorseRider.Infrastructure.Repositories
-{
+namespace CompetitionExecutionContext.Infrastructure.Repositories { 
     public class CompetitionRepository //: ICompetitionRepository
     {
         private readonly IDbConnectionFactory _dbConnectionFactory;

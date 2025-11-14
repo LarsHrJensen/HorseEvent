@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HorseRider.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HorseRider.Domain.Entities
+namespace CompetitionExecutionContext.Domain.Entities
 {
     public class Competition
     {

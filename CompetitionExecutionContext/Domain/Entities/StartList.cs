@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HorseRider.Domain.Entities
+namespace CompetitionExecutionContext.Domain.Entities
 {
     public class StartList
     {

@@ -1,6 +1,7 @@
-﻿using HorseRider.Domain.Entities;
+﻿using CompetitionExecutionContext.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using HorseRider.Infrastructure.Repositories;
+using CompetitionExecutionContext.Infrastructure.Repositories;
 
 namespace BackendAPI.Controllers
 {

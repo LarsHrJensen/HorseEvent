@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClubContext\ClubContext.csproj" />
+    <ProjectReference Include="..\CompetitionExecutionContext\CompetitionExecutionContext.csproj" />
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\EventSchedulingContext\EventSchedulingContext.csproj" />
     <ProjectReference Include="..\HorseRider\HorseRiderContext.csproj" />

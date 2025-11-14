@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HorseRider.Application.Interfaces;
+using CompetitionExecutionContext.Domain.Entities;
 using HorseRider.Domain.Entities;
 using Microsoft.Data.SqlClient;
 using SharedKernel.Interfaces;
 
 
-namespace HorseRider.Infrastructure.Repositories
+namespace CompetitionExecutionContext.Infrastructure.Repositories
 {
     public class ClassRepository
     {
         private readonly IDbConnectionFactory _dbConnectionFactory;
 
-        public ClassRepository(IDbConnectionFactory dbConnectionFactory)
-        {
-            _dbConnectionFactory = dbConnectionFactory;
-        }
+    public ClassRepository(IDbConnectionFactory dbConnectionFactory)
+    {
+        _dbConnectionFactory = dbConnectionFactory;
+    }
 
         // Hent en klasse ud fra ClassId
         public async Task<Class?> GetByIdAsync(int classId)

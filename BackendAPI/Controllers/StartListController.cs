@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CompetitionExecutionContext.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BackendAPI.Controllers
 {
