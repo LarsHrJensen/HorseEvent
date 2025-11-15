@@ -28,7 +28,7 @@ namespace ReactApp1.Server.Controllers
             if (request == null)
                 return BadRequest(new { message = "Hest data er tomt." });
 
-            var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear);
+            var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear,request.Gender, request.Color, request.Breed, request.Breeder, request.Sire, request.Dam);
             var horseDTO = await _mediator.Send(command);
 
             if (horseDTO == null)

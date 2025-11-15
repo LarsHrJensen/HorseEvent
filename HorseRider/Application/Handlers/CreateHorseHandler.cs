@@ -16,7 +16,16 @@ namespace HorseRider.Application.Handlers
         public async Task<HorseDTO> Handle(CreateHorseCommand command, CancellationToken cancellationToken)
         {
             // Opretter og gemmer ny hest
-            var horse = new Horse(command.Name, command.Id, command.Height, command.BirthYear);
+            var horse = new Horse(command.Name, command.UELN, command.Height, command.BirthYear);
+            if (command.Gender != null) { horse.Gender = command.Gender; }
+            if (command.Color != null) { horse.Color = command.Color; }
+            if (command.Breed != null) { horse.Breed = command.Breed; }
+            if (command.Breeder != null) { horse.Breeder = command.Breeder; }
+            if (command.Sire != null) { horse.Sire = command.Sire; }
+            if (command.Dam != null) { horse.Dam = command.Dam; }
+
+            
+
             horse.HorseId =await _horseRepository.AddAsync(horse);
 
             // Mapper til DTO direkte
@@ -30,5 +39,4 @@ namespace HorseRider.Application.Handlers
             };
         }
     }
-
 }
