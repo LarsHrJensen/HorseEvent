@@ -35,7 +35,7 @@ export default function Page() {
       if (response.ok) {
           console.log("Login successful", data);
           alert("Login successful!")
-       /* router.push('/home');*/
+        router.push('/home');
       } else {
         console.error("Login failed", data?.message || "Unknown error");
       }
