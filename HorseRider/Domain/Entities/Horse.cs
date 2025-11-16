@@ -22,8 +22,8 @@ namespace HorseRider.Domain.Entities
         public string? Color { get; set; }
         public string? Breed { get; set; }       // Race / Avlsforbund
         public string? Breeder { get; set; }     // Avler
-        public string? Sire { get; set; }      // UELN eller navn på far
-        public string? Dam { get; set; }      // UELN eller navn på mor
+        public int? SireId { get; set; }      // far
+        public int? DamId { get; set; }      //  mor
 
         // Derived property (Larman: “Derived attributes should not be stored”)
         public string Category =>
@@ -40,8 +40,8 @@ namespace HorseRider.Domain.Entities
             string? color = null,
             string? breed = null,
             string? breeder = null,
-            string? father = null,
-            string? mother = null)
+            int? father = null,
+            int? mother = null)
         {
             Name = name;
             UELN = ueln;
@@ -51,8 +51,8 @@ namespace HorseRider.Domain.Entities
             Color = color;
             Breed = breed;
             Breeder = breeder;
-            Sire = father;
-            Dam = mother;
+            SireId = father;
+            DamId = mother;
         }
 
         public Horse(string name, string ueln, int height, int birthYear)

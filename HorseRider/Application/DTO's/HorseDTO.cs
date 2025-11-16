@@ -8,5 +8,6 @@
         public int HorseHeight { get; set; }
         public int BirthYear { get; set; }
         public string Category { get; set; }
+        public string Gender { get; set; }
     }
 }

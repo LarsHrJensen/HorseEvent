@@ -25,8 +25,9 @@ namespace HorseRider.Application.Handlers
                 UELN = h.UELN,
                 HorseHeight = h.Height,
                 BirthYear = h.BirthYear,
-                Category = h.Category
-
+                Category = h.Category,
+                Gender = h.Gender
+            
             }).ToList();
         }
     }

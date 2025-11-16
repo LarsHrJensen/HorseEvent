@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./page.css";
 
 export default function CreateHorsePage() {
@@ -17,8 +17,8 @@ export default function CreateHorsePage() {
         Color: "",
         Breed: "",
         Breeder: "",
-        Sire: "",
-        Dam: ""
+        SireId: "",
+        DamId: ""
     });
 
     const [showOptional, setShowOptional] = useState(false);
@@ -49,8 +49,8 @@ export default function CreateHorsePage() {
                     Color: "",
                     Breed: "",
                     Breeder: "",
-                    Sire: "",
-                    Dam: ""
+                    SireId: "",
+                    DamId: ""
                 });
             } else {
                 alert("Der opstod en fejl.");
@@ -60,6 +60,29 @@ export default function CreateHorsePage() {
             alert("Something went wrong, womp womp");
         }
     };
+    const [horses, setHorses] = useState([]);
+    const mares = horses.filter(h => h.gender === "Mare");
+    const males = horses.filter(h => h.gender === "Stallion" || h.gender === "Gelding");
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchHorses() {
+            try {
+                const response = await fetch("https://localhost:7265/api/horse");
+                if (!response.ok) throw new Error("Fejl ved hentning af heste");
+                const data = await response.json();
+                setHorses(data);
+            } catch (err) {
+                console.error(err);
+                alert("Der opstod en fejl ved hentning af heste");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchHorses();
+    }, []);
+
 
     return (
         <div className="createHorseContainer">
@@ -114,15 +137,23 @@ export default function CreateHorsePage() {
                             </select>
 
                             <label>Far:</label>
-                            <select name="Sire" value={horseData.Sire} onChange={handleChange}>
+                            <select name="SireId" value={horseData.SireId} onChange={handleChange}>
                                 <option value="">Vælg far</option>
-                                {existingHorses.map((h) => <option key={h} value={h}>{h}</option>)}
+                                {males.map(m => (
+                                    <option key={m.id} value={m.id}>
+                                        {m.name} ({m.ueln})
+                                    </option>
+                                ))}
                             </select>
 
                             <label>Mor:</label>
-                            <select name="Dam" value={horseData.Dam} onChange={handleChange}>
+                            <select name="DamId" value={horseData.DamId} onChange={handleChange}>
                                 <option value="">Vælg mor</option>
-                                {existingHorses.map((h) => <option key={h} value={h}>{h}</option>)}
+                                {mares.map(m => (
+                                    <option key={m.id} value={m.id}>
+                                        {m.name} ({m.ueln})
+                                    </option>
+                                ))}
                             </select>
 
                             <label>Avler:</label>

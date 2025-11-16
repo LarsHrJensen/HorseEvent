@@ -21,8 +21,8 @@ namespace HorseRider.Application.Handlers
             if (command.Color != null) { horse.Color = command.Color; }
             if (command.Breed != null) { horse.Breed = command.Breed; }
             if (command.Breeder != null) { horse.Breeder = command.Breeder; }
-            if (command.Sire != null) { horse.Sire = command.Sire; }
-            if (command.Dam != null) { horse.Dam = command.Dam; }
+            if (command.SireId != null) { horse.SireId = command.SireId; }
+            if (command.DamId != null) { horse.DamId = command.DamId; }
 
             
 

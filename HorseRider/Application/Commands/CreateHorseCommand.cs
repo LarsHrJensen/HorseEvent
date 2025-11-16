@@ -12,8 +12,8 @@ namespace HorseRider.Application.Commands
      string? Color,         // Frivillig
      string? Breed,         // Frivillig (race / avlsforbund)
      string? Breeder,       // Frivillig (avler)
-     string? Sire,        // Frivillig
-     string? Dam         // Frivillig
+     int? SireId,        // Frivillig
+     int? DamId         // Frivillig
  ) : IRequest<HorseDTO>;
 
 }

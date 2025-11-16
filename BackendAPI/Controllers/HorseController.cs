@@ -28,7 +28,7 @@ namespace ReactApp1.Server.Controllers
             if (request == null)
                 return BadRequest(new { message = "Hest data er tomt." });
 
-            var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear,request.Gender, request.Color, request.Breed, request.Breeder, request.Sire, request.Dam);
+            var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear,request.Gender, request.Color, request.Breed, request.Breeder, request.SireId, request.DamId);
             var horseDTO = await _mediator.Send(command);
 
             if (horseDTO == null)
@@ -59,7 +59,8 @@ namespace ReactApp1.Server.Controllers
                 Name = h.HorseName,
                 Height = h.HorseHeight,
                 BirthYear = h.BirthYear,
-                Category = h.Category
+                Category = h.Category,
+                Gender = h.Gender
             });
 
             return Ok(response);

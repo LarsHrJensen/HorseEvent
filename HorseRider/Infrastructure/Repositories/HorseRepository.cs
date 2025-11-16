@@ -25,14 +25,25 @@ namespace HorseRider.Infrastructure.Repositories
             await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
             await conn.OpenAsync();
 
-            string sql = @"INSERT INTO Horse (HorseName, Height, BirthYear, UELN)   OUTPUT INSERTED.HorseId
-                       VALUES (@HorseName, @Height, @BirthYear, @UELN)";
+            string sql = @"INSERT INTO Horse (HorseName, Height, BirthYear, UELN, Gender, Color, Breeder, SireId, DamId) 
+                    OUTPUT INSERTED.HorseId
+                       VALUES (@HorseName, @Height, @BirthYear, @UELN, @Gender, @Color, @Breeder, @Sire, @Dam);"; //todo tilføj @Breed og BreedId
+
+
 
             await using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@HorseName", entity.Name);
             cmd.Parameters.AddWithValue("@Height", entity.Height);
             cmd.Parameters.AddWithValue("@BirthYear", entity.BirthYear);
             cmd.Parameters.AddWithValue("@UELN", entity.UELN);
+
+            // Optional fields – convert null to DBNull.Value
+            cmd.Parameters.AddWithValue("@Gender", entity.Gender ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Color", entity.Color ?? (object)DBNull.Value);
+            //cmd.Parameters.AddWithValue("@Breed", entity.Breed ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Breeder", entity.Breeder ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Sire", entity.SireId ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Dam", entity.DamId ?? (object)DBNull.Value);
 
             var id = (int)await cmd.ExecuteScalarAsync();
 
@@ -68,7 +79,7 @@ namespace HorseRider.Infrastructure.Repositories
             await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
             await conn.OpenAsync();
 
-            string sql = "SELECT HorseId, UELN, HorseName, Height, BirthYear FROM Horse";
+            string sql = "SELECT HorseId, HorseName, Height, BirthYear, UELN, Gender, Color, BreedId, Breeder, SireId, DamId FROM Horse";
 
             using var cmd = new SqlCommand(sql, conn);
             using var reader = cmd.ExecuteReader();
@@ -82,6 +93,12 @@ namespace HorseRider.Infrastructure.Repositories
                     Name = reader["HorseName"].ToString()!,
                     Height = (int)(decimal)reader["Height"],
                     BirthYear = (int)reader["BirthYear"],
+                    Gender = reader["Gender"]?.ToString() ?? "",
+                    Color = reader["Color"]?.ToString() ?? "",
+                    //BreedId = reader["BreedId"] == DBNull.Value ? null : Convert.ToInt32(reader["BreedId"]),
+                    Breeder = reader["Breeder"]?.ToString() ?? "",
+                    SireId = reader["SireId"] == DBNull.Value ? null : Convert.ToInt32(reader["SireId"]),
+                    DamId = reader["DamId"] == DBNull.Value ? null : Convert.ToInt32(reader["DamId"])
                 };
 
                 horses.Add(horse);

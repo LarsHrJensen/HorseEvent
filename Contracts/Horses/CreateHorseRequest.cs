@@ -15,7 +15,7 @@ namespace Contracts.Horses
         public string? Color { get; set; }
         public string? Breed { get; set; }       // Race / Avlsforbund
         public string? Breeder { get; set; }     // Avler
-        public string? Sire { get; set; }      // Far
-        public string? Dam { get; set; }      // Mor
+        public int? SireId { get; set; }      // Far
+        public int? DamId { get; set; }      // Mor
     }
 }
