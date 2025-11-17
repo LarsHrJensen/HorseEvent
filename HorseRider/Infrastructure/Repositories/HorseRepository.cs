@@ -19,13 +19,13 @@ namespace HorseRider.Infrastructure.Repositories
             _dbConnectionFactory = dbConnectionFactory;
         }
 
-        public async Task AddAsync(Horse entity)
+        public async Task<int> AddAsync(Horse entity)
         {
             // Cast til SqlConnection
             await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
             await conn.OpenAsync();
 
-            string sql = @"INSERT INTO Horse (HorseName, Height, BirthYear, UELN) 
+            string sql = @"INSERT INTO Horse (HorseName, Height, BirthYear, UELN)   OUTPUT INSERTED.HorseId
                        VALUES (@HorseName, @Height, @BirthYear, @UELN)";
 
             await using var cmd = new SqlCommand(sql, conn);
@@ -34,9 +34,10 @@ namespace HorseRider.Infrastructure.Repositories
             cmd.Parameters.AddWithValue("@BirthYear", entity.BirthYear);
             cmd.Parameters.AddWithValue("@UELN", entity.UELN);
 
-            await cmd.ExecuteNonQueryAsync();
+            var id = (int)await cmd.ExecuteScalarAsync();
 
             Console.WriteLine($"Hesten {entity.Name} blev oprettet i databasen.");
+            return id;
         }
 
         public async Task DeleteAsync(Horse entity)
@@ -115,7 +116,11 @@ namespace HorseRider.Infrastructure.Repositories
 
             return null!;
         }
-        
+
+        public Task<IEnumerable<Horse>> GetByUserAsync()
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task UpdateAsync(Horse entity)
         {

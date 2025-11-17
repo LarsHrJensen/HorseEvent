@@ -20,47 +20,37 @@ export default function CreateHorsePage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setMessage("");
-
-        if (password !== confirmPassword) {
-            setMessage("Adgangskoderne matcher ikke");
-            return;
-        }
 
         try {
-            const response = await fetch("https://localhost:7265/api/user", {
+            const response = await fetch("https://localhost:7265/api/horse", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(horseData)
             });
 
-            const data = await response.json(); // rettet fra 'res' til 'response'
-
             if (response.ok) {
-                setMessage("Bruger oprettet!");
-                // Reset felterne efter succes
-                setUsername("");
-                setPassword("");
-                setConfirmPassword("");
-                // router.push('/login'); // evt. redirect
+                alert("Hest oprettet!");
+                setHorseData({ name: "", id: "", height: "", birthyear: "" });
             } else {
-                setMessage(data.message || "Fejl ved oprettelse");
+                alert("Der opstod en fejl.");
             }
         } catch (error) {
             console.error(error);
-            setMessage("Serverfejl");
+            alert("Something went wrong, womp womp");
         }
     };
 
     return (
         <div className="createHorseContainer">
             <h1>Opret hest</h1>
-            <p>Udfyld detaljerne nedenfor for at oprette en ny hest.</p>
+            <p>Udfyld detaljerne nedenfor for at oprette en ny hest</p>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="Name" placeholder="Hestens navn" value={horseData.Name} onChange={handleChange} required />
-                <input type="text" name="HorseId" placeholder="Hestens ID nummer" value={horseData.HorseId} onChange={handleChange} required />
-                <input type="number" name="Height" placeholder="Højde i cm" value={horseData.Height} onChange={handleChange} required />
-                <input type="number" name="BirthYear" placeholder="Hestens fødselsår" value={horseData.BirthYear} onChange={handleChange} required />
+                <input type="text" name="Name" placeholder="Horse name" value={horseData.Name} onChange={handleChange} required />
+                <input type="text" name="HorseId" placeholder="Horse ID" value={horseData.HorseId} onChange={handleChange} required />
+                <input type="number" name="Height" placeholder="Height" value={horseData.Height} onChange={handleChange} required />
+                <input type="number" name="BirthYear" placeholder="Birthyear" value={horseData.BirthYear} onChange={handleChange} required />
 
                 <button type="submit">Opret Hest</button>
             </form>

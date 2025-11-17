@@ -5,11 +5,11 @@ using MediatR;
 
 namespace HorseRider.Application.Handlers
 {
-    public class GetHorsesHandler : IRequestHandler<GetHorsesQuery, List<HorseDTO>>
+    public class GetUsersHorsesHandler : IRequestHandler<GetHorsesQuery, List<HorseDTO>>
     {
         private readonly IHorseRepository _horseRepository;
 
-        public GetHorsesHandler(IHorseRepository _horseRepository)
+        public GetUsersHorsesHandler(IHorseRepository _horseRepository)
         {
             this._horseRepository = _horseRepository;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClubContext.Domain.Entities
 {
-    internal class Member
+    public class Member
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

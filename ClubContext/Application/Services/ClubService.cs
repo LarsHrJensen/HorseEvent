@@ -20,25 +20,27 @@ namespace ClubContext.Application.Services
             {
                 Name = name,
                 Adress = new Adress(
-            streetName: address.StreetName,
-            houseNumber: address.StreetNumber,
-            postalCode: address.PostalCode,
-            city: address.City,
-            countryCode: address.CountryCode,
-            countryName: address.CountryName,
-            apartment: address.Apartment  // valgfri, kan udelades hvis null
-            )
+                    streetName: address.StreetName,
+                    houseNumber: address.StreetNumber,
+                    postalCode: address.PostalCode,
+                    city: address.City,
+                    countryCode: address.CountryCode,
+                    countryName: address.CountryName,
+                    apartment: address.Apartment  // valgfri, kan udelades hvis null
+                    )
             };
 
             await _clubRepository.AddAsync(club);
 
             return club.ToDto();
         }
-        
 
-        public Task<IEnumerable<ClubDto>> GetAllClubsAsync()
+
+        public async Task<IEnumerable<ClubDto>> GetAllClubsAsync()
         {
-            throw new NotImplementedException();
+            List<Club> clubs = await _clubRepository.GetAllAsync();
+
+            return clubs.Select(c => c.ToDto());
         }
 
         public Task<ClubDto?> GetClubAsync(int id)

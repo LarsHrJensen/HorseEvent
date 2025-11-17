@@ -2,18 +2,22 @@ using ClubContext.Application.Handlers;
 using ClubContext.Application.Interfaces;
 using ClubContext.Application.Services;
 using ClubContext.ClubInfrastructure.Repositories;
-using ClubContext.Infrastructure.Repositories;
 using ClubContext.Infrastructure;
-using HorseRider.Application.Handlers.HorseRider.Application.Handlers;
+using ClubContext.Infrastructure.Repositories;
+using EventSchedulingContext.Application.Interfaces;
+using EventSchedulingContext.Application.Services;
+using EventSchedulingContext.Infrastructure;
+using EventSchedulingContext.Infrastructure.Repositories;
 using HorseRider.Application.Handlers;
+using HorseRider.Application.Handlers.HorseRider.Application.Handlers;
 using HorseRider.Application.Interfaces;
 using HorseRider.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel.Interfaces;
-using UserManagementContext.Infrastructure.Repositories;
 using UserManagementContext.Application.Interfaces;
 using UserManagementContext.Application.Services;
 using UserManagementContext.Infrastructure;
+using UserManagementContext.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,16 +25,20 @@ var builder = WebApplication.CreateBuilder(args);
 var horseRiderConnectionString = builder.Configuration.GetConnectionString("HorseRidersContext");
 var clubConnectionString = builder.Configuration.GetConnectionString("ClubDb");
 var userConnectionString = builder.Configuration.GetConnectionString("UserManagementDB");
+var eventschedulingConnectionString = builder.Configuration.GetConnectionString("EventSchedulingDB");
 
 // 2. DbContext
 builder.Services.AddDbContext<ClubDbContext>(options =>
     options.UseNpgsql(clubConnectionString));
 builder.Services.AddDbContext<UserManagementDbContext>(options =>
     options.UseNpgsql(userConnectionString));
+builder.Services.AddDbContext<EventSchedulingDbContext>(options =>
+    options.UseNpgsql(eventschedulingConnectionString));
 
 // 3. Repositories
 builder.Services.AddScoped<IDbConnectionFactory>(sp =>
     new SqlDbConnectionFactory(horseRiderConnectionString));
+
 
 builder.Services.AddScoped<IHorseRepository, HorseRepository>();
 builder.Services.AddScoped<IRiderRepository, RiderRepository>();
@@ -38,10 +46,17 @@ builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
 builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<StartListRepository>();
+builder.Services.AddScoped<IClassLevelRepository, ClassLevelRepository>();
+builder.Services.AddScoped<IDisciplineRepository, DisciplinRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDisciplineService, DisciplinService >();
+builder.Services.AddScoped<IClassLevelService, ClassLevelService>();
+builder.Services.AddScoped<IEventService, EventService>();
 
 // 5. Command / Query Handlers (hvis du bruger MediatR)
 builder.Services.AddScoped<CreateRiderHandler>();

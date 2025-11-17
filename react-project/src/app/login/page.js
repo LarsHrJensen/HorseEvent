@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
@@ -13,22 +13,16 @@ export default function Page() {
     e.preventDefault();
     console.log("Login clicked");
 
-    try {
-      const response = await fetch('https://localhost:7043/api/account/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          rememberMe: true
-        }),
-      });
-
-   
+      try {
+          const response = await fetch("https://localhost:7265/api/user/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                  Username: username,
+                  Password: password,
+                  rememberMe: true
+              })
+          });
 
       let data = null;
       const text = await response.text();
@@ -39,8 +33,9 @@ export default function Page() {
       }
 
       if (response.ok) {
-        console.log("Login successful", data);
-        router.push('/dashboard');
+          console.log("Login successful", data);
+          alert("Login successful!")
+        router.push('/home');
       } else {
         console.error("Login failed", data?.message || "Unknown error");
       }
@@ -66,13 +61,13 @@ export default function Page() {
         <h1 className="login-title">Log ind på Hesteland! </h1>
 
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="username">Brugernavn:</label>
           <input
             type="text"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
 

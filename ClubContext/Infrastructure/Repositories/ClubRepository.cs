@@ -1,5 +1,6 @@
 ﻿using ClubContext.Application.Interfaces;
 using ClubContext.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClubContext.Infrastructure.Repositories
 {
@@ -11,7 +12,7 @@ namespace ClubContext.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task AddAsync(Club entity)
+        public async Task<int> AddAsync(Club entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -21,6 +22,8 @@ namespace ClubContext.Infrastructure.Repositories
 
             // Gem ændringer i databasen
             await _dbContext.SaveChangesAsync();
+
+            return entity.Id;
         }
 
         public Task DeleteAsync(Club entity)
@@ -28,9 +31,9 @@ namespace ClubContext.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Club>> GetAllAsync()
+        public async Task<List<Club>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Clubs.ToListAsync();
         }
 
         public Task<Club?> GetByIdAsync(int id)

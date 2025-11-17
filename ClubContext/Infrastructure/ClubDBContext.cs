@@ -1,5 +1,4 @@
 ﻿using ClubContext.Domain.Entities;
-using ClubContext.Domain.Entities;
 using ClubContext.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 

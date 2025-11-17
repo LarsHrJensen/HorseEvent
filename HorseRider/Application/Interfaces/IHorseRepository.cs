@@ -5,5 +5,6 @@ namespace HorseRider.Application.Interfaces
 {
     public interface IHorseRepository : ICrudRepository<Horse>
     {
+        Task<IEnumerable<Horse>> GetByUserAsync();
     }
 }

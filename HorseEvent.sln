@@ -36,6 +36,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubContext", "ClubContext\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementContext", "UserManagementContext\UserManagementContext.csproj", "{0A68191A-4943-4163-B435-8FA0D8E8B1A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSchedulingContext", "EventSchedulingContext\EventSchedulingContext.csproj", "{9BE45A78-48B1-4F67-92F3-D794F16C369E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionExecutionContext", "CompetitionExecutionContext\CompetitionExecutionContext.csproj", "{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +74,14 @@ Global
 		{0A68191A-4943-4163-B435-8FA0D8E8B1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A68191A-4943-4163-B435-8FA0D8E8B1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A68191A-4943-4163-B435-8FA0D8E8B1A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE45A78-48B1-4F67-92F3-D794F16C369E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE45A78-48B1-4F67-92F3-D794F16C369E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE45A78-48B1-4F67-92F3-D794F16C369E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE45A78-48B1-4F67-92F3-D794F16C369E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,6 +8,6 @@ namespace SharedKernel.Interfaces.Base
 {
     public interface ICreateRepository<T> where T : class
     {
-        Task AddAsync(T entity);
+        Task<int> AddAsync(T entity);
     }
 }
