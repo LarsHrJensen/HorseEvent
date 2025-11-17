@@ -4,10 +4,7 @@ import { useEffect, useState } from "react";
 import "./page.css";
 
 export default function CreateHorsePage() {
-    // Hardcoded values – kan senere hentes fra API/databasen
-    const breeds = ["DV", "Oldenborg", "Fjordhest", "Hannoveraner", "Arabian"];
-    const existingHorses = ["Chess", "Flipper", "Marjolein", "Sander", "Onslow", "The Flying Dutchmann"];
-
+  
     const [horseData, setHorseData] = useState({
         Name: "",
         HorseId: "",
@@ -63,7 +60,7 @@ export default function CreateHorsePage() {
     const [horses, setHorses] = useState([]);
     const mares = horses.filter(h => h.gender === "Mare");
     const males = horses.filter(h => h.gender === "Stallion" || h.gender === "Gelding");
-    const [loading, setLoading] = useState(true);
+    const [isHorseLoading, setHorseLoading] = useState(true);
 
     useEffect(() => {
         async function fetchHorses() {
@@ -76,11 +73,32 @@ export default function CreateHorsePage() {
                 console.error(err);
                 alert("Der opstod en fejl ved hentning af heste");
             } finally {
-                setLoading(false);
+                setHorseLoading(false);
             }
         }
 
         fetchHorses();
+    }, []);
+
+    const [breeds, setHorseBreeds] = useState([]);
+    const [isHorseBreedLoading, setHorseBreedLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchHorseBreeds() {
+            try {
+                const response = await fetch("https://localhost:7265/api/horseBreed");
+                if (!response.ok) throw new Error("Fejl ved hentning af hesteracer");
+                const data = await response.json();
+                setHorseBreeds(data);
+            } catch (err) {
+                console.error(err);
+                alert("Der opstod en fejl ved hentning af hesteracer");
+            } finally {
+                setHorseBreedLoading(false);
+            }
+        }
+
+        fetchHorseBreeds();
     }, []);
 
 
@@ -133,7 +151,10 @@ export default function CreateHorsePage() {
                             <label>Race / Avlsforbund:</label>
                             <select name="Breed" value={horseData.Breed} onChange={handleChange}>
                                 <option value="">Vælg race</option>
-                                {breeds.map((b) => <option key={b} value={b}>{b}</option>)}
+                                {breeds.map((b) => <option key={b.id} value={b.id}>
+                                    {b.name}
+                                </option>
+                                )}
                             </select>
 
                             <label>Far:</label>

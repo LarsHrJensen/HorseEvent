@@ -11,7 +11,10 @@ using EventSchedulingContext.Infrastructure.Repositories;
 using HorseRider.Application.Handlers;
 using HorseRider.Application.Handlers.HorseRider.Application.Handlers;
 using HorseRider.Application.Interfaces;
+using HorseRiderContext.Application.Services;
 using HorseRider.Infrastructure.Repositories;
+using HorseRiderContext.Application.Interfaces;
+using HorseRiderContext.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel.Interfaces;
 using UserManagementContext.Application.Interfaces;
@@ -50,6 +53,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IClassLevelRepository, ClassLevelRepository>();
 builder.Services.AddScoped<IDisciplineRepository, DisciplinRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<IHorseBreedRepository, HorseBreedRepository>();
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
@@ -57,6 +61,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDisciplineService, DisciplinService >();
 builder.Services.AddScoped<IClassLevelService, ClassLevelService>();
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IHorseBreedService, HorseBreedService>();
 
 // 5. Command / Query Handlers (hvis du bruger MediatR)
 builder.Services.AddScoped<CreateRiderHandler>();
