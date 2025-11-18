@@ -1,13 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 @import "tailwindcss";
 
 :root {
   --background: #0070f3;
   --foreground: #ffffff;
-  --background: #f0f4ff;
-  --foreground: #171717;
+
 }
 
 
