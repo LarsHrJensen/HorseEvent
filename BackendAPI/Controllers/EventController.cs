@@ -1,4 +1,5 @@
 ﻿using ClubContext.Application.Interfaces;
+using ClubContext.Application.Services;
 using Contracts.Club;
 using Contracts.Events;
 using EventSchedulingContext.Application.Interfaces;
@@ -19,7 +20,7 @@ namespace BackendAPI.Controllers
             _eventService = eventService;
         }
 
-        // POST: api/klubber
+        // POST: api/events
         [HttpPost]
         public async Task<IActionResult> CreateEvent([FromBody] CreateEventRequest request)
         {
@@ -42,6 +43,17 @@ namespace BackendAPI.Controllers
 
             // Returner resultat
             return Ok(createdEvent);
+        }
+
+        // GET: api/events
+        [HttpGet]
+        public async Task<IActionResult> GetAllClubs()
+        {
+            var eventDTO = await _eventService.GetAllEventsAsync();
+
+            //Mapping
+
+            return Ok(eventDTO);
         }
     }
 }

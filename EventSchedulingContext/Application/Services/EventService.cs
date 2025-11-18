@@ -69,9 +69,34 @@ namespace EventSchedulingContext.Application.Services
             };
         }
 
-        public Task<IEnumerable<EventDTO>> GetAllEventsAsync()
+        public async Task<IEnumerable<EventDTO>> GetAllEventsAsync()
         {
-            throw new NotImplementedException();
+           var events = await _eventRepository.GetAllAsync();
+
+           return events.Select(e => new EventDTO
+            {
+                Id = e.Id,
+                Name = e.Name,
+                ClubId = e.ClubId,
+                Level = e.Level,
+                StartDate = e.StartDate,
+                EndDate = e.EndDate,
+                EntryDeadline = e.EntryDeadline,
+                Status = MapStatus(e.Status),
+                Classes = e.Classes.Select(c => new ClassDTO
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Level = c.Level,
+                    DisciplineId = c.DisciplineId,
+                    ClassLevelId = c.ClassLevelId,
+                    Date = c.Date,
+                    Price = c.Price,
+                    MaxParticipants = c.MaxParticipants,
+                    EventId = c.EventId
+                }).ToList()
+            });
+
         }
 
         private EventSchedulingContext.Domain.Entities.EventStatus MapStatus(EventSchedulingContext.Application.DTOs.EventStatus dtoStatus)

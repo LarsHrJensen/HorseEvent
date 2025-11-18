@@ -37,9 +37,10 @@ namespace EventSchedulingContext.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Event>> GetAllAsync()
+        public async Task<List<Event>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Events
+                  .ToListAsync();
         }
 
         public Task<Event?> GetByIdAsync(int id)
