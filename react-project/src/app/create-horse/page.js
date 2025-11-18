@@ -28,11 +28,20 @@ export default function CreateHorsePage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const payload = {
+            ...horseData,
+            SireId: horseData.SireId === "" ? null : parseInt(horseData.SireId),
+            DamId: horseData.DamId === "" ? null : parseInt(horseData.DamId),
+            Breed: horseData.Breed === "" ? null : horseData.Breed,
+            Color: horseData.Color === "" ? null : horseData.Color,
+            Breeder: horseData.Breeder === "" ? null : horseData.Breeder
+        };
+
         try {
             const response = await fetch("https://localhost:7265/api/horse", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(horseData)
+                body: JSON.stringify(payload)
             });
 
             if (response.ok) {
@@ -46,7 +55,7 @@ export default function CreateHorsePage() {
                     Color: "",
                     Breed: "",
                     Breeder: "",
-                    SireId: "",
+                    SireId: "",                    
                     DamId: ""
                 });
             } else {
@@ -158,7 +167,7 @@ export default function CreateHorsePage() {
                             </select>
 
                             <label>Far:</label>
-                            <select name="SireId" value={horseData.SireId} onChange={handleChange}>
+                            <select name="SireId" value={horseData.SireId ?? ""} onChange={handleChange}>
                                 <option value="">Vælg far</option>
                                 {males.map(m => (
                                     <option key={m.id} value={m.id}>
@@ -168,7 +177,8 @@ export default function CreateHorsePage() {
                             </select>
 
                             <label>Mor:</label>
-                            <select name="DamId" value={horseData.DamId} onChange={handleChange}>
+                            <select name="DamId" value={horseData.DamId ?? ""} onChange={handleChange}>
+
                                 <option value="">Vælg mor</option>
                                 {mares.map(m => (
                                     <option key={m.id} value={m.id}>
