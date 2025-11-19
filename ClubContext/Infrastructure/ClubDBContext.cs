@@ -1,6 +1,7 @@
 ﻿using ClubContext.Domain.Entities;
 using ClubContext.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using SharedKernel;
 
 namespace ClubContext.Infrastructure
 {
@@ -15,12 +16,27 @@ namespace ClubContext.Infrastructure
         public DbSet<Country> Countries { get; set; }
         public DbSet<PostalCodeCity> PostalCodeCities { get; set; } // kun DK-postnumre
 
+        public DbSet<OutboxEvent> Outbox { get; set; }
+
         // Hovedtabel
         public DbSet<Club> Clubs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
+            // ---------------------------
+            // Outbox-konfiguration
+            // ---------------------------
+            modelBuilder.Entity<OutboxEvent>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.EventType).IsRequired();
+                entity.Property(e => e.Payload).IsRequired();
+                entity.Property(e => e.CreatedAt).IsRequired();
+                entity.Property(e => e.Processed).IsRequired();
+            });
 
             // ---------------------------
             // Country-konfiguration

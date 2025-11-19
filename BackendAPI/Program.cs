@@ -38,6 +38,10 @@ builder.Services.AddDbContext<UserManagementDbContext>(options =>
 builder.Services.AddDbContext<EventSchedulingDbContext>(options =>
     options.UseNpgsql(eventschedulingConnectionString));
 
+// Unit of Work registrering
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 // 3. Repositories
 builder.Services.AddScoped<IDbConnectionFactory>(sp =>
     new SqlDbConnectionFactory(horseRiderConnectionString));
@@ -47,7 +51,7 @@ builder.Services.AddScoped<IHorseRepository, HorseRepository>();
 builder.Services.AddScoped<IRiderRepository, RiderRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
-builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
+//builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<StartListRepository>();
 builder.Services.AddScoped<IClassLevelRepository, ClassLevelRepository>();
