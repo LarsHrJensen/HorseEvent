@@ -18,34 +18,47 @@ namespace ClubContext.Application.Services
         }
         public async Task<ClubDto> CreateClubAsync(string name, AddressDto address)
         {
-            var club = new Club
+            await _unitOfWork.BeginTransactionAsync();
+
+            try
             {
-                Name = name,
-                Adress = new Adress(
-                  streetName: address.StreetName,
-                  houseNumber: address.StreetNumber,
-                  postalCode: address.PostalCode,
-                  city: address.City,
-                  countryCode: address.CountryCode,
-                  countryName: address.CountryName,
-                  apartment: address.Apartment
-                )
-            };
+                var club = new Club
+                {
+                    Name = name,
+                    Adress = new Adress(
+                      streetName: address.StreetName,
+                      houseNumber: address.StreetNumber,
+                      postalCode: address.PostalCode,
+                      city: address.City,
+                      countryCode: address.CountryCode,
+                      countryName: address.CountryName,
+                      apartment: address.Apartment
+                    )
+                };
 
-            await _unitOfWork.Clubs.AddAsync(club);
+                await _unitOfWork.Clubs.AddAsync(club);
+                await _unitOfWork.CompleteAsync();
 
-            // Tilføj Outbox event
-            var outboxEvent = new OutboxEvent
+                // Tilføj Outbox event
+                var outboxEvent = new OutboxEvent
+                {
+                    EventType = "ClubCreated",
+                    Payload = JsonSerializer.Serialize(club.ToDto())
+                };
+                await _unitOfWork.Outbox.AddAsync(outboxEvent);
+
+                // Commit begge ændringer i samme transaction
+                await _unitOfWork.CompleteAsync();
+
+                await _unitOfWork.CommitAsync();
+
+                return club.ToDto();
+            }
+            catch
             {
-                EventType = "ClubCreated",
-                Payload = JsonSerializer.Serialize(club.ToDto())
-            };
-            await _unitOfWork.Outbox.AddAsync(outboxEvent);
-
-            // Commit begge ændringer i samme transaction
-            await _unitOfWork.CompleteAsync();
-
-            return club.ToDto();
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
         }
 
 
