@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSchedulingContext", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionExecutionContext", "CompetitionExecutionContext\CompetitionExecutionContext.csproj", "{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutboxWatcher", "OutboxWatcher\OutboxWatcher.csproj", "{A5290D35-8296-48F2-BA6C-24EB6F183F1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,10 @@ Global
 		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5290D35-8296-48F2-BA6C-24EB6F183F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5290D35-8296-48F2-BA6C-24EB6F183F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5290D35-8296-48F2-BA6C-24EB6F183F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5290D35-8296-48F2-BA6C-24EB6F183F1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
