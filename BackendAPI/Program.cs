@@ -7,6 +7,7 @@ using ClubContext.Infrastructure;
 using HorseRider.Application.Handlers.HorseRider.Application.Handlers;
 using HorseRider.Application.Handlers;
 using HorseRider.Application.Interfaces;
+using HorseRiderContext.Infrastructure.Repositories;
 using HorseRider.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SharedKernel.Interfaces;
@@ -35,6 +36,7 @@ builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
 builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<StartListRepository>();
+builder.Services.AddScoped<RiderPerformanceRepository>();
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
