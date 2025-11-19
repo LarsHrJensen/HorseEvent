@@ -1,24 +1,8 @@
-﻿import { useEffect, useState } from "react";
+﻿'use client'
+import { useEffect, useState } from "react";
 
-interface StartListItem {
-    startListId: number;
-    combinationName: string;
-    className: string;
-    startNumber: number;
-    startTime: string;
-    riderName: string;
-    horseName: string;
-    competitionName: string;
-    classLevel: string;
-    disciplineName: string;
-}
-
-interface StartListProps {
-    competitionName: string;
-}
-
-export default function StartList({ competitionName }: StartListProps) {
-    const [startList, setStartList] = useState < StartListItem[] > ([]);
+export default function StartList({ competitionName }) {
+    const [startList, setStartList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -26,12 +10,12 @@ export default function StartList({ competitionName }: StartListProps) {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `https://localhost:7265/api/startlist/${encodeURIComponent(competitionName)}`
+                    `https://localhost:7265/api/startlist/${encodeURIComponent("Aalborg Springtour")}`
                 );
                 if (!response.ok) throw new Error("Fejl ved hentning af startlisten");
                 const data = await response.json();
                 setStartList(data);
-            } catch (err: any) {
+            } catch (err) {
                 setError(err.message);
             } finally {
                 setLoading(false);
@@ -62,7 +46,7 @@ export default function StartList({ competitionName }: StartListProps) {
                 {startList.map((item) => (
                     <tr key={item.startListId}>
                         <td>{item.startNumber}</td>
-                        <td>{new Date(item.startTime).toLocaleString()}</td>
+                        <td>{item.startTime ? new Date(item.startTime).toLocaleString() : "Ingen tid"}</td>
                         <td>{item.riderName}</td>
                         <td>{item.horseName}</td>
                         <td>{item.competitionName}</td>
@@ -71,6 +55,8 @@ export default function StartList({ competitionName }: StartListProps) {
                     </tr>
                 ))}
             </tbody>
+
         </table>
     );
+
 }

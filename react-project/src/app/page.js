@@ -38,6 +38,10 @@ export default function Home() {
         className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
           Hjælp & Support
         </a>
+        <a href="/startlist-og-resultater"
+            className="inline-block bg-purple-300 text-black px-6 py-3 rounded-xl text-lg font-medium shadow-md hover:bg-purple-400 transition-transform hover:scale-105">
+          Startlister & Resultater
+        </a>
       </div>
     </main>
   );
