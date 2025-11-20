@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "react-project", "react-project\", "{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "react-project(1)", "react-project\", "{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_57184"
