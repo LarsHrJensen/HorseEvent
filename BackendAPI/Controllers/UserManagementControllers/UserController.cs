@@ -51,7 +51,7 @@ namespace BackendAPI.Controllers.UserManagement
         {
             var user = await _userService.LoginAsync(request);
             if (user == null)
-                return Unauthorized("Invalid email or password");
+                return Unauthorized(new { message = "Invalid email or password" });
 
             var response = new UserResponse
             {
