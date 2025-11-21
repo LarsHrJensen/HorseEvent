@@ -22,6 +22,7 @@ using UserManagementContext.Application.Services;
 using UserManagementContext.Infrastructure;
 using UserManagementContext.Infrastructure.Repositories;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. Connection strings
@@ -51,13 +52,14 @@ builder.Services.AddScoped<IHorseRepository, HorseRepository>();
 builder.Services.AddScoped<IRiderRepository, RiderRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IPostalCodeRepository, PostalCodeRepository>();
-//builder.Services.AddScoped<IClubRepository, ClubRepository>(); 
+builder.Services.AddScoped<IClubCreatedEventHandler, ClubCreatedEventHandler>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<StartListRepository>();
 builder.Services.AddScoped<IClassLevelRepository, ClassLevelRepository>();
 builder.Services.AddScoped<IDisciplineRepository, DisciplinRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IHorseBreedRepository, HorseBreedRepository>();
+builder.Services.AddScoped<IClubReadRepository, ClubReadRepository>();
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();

@@ -78,9 +78,9 @@ namespace ClubContext.Infrastructure
             modelBuilder.Entity<Club>(entity =>
             {
                 entity.ToTable("clubs");
-                entity.HasKey(c => c.Id); // Kun definerer nøglen
+                entity.HasKey(c => c.ClubId); // Kun definerer nøglen
 
-                entity.Property(c => c.Id)   // Her mapper vi selve kolonnen
+                entity.Property(c => c.ClubId)   // Her mapper vi selve kolonnen
                       .HasColumnName("id");
 
 

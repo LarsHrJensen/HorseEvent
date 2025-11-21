@@ -6,7 +6,7 @@ using HorseRider.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NewBackendApi.Controllers
+namespace BackendAPI.Controllers.HorseRiderContext
 {
     [ApiController]
     [Route("api/[controller]")]

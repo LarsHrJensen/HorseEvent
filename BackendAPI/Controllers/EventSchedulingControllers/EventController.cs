@@ -7,7 +7,7 @@ using EventSchedulingContext.Application.Mapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BackendAPI.Controllers
+namespace BackendAPI.Controllers.EventSchedulingContext
 {
     [Route("api/[controller]")]
     [ApiController]

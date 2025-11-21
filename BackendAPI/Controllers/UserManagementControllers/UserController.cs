@@ -6,7 +6,7 @@ using Contracts;
 using Contracts.User;
 using Microsoft.AspNetCore.Identity.Data;
 
-namespace BackendAPI.Controllers
+namespace BackendAPI.Controllers.UserManagement
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,7 +20,7 @@ namespace BackendAPI.Controllers
         }
         // POST: api/brugere
         [HttpPost]
-        public async Task<IActionResult> CreateUserAsync([FromBody] Contracts.User.CreateUserRequest request)
+        public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserRequest request)
         {
             if (request == null)
                 return BadRequest(new { message = "Brugerdata er tomt." });
@@ -61,7 +61,7 @@ namespace BackendAPI.Controllers
             };
 
             return Ok(response);
-            
+
         }
     }
 }

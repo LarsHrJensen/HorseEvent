@@ -5,7 +5,7 @@ using Contracts;
 using Contracts.Club;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BackendAPI.Controllers
+namespace BackendAPI.Controllers.Club
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,7 +24,7 @@ namespace BackendAPI.Controllers
         {
 
             if (request == null)
-                   return BadRequest(new { message = "club data er tomt." });
+                return BadRequest(new { message = "club data er tomt." });
 
             var result = await _clubService.CreateClubAsync
             (

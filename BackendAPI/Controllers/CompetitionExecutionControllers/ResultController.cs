@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using HorseRider.Infrastructure.Repositories;
 using CompetitionExecutionContext.Infrastructure.Repositories;
 
-namespace BackendAPI.Controllers
+namespace BackendAPI.Controllers.CompetitionExecution
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -9,7 +9,7 @@ namespace ClubContext.Application.Mappers
         {
             return new ClubDto
             {
-                Id = club.Id,
+                ClubId = club.ClubId,
                 Name = club.Name,
                 Address = new AddressDto
                 {

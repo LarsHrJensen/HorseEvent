@@ -14,7 +14,7 @@ namespace EventSchedulingContext.Application.Mapper
         {
             return new EventDTO
             {
-                Id = null, // Ved create er der intet Id endnu
+                Id = null, // Ved create er der intet ClubId endnu
                 Name = request.Name,
                 ClubId = request.ClubId,
                 Level = request.Level,

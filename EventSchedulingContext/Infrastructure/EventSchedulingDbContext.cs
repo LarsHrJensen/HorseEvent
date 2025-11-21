@@ -1,4 +1,5 @@
 ﻿using EventSchedulingContext.Domain.Entities;
+using EventSchedulingContext.ReadModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace EventSchedulingContext.Infrastructure
@@ -14,6 +15,7 @@ namespace EventSchedulingContext.Infrastructure
         public DbSet<Disciplin> Disciplines { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Class> Classes { get; set; }
+        public DbSet<ClubReadModel> Clubs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -81,6 +83,22 @@ namespace EventSchedulingContext.Infrastructure
                       .WithMany(e => e.Classes)
                       .HasForeignKey(c => c.EventId)
                       .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            //club read model
+            modelBuilder.Entity<ClubReadModel>(entity =>
+            {
+                entity.ToTable("club_readmodel", "public");
+
+                entity.HasKey(c => c.ClubId);
+
+                entity.Property(c => c.ClubId)
+                      .HasColumnName("club_id");
+
+                entity.Property(c => c.Name)
+                      .HasColumnName("name")
+                      .HasMaxLength(200)
+                      .IsRequired();
             });
 
             base.OnModelCreating(modelBuilder);

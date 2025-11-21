@@ -4,7 +4,7 @@ using Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BackendAPI.Controllers
+namespace BackendAPI.Controllers.Club
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -12,7 +12,7 @@ namespace BackendAPI.Controllers
     {
         private readonly IMediator _mediator;
 
-        public CountryController (IMediator mediator)
+        public CountryController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -49,7 +49,7 @@ namespace BackendAPI.Controllers
                 postalCodes = await ExternalPostalService.GetPostalCodesAsync(countryCode);
             }
 
-                return Ok(postalCodes);
+            return Ok(postalCodes);
         }
 
     }

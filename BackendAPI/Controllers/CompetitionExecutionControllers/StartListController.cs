@@ -1,7 +1,7 @@
 ﻿using CompetitionExecutionContext.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BackendAPI.Controllers
+namespace BackendAPI.Controllers.CompetitionExecution
 {
     [ApiController]
     [Route("api/[controller]")]

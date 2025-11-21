@@ -21,7 +21,7 @@ namespace ClubContext.Infrastructure.Repositories
 
            var newClub = await _dbContext.Clubs.AddAsync(entity);
 
-            return newClub.Entity.Id;    // INGEN SaveChanges her
+            return newClub.Entity.ClubId;    // INGEN SaveChanges her
         }
 
         public async Task<List<Club>> GetAllAsync()

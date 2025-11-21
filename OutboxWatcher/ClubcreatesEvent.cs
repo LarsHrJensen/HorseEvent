@@ -4,25 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClubContext.Application.DTOs
+namespace OutboxWatcher
 {
-   
-    public class ClubDto
+    public class ClubCreatedEvent
     {
         public int ClubId { get; set; }
         public string Name { get; set; }
         public AddressDto Address { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 
     public class AddressDto
     {
         public string StreetName { get; set; }
-        public string StreetNumber { get; set; }
-        public string? Apartment { get; set; }  // Optional
         public string PostalCode { get; set; }
-        public string City { get; set; }          // Bemærk! Fra PostalCodeCity VO
-        public string CountryCode { get; set; }
-        public string CountryName { get; set; }   // Fra Country VO
+        public string City { get; set; }
     }
-    
 }

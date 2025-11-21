@@ -6,7 +6,7 @@ using HorseRider.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ReactApp1.Server.Controllers
+namespace BackendAPI.Controllers.HorseRiderContext
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -28,7 +28,7 @@ namespace ReactApp1.Server.Controllers
             if (request == null)
                 return BadRequest(new { message = "Hest data er tomt." });
 
-            var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear,request.Gender, request.Color, request.Breed, request.Breeder, request.SireId, request.DamId);
+            var command = new CreateHorseCommand(request.Name, request.HorseId, request.Height, request.BirthYear, request.Gender, request.Color, request.Breed, request.Breeder, request.SireId, request.DamId);
             var horseDTO = await _mediator.Send(command);
 
             if (horseDTO == null)
@@ -73,7 +73,7 @@ namespace ReactApp1.Server.Controllers
 
         //            var response = horsesDTO.Select(h => new HorseResponse
         //            {
-        //                Id = (int)h.Id,
+        //                ClubId = (int)h.ClubId,
         //                UELN = h.UELN,
         //                Name = h.HorseName,
         //                Height = h.HorseHeight,

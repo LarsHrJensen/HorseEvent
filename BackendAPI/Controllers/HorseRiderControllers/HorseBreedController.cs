@@ -1,9 +1,8 @@
-﻿
-using HorseRiderContext.Application.Interfaces;
+﻿using HorseRiderContext.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BackendAPI.Controllers
+namespace BackendAPI.Controllers.HorseRiderContext
 {
     [Route("api/[controller]")]
     [ApiController]
