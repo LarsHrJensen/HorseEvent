@@ -251,12 +251,11 @@ export default function CreateEventPage() {
                                 {loadingClubs && <option>Loading clubs...</option>}
                                 {!loadingClubs && clubs.length === 0 && <option>No clubs found</option>}
                                 {clubs.map((c) => (
-                                    <option key={c.id} value={Number(c.id)}>
+                                    <option key={c.clubId} value={Number(c.clubId)}>
                                         {c.name}
                                     </option>
                                 ))}
                             </select>
-
                         </label>
 
                         <label>

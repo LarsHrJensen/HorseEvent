@@ -65,6 +65,7 @@ export default function EventsPage() {
                                 <td className="p-3">{event.name}</td>
                                 <td className="p-3">{event.level}</td>
                                 <td className="p-3">{event.clubId}</td>
+                                <td className="p-3">{event.clubName}</td>
                                 <td className="p-3">{new Date(event.startDate).toLocaleDateString()}</td>
                                 <td className="p-3">{new Date(event.endDate).toLocaleDateString()}</td>
                                 <td className="p-3">{event.status}</td>

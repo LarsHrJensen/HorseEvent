@@ -15,6 +15,7 @@ namespace EventSchedulingContext.Application.DTOs
 
         // Relation til Club
         public int ClubId { get; set; }
+        public string ClubName { get; set; }
 
         // Kun "E" niveau for nu
         public string Level { get; set; } = "E";

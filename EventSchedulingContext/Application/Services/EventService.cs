@@ -1,21 +1,18 @@
 ﻿using EventSchedulingContext.Application.DTOs;
 using EventSchedulingContext.Application.Interfaces;
 using EventSchedulingContext.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EventSchedulingContext.Application.Services
 {
     public class EventService : IEventService
     {
         IEventRepository _eventRepository;
+        IClubReadRepository _clubReadRepository;
 
-        public EventService(IEventRepository eventRepository)
+        public EventService(IEventRepository eventRepository, IClubReadRepository clubReadRepository)
         {
             _eventRepository = eventRepository;
+            _clubReadRepository = clubReadRepository;
         }
 
         public async Task<EventDTO> CreateEventAsync(EventDTO dto)
@@ -71,18 +68,30 @@ namespace EventSchedulingContext.Application.Services
 
         public async Task<IEnumerable<EventDTO>> GetAllEventsAsync()
         {
-           var events = await _eventRepository.GetAllAsync();
+            var events = await _eventRepository.GetAllAsync();
 
-           return events.Select(e => new EventDTO
+            // Hent alle klubber i én query
+            var clubs = await _clubReadRepository.GetAllAsync();
+
+            // Lav dictionary for hurtig opslag
+            var clubDict = clubs.ToDictionary(c => c.ClubId, c => c.Name);
+
+            return events.Select(e => new EventDTO
             {
                 Id = e.Id,
                 Name = e.Name,
                 ClubId = e.ClubId,
+
+                ClubName = clubDict.TryGetValue(e.ClubId, out var name)
+                            ? name
+                            : "Ukendt klub",
+
                 Level = e.Level,
                 StartDate = e.StartDate,
                 EndDate = e.EndDate,
                 EntryDeadline = e.EntryDeadline,
                 Status = MapStatus(e.Status),
+
                 Classes = e.Classes.Select(c => new ClassDTO
                 {
                     Id = c.Id,
@@ -96,7 +105,6 @@ namespace EventSchedulingContext.Application.Services
                     EventId = c.EventId
                 }).ToList()
             });
-
         }
 
         private EventSchedulingContext.Domain.Entities.EventStatus MapStatus(EventSchedulingContext.Application.DTOs.EventStatus dtoStatus)
