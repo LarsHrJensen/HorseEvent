@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import "./page.css";
+import { useRouter } from "next/navigation"; 
 
 export default function CreateHorsePage() {
-  
+    const router = useRouter(); // opret router objekt
+
+
     const [horseData, setHorseData] = useState({
         Name: "",
         HorseId: "",
@@ -58,6 +61,7 @@ export default function CreateHorsePage() {
                     SireId: "",                    
                     DamId: ""
                 });
+                router.push("/get-horses");
             } else {
                 alert("Der opstod en fejl.");
             }
