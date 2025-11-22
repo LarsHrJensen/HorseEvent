@@ -3,6 +3,7 @@ using Contracts.Horses;
 using HorseRider.Application.Commands;
 using HorseRider.Application.Handlers;
 using HorseRider.Application.Queries;
+using HorseRiderContext.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -60,28 +61,46 @@ namespace BackendAPI.Controllers.HorseRiderContext
                 Height = h.HorseHeight,
                 BirthYear = h.BirthYear,
                 Category = h.Category,
-                Gender = h.Gender
+                Gender = h.Gender,
+                Breeder = h.Breeder,
+                BreedId = h.BreedId,
+                BreedName = h.BreedName,
+                DamId = h.DamId,
+                SireId = h.SireId,
+                Color = h.Color
+
             });
 
             return Ok(response);
         }
 
-        //        [HttpGet]
-        //        public async Task<IActionResult> GetUsersHorses()
-        //        {
-        //            var horsesDTO = await _mediator.Send(new GetUsersHorsesQuery());
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchHorses(
+                                                        [FromQuery] string? name,
+                                                        [FromQuery] string? ueln,
+                                                        [FromQuery] int? birthYear,
+                                                        [FromQuery] int? raceId)
+        {
+            var horsesDTO = await _mediator.Send(new SearchHorsesQuery(name, ueln, birthYear, raceId));
 
-        //            var response = horsesDTO.Select(h => new HorseResponse
-        //            {
-        //                ClubId = (int)h.ClubId,
-        //                UELN = h.UELN,
-        //                Name = h.HorseName,
-        //                Height = h.HorseHeight,
-        //                BirthYear = h.BirthYear,
-        //                Category = h.Category
-        //            });
+            var response = horsesDTO.Select(h => new HorseResponse
+            {
+                Id = (int)h.Id,
+                Name = h.HorseName,
+                UELN = h.UELN,
+                Height = h.HorseHeight,
+                BirthYear = h.BirthYear,
+                Category = h.Category,
+                Gender = h.Gender,
+                Breeder = h.Breeder,
+                BreedName = h.BreedName,
+                BreedId = h.BreedId,
+                DamId = h.DamId,
+                SireId = h.SireId,
+                Color = h.Color
+            });
 
-        //            return Ok(response);
-        //        }
+            return Ok(response);
+        }
     }
 }

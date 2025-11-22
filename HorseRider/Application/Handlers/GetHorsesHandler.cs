@@ -26,8 +26,13 @@ namespace HorseRider.Application.Handlers
                 HorseHeight = h.Height,
                 BirthYear = h.BirthYear,
                 Category = h.Category,
-                Gender = h.Gender
-            
+                Gender = h.Gender,
+                Breeder = h.Breeder,
+                BreedId = h.BreedId,
+                BreedName = h.Breed?.Name,
+                DamId = h.DamId ,
+                SireId = h.SireId,
+                Color = h.Color
             }).ToList();
         }
     }

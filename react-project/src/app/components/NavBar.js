@@ -14,7 +14,7 @@ export default function NavBar(){
                     <span className="text-colour-blue"> Hjem </span>
                 </Link>
                 
-                <Link href="/events"
+                <Link href="/get-events"
                 className="nav-link">
                     <Trophy className="nav-icon"/>
                     <span className="text-colour-blue"> Stævner </span>
@@ -26,7 +26,7 @@ export default function NavBar(){
                     <span className="text-colour-blue"> Profil </span>
                 </Link>
 
-                <Link href="/my-horses"
+                <Link href="/get-horses"
                 className="nav-link">
                     <span className="text-colour-blue">Mine Heste</span>
                 </Link>

@@ -1,5 +1,6 @@
 ﻿using HorseRider.Application.Interfaces;
 using HorseRider.Domain.Entities;
+using HorseRiderContext.Domain.Entities;
 using Microsoft.Data.SqlClient;
 using SharedKernel.Interfaces;
 using System;
@@ -79,29 +80,46 @@ namespace HorseRider.Infrastructure.Repositories
             await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
             await conn.OpenAsync();
 
-            string sql = "SELECT HorseId, HorseName, Height, BirthYear, UELN, Gender, Color, BreedId, Breeder, SireId, DamId FROM Horse";
+            string sql = $@"SELECT 
+                            Horse.HorseId, Horse.HorseName, Horse.Height, Horse.BirthYear, Horse.UELN, Horse.Gender, 
+                            Horse.Color, Horse.BreedId, Horse.Breeder, Horse.SireId, Horse.DamId,
+                            HorseBreeds.BreedName as BreedName
+                        FROM Horse
+                        LEFT JOIN HorseBreeds ON Horse.BreedId = HorseBreeds.BreedId order by HorseId;
+
+                        ";
 
             using var cmd = new SqlCommand(sql, conn);
             using var reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                var horse = new Horse
+                while (reader.Read())
                 {
-                    HorseId = (int)reader["HorseId"],
-                    UELN = reader["UELN"].ToString()!,
-                    Name = reader["HorseName"].ToString()!,
-                    Height = (int)(decimal)reader["Height"],
-                    BirthYear = (int)reader["BirthYear"],
-                    Gender = reader["Gender"]?.ToString() ?? "",
-                    Color = reader["Color"]?.ToString() ?? "",
-                    //BreedId = reader["BreedId"] == DBNull.Value ? null : Convert.ToInt32(reader["BreedId"]),
-                    Breeder = reader["Breeder"]?.ToString() ?? "",
-                    SireId = reader["SireId"] == DBNull.Value ? null : Convert.ToInt32(reader["SireId"]),
-                    DamId = reader["DamId"] == DBNull.Value ? null : Convert.ToInt32(reader["DamId"])
-                };
+                    var horse = new Horse
+                    {
+                        HorseId = (int)reader["HorseId"],
+                        UELN = reader["UELN"].ToString()!,
+                        Name = reader["HorseName"].ToString()!,
+                        Height = (int)(decimal)reader["Height"],
+                        BirthYear = (int)reader["BirthYear"],
+                        Gender = reader["Gender"]?.ToString() ?? "",
+                        Color = reader["Color"]?.ToString() ?? "",
+                        BreedId = reader["BreedId"] == DBNull.Value ? null : Convert.ToInt32(reader["BreedId"]),
+                        Breeder = reader["Breeder"]?.ToString() ?? "",
+                        SireId = reader["SireId"] == DBNull.Value ? null : Convert.ToInt32(reader["SireId"]),
+                        DamId = reader["DamId"] == DBNull.Value ? null : Convert.ToInt32(reader["DamId"]),
+                        Breed = reader["BreedName"] != DBNull.Value
+                     ? new HorseBreed
+                     {
+                         Id = reader["BreedId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["BreedId"]),
+                         Name = reader["BreedName"].ToString()!
+                     }
+                     : null
+                    };
 
-                horses.Add(horse);
+                    horses.Add(horse);
+                }
             }
 
             return horses;

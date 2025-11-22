@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HorseRiderContext.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace HorseRider.Domain.Entities
 
         // Optional fields
         public string? Color { get; set; }
-        public string? Breed { get; set; }       // Race / Avlsforbund
+        public int? BreedId { get; set; }       // Race / Avlsforbund
+        public HorseBreed? Breed { get; set; }
         public string? Breeder { get; set; }     // Avler
         public int? SireId { get; set; }      // far
         public int? DamId { get; set; }      //  mor
@@ -38,7 +40,7 @@ namespace HorseRider.Domain.Entities
             int birthYear,
             string sex,
             string? color = null,
-            string? breed = null,
+            int? breedId = null,
             string? breeder = null,
             int? father = null,
             int? mother = null)
@@ -49,7 +51,7 @@ namespace HorseRider.Domain.Entities
             BirthYear = birthYear;
             Gender = sex;
             Color = color;
-            Breed = breed;
+            BreedId = breedId;
             Breeder = breeder;
             SireId = father;
             DamId = mother;

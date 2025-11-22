@@ -10,7 +10,7 @@ namespace HorseRider.Application.Commands
      int BirthYear,
      string? Gender,            // Hoppe / Vallak / Hingst
      string? Color,         // Frivillig
-     string? Breed,         // Frivillig (race / avlsforbund)
+     int? Breed,         // Frivillig (race / avlsforbund)
      string? Breeder,       // Frivillig (avler)
      int? SireId,        // Frivillig
      int? DamId         // Frivillig

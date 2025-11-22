@@ -19,7 +19,7 @@ namespace HorseRider.Application.Handlers
             var horse = new Horse(command.Name, command.UELN, command.Height, command.BirthYear);
             if (command.Gender != null) { horse.Gender = command.Gender; }
             if (command.Color != null) { horse.Color = command.Color; }
-            if (command.Breed != null) { horse.Breed = command.Breed; }
+            if (command.Breed != null) { horse.BreedId = command.Breed; }
             if (command.Breeder != null) { horse.Breeder = command.Breeder; }
             if (command.SireId != null) { horse.SireId = command.SireId; }
             if (command.DamId != null) { horse.DamId = command.DamId; }
