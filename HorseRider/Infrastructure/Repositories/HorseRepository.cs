@@ -26,9 +26,9 @@ namespace HorseRider.Infrastructure.Repositories
             await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
             await conn.OpenAsync();
 
-            string sql = @"INSERT INTO Horse (HorseName, Height, BirthYear, UELN, Gender, Color, Breeder, SireId, DamId) 
+            string sql = @"INSERT INTO Horse (HorseName, Height, BirthYear, UELN, Gender, Color, Breeder, SireId, DamId, BreedId) 
                     OUTPUT INSERTED.HorseId
-                       VALUES (@HorseName, @Height, @BirthYear, @UELN, @Gender, @Color, @Breeder, @Sire, @Dam);"; //todo tilføj @Breed og BreedId
+                       VALUES (@HorseName, @Height, @BirthYear, @UELN, @Gender, @Color, @Breeder, @Sire, @Dam, @Breed);"; //todo tilføj @Breed og BreedId
 
 
 
@@ -41,7 +41,7 @@ namespace HorseRider.Infrastructure.Repositories
             // Optional fields – convert null to DBNull.Value
             cmd.Parameters.AddWithValue("@Gender", entity.Gender ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@Color", entity.Color ?? (object)DBNull.Value);
-            //cmd.Parameters.AddWithValue("@Breed", entity.Breed ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@Breed", entity.BreedId ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@Breeder", entity.Breeder ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@Sire", entity.SireId ?? (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@Dam", entity.DamId ?? (object)DBNull.Value);
