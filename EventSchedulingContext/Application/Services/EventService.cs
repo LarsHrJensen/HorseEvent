@@ -74,7 +74,7 @@ namespace EventSchedulingContext.Application.Services
             var clubs = await _clubReadRepository.GetAllAsync();
 
             // Lav dictionary for hurtig opslag
-            var clubDict = clubs.ToDictionary(c => c.ClubId, c => c.Name);
+            var clubDict = clubs.ToDictionary(c => c.ClubId);
 
             return events.Select(e => new EventDTO
             {
@@ -82,10 +82,13 @@ namespace EventSchedulingContext.Application.Services
                 Name = e.Name,
                 ClubId = e.ClubId,
 
-                ClubName = clubDict.TryGetValue(e.ClubId, out var name)
-                            ? name
-                            : "Ukendt klub",
+                ClubDistrictId = clubDict.TryGetValue(e.ClubId, out var club)
+                        ? club.DistrictId
+                        : (int?)null,
 
+                ClubName = clubDict.TryGetValue(e.ClubId, out var club2)
+                        ? club2.Name
+                        : "Ukendt klub",
                 Level = e.Level,
                 StartDate = e.StartDate,
                 EndDate = e.EndDate,

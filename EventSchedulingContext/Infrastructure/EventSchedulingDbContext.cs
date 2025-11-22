@@ -99,6 +99,8 @@ namespace EventSchedulingContext.Infrastructure
                       .HasColumnName("name")
                       .HasMaxLength(200)
                       .IsRequired();
+
+                entity.Property(c => c.DistrictId).HasColumnName("district_id");
             });
 
             base.OnModelCreating(modelBuilder);

@@ -50,7 +50,8 @@ export default function EventsPage() {
                             <th className="p-3">ID</th>
                             <th className="p-3">Navn</th>
                             <th className="p-3">Niveau</th>
-                            <th className="p-3">Klub</th>
+                            <th className="p-3">Klubnavn</th>
+                            <th className="p-3">Distrikt</th>
                             <th className="p-3">Start</th>
                             <th className="p-3">Slut</th>
                             <th className="p-3">Status</th>
@@ -64,11 +65,27 @@ export default function EventsPage() {
                                 <td className="p-3">{event.id}</td>
                                 <td className="p-3">{event.name}</td>
                                 <td className="p-3">{event.level}</td>
-                                <td className="p-3">{event.clubId}</td>
-                                <td className="p-3">{event.clubName}</td>
-                                <td className="p-3">{new Date(event.startDate).toLocaleDateString()}</td>
-                                <td className="p-3">{new Date(event.endDate).toLocaleDateString()}</td>
+
+                                {/* Klubnavn i stedet for clubId */}
+                                <td className="p-3">
+                                    {event.clubName ?? "Ukendt klub"}
+                                </td>
+
+                                {/* Distrikt (int?) */}
+                                <td className="p-3">
+                                    {event.clubDistrictId ?? "—"}
+                                </td>
+
+                                <td className="p-3">
+                                    {new Date(event.startDate).toLocaleDateString()}
+                                </td>
+
+                                <td className="p-3">
+                                    {new Date(event.endDate).toLocaleDateString()}
+                                </td>
+
                                 <td className="p-3">{event.status}</td>
+
                                 <td className="p-3">
                                     <button
                                         onClick={() => window.location.href = `/events/${event.id}`}

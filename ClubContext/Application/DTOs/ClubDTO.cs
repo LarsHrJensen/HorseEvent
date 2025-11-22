@@ -12,6 +12,7 @@ namespace ClubContext.Application.DTOs
         public int ClubId { get; set; }
         public string Name { get; set; }
         public AddressDto Address { get; set; }
+        public int? DistrictId { get; set; }
     }
 
     public class AddressDto

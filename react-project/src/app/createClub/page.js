@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 export default function CreateClubForm() {
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState("");
+    const [loadingCountries, setLoadingCountries] = useState(true);
+
     const [postalCodes, setPostalCodes] = useState([]);
     const [selectedPostalCode, setSelectedPostalCode] = useState("");
-    const [loadingCountries, setLoadingCountries] = useState(true);
     const [loadingPostalCodes, setLoadingPostalCodes] = useState(false);
+
+    const [districts, setDistricts] = useState([]);
+    const [selectedDistrict, setSelectedDistrict] = useState("5");
+    const [loadingDistricts, setLoadingDistricts] = useState(false);
 
     // Klub info
     const [clubName, setClubName] = useState("");
@@ -31,6 +36,23 @@ export default function CreateClubForm() {
             }
         }
         fetchCountries();
+    }, []);
+
+    // Hent distrikter
+    useEffect(() => {
+        async function fetchDistricts() {
+            try {
+                const response = await fetch("https://localhost:7265/api/district");
+                if (!response.ok) throw new Error("Network response was not ok");
+                const data = await response.json();
+                setDistricts(data);
+            } catch (error) {
+                console.error("Error fetching districts:", error);
+            } finally {
+                setLoadingDistricts(false);
+            }
+        }
+        fetchDistricts();
     }, []);
 
     // Hent postnumre, når land vælges
@@ -70,6 +92,8 @@ export default function CreateClubForm() {
                 postalCode: selectedPostalCode,
                 city: postalCodes.find(p => p.postalCode === selectedPostalCode)?.city || ""
             },
+            district: selectedDistrict ? parseInt(selectedDistrict, 10) : null
+
         }
 
         try {
@@ -157,6 +181,32 @@ export default function CreateClubForm() {
                         ))}
                     </select>
                 </div>
+
+                {selectedCountry === "DK" && (
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">District</label>
+
+                        {loadingDistricts ? (
+                            <p className="text-gray-500">Loading districts...</p>
+                        ) : (
+                            <select
+                                value={selectedDistrict}
+                                onChange={(e) => setSelectedDistrict(e.target.value)}
+                                required
+                                className="w-full border border-gray-300 rounded-lg px-4 py-2 text-lg bg-white focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                            >
+                                <option value="">--Select District--</option>
+                                {districts
+                                    .filter((d) => d.countryCode === "DK")
+                                    .map((d) => (
+                                        <option key={d.districtId} value={d.districtId.toString()}>
+                                            {d.name}
+                                        </option>
+                                    ))}
+                            </select>
+                        )}
+                    </div>
+                )}
 
                 {selectedCountry && (
                     <div>

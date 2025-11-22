@@ -21,6 +21,7 @@ using UserManagementContext.Application.Interfaces;
 using UserManagementContext.Application.Services;
 using UserManagementContext.Infrastructure;
 using UserManagementContext.Infrastructure.Repositories;
+using BackendAPI.Controllers.ClubControllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,6 +61,7 @@ builder.Services.AddScoped<IDisciplineRepository, DisciplinRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<IHorseBreedRepository, HorseBreedRepository>();
 builder.Services.AddScoped<IClubReadRepository, ClubReadRepository>();
+builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
@@ -68,6 +70,7 @@ builder.Services.AddScoped<IDisciplineService, DisciplinService >();
 builder.Services.AddScoped<IClassLevelService, ClassLevelService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IHorseBreedService, HorseBreedService>();
+builder.Services.AddScoped<IDistrictService, DistrictService>();
 
 // 5. Command / Query Handlers (hvis du bruger MediatR)
 builder.Services.AddScoped<CreateRiderHandler>();

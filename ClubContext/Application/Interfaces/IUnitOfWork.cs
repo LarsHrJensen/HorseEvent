@@ -15,8 +15,8 @@ namespace ClubContext.Application.Interfaces
         IOutboxRepository Outbox { get; }
         Task BeginTransactionAsync();
         Task CommitAsync();
-        Task<int> CompleteAsync();
         Task RollbackAsync();
+        Task<int> CompleteAsync();
     }
 
     public class UnitOfWork : IUnitOfWork

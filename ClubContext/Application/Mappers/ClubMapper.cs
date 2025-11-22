@@ -20,7 +20,8 @@ namespace ClubContext.Application.Mappers
                     City = club.Adress.City,               // direkte felt
                     CountryCode = club.Adress.CountryCode, // direkte felt
                     CountryName = club.Adress.CountryName  // direkte felt
-                }
+                },
+                DistrictId = club.DistrictId
             };
         }
     }

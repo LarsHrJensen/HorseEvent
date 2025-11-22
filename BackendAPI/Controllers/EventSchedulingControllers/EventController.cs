@@ -47,7 +47,7 @@ namespace BackendAPI.Controllers.EventSchedulingContext
 
         // GET: api/events
         [HttpGet]
-        public async Task<IActionResult> GetAllClubs()
+        public async Task<IActionResult> GetAllEvents()
         {
             var eventDTO = await _eventService.GetAllEventsAsync();
 

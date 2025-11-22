@@ -10,5 +10,6 @@ namespace EventSchedulingContext.ReadModels
     {
         public int ClubId { get; set; }
         public string Name { get; set; }
+        public int? DistrictId { get; set; }
     }
 }

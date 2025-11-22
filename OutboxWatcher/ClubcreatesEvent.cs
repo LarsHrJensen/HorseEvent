@@ -12,6 +12,7 @@ namespace OutboxWatcher
         public string Name { get; set; }
         public AddressDto Address { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int DistrictId { get; set; }
     }
 
     public class AddressDto

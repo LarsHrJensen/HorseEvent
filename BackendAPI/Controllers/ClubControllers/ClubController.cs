@@ -38,6 +38,7 @@ namespace BackendAPI.Controllers.Club
                       CountryCode = request.Address.CountryCode,
                       CountryName = request.Address.CountryName
                   }
+               , request.District
             );
 
             return Ok(result);

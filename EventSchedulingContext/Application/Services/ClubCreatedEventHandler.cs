@@ -19,6 +19,7 @@ namespace EventSchedulingContext.Application.Services
             {
                 ClubId = clubCreatedEvent.ClubId,
                 Name = clubCreatedEvent.Name,
+                DistrictId = clubCreatedEvent.DistrictId
             };
 
             await _repo.AddAsync(model);

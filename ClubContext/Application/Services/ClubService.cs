@@ -16,7 +16,7 @@ namespace ClubContext.Application.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<ClubDto> CreateClubAsync(string name, AddressDto address)
+        public async Task<ClubDto> CreateClubAsync(string name, AddressDto address, int? districtId )
         {
             await _unitOfWork.BeginTransactionAsync();
 
@@ -33,7 +33,8 @@ namespace ClubContext.Application.Services
                       countryCode: address.CountryCode,
                       countryName: address.CountryName,
                       apartment: address.Apartment
-                    )
+                    ),
+                    DistrictId= districtId  
                 };
 
                 await _unitOfWork.Clubs.AddAsync(club);
