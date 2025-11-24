@@ -37,6 +37,8 @@ builder.Services.AddScoped<IClubRepository, ClubRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<StartListRepository>();
 builder.Services.AddScoped<RiderPerformanceRepository>();
+builder.Services.AddScoped<AdvQueriesForDashRepository>();
+
 
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
