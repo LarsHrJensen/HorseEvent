@@ -1,7 +1,8 @@
 ﻿'use client';
 import { useEffect, useState } from "react";
 import './page.css';
-import { ResponsiveBar } from '@nivo/bar'; 
+import { ResponsiveBar } from '@nivo/bar';
+import { ResponsiveLine } from '@nivo/line';
 
 export default function RiderPerformanceTable({ drfLicense }) {
     const [performance, setPerformance] = useState([]);
@@ -49,9 +50,55 @@ export default function RiderPerformanceTable({ drfLicense }) {
         placements: p.placements !== null ? maxPlacement - p.placements + 1 : 0
     }));
 
+    const averageScoreData = Object.values(
+        performance.reduce((acc, p) => {
+            if (!acc[p.horseName]) {
+                acc[p.horseName] = {
+                    horse: p.horseName,
+                    totalScore: 0,
+                    count: 0
+                };
+            }
+
+            if (p.score !== null && p.score !== undefined) {
+                acc[p.horseName].totalScore += p.score;
+                acc[p.horseName].count += 1;
+            }
+
+            return acc;
+        }, {})
+    ).map(h => ({
+        horse: h.horse,
+        averageScore: h.count > 0
+            ? Number((h.totalScore / h.count).toFixed(2))
+            : 0
+    }));
+
+    const sortedPerformance = [...performance].sort(
+        (a, b) => new Date(a.startTime) - new Date(b.startTime)
+    );
+
+    let accumulated = 0;
+
+    const accumulatedScoreData = [
+        {
+            id: "Akkumuleret Score",
+            data: sortedPerformance.map(p => {
+                accumulated += p.score ?? 0; // hvis score mangler, brug 0
+                return {
+                    x: new Date(p.startTime).toLocaleDateString(), // eller p.competitionName
+                    y: accumulated
+                };
+            })
+        }
+    ];
+
+
     return (
         <div>
-            <h2>Rytter Performance</h2>
+            <h1 style={{ frontweight: 'bold', textAlign: 'center', marginTop: '1rem' }}>
+                Rytterperformance for {performance[0]?.riderName ?? drfLicense}
+            </h1>
             <table style={{ borderCollapse: "collapse", width: "100%" }}>
                 <thead>
                     <tr>
@@ -83,6 +130,10 @@ export default function RiderPerformanceTable({ drfLicense }) {
                 </tbody>
             </table>
 
+            
+
+
+           {/* Score per stævne/klasse*/}
             <div className="dashboard-grid">
                 <div style={{ height: 350 }}>
                     <ResponsiveBar
@@ -103,6 +154,7 @@ export default function RiderPerformanceTable({ drfLicense }) {
                     />
                 </div>
 
+                {/*Fejl per hest/klasse*/}
                 <div style={{ height: 350 }}>
                     <ResponsiveBar
                         data={faultsData}
@@ -110,7 +162,7 @@ export default function RiderPerformanceTable({ drfLicense }) {
                         indexBy="competitionClassHorse"
                         margin={{ top: 50, right: 50, bottom: 100, left: 60 }}
                         padding={0.3}
-                        colers={{ scheme: 'red_yellow_blue' }}
+                        colors={{ scheme: 'red_yellow_blue' }}
                         axisBottom={{
                             tickRotation: -45,
                         }}
@@ -118,6 +170,7 @@ export default function RiderPerformanceTable({ drfLicense }) {
                     />
                 </div>
 
+                {/*Placering per hest/klasse*/}
                 <div style={{ height: 350 }}>
                     <ResponsiveBar
                         data={placementsData}
@@ -132,8 +185,49 @@ export default function RiderPerformanceTable({ drfLicense }) {
 
                     />
                 </div>
-            </div>
 
+                {/*Gennemsnitsscore pr hest pr rytter*/}
+                <div style={{ height: 350 }}>
+                    <ResponsiveBar
+                        data={averageScoreData}
+                        keys={['averageScore']}
+                        indexBy="horse"
+                        margin={{ top: 50, right: 50, bottom: 100, left: 60 }}
+                        padding={0.3}
+                        valueScale={{ type: 'linear' }}
+                        colors={{ scheme: 'greens' }}
+                        axisBottom={{
+                            tickRotation: -45,
+                        }}
+                        axisLeft={{
+                            legend: 'Gennemsnitsscore',
+                            legendPosition: 'middle',
+                            legendOffset: -40
+                        }}
+                        labelSkipWidth={12}
+                        labelsSkipHeight={12}
+                    />
+                </div>
+
+                {/*Akummuleret score over tid*/}
+                <div style={{ height: 350 }}>
+                    <ResponsiveLine
+                        data={accumulatedScoreData}
+                        margin={{ top: 50, right: 50, bottom: 100, left: 60 }}
+                        xScale={{ type: 'point' }}
+                        yScale={{ type: 'linear', min: 0 }}
+                        axisBottom={{ tickRotation: -45 }}
+                        axisLeft={{ legend: 'Akkumuleret Score', legendPosition: 'middle', legendOffset: -40 }}
+                        pointSize={10}
+                        pointColor={{ theme: 'background' }}
+                        pointBorderWidth={2}
+                        pointBorderColor={{ from: 'serieColor' }}
+                        enableGridX={false}
+                        enableGridY={true}
+                    />
+                </div>
+
+            </div>
         </div>
     );
 }
