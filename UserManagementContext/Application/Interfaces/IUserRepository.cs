@@ -8,8 +8,8 @@ using UserManagementContext.Domain.Entities;
 
 namespace UserManagementContext.Application.Interfaces
 {
-    public interface IUserRepository: ICrudRepository<UserEntity>
+    public interface IUserRepository : ICrudRepository<UserEntity>
     {
-       Task<UserEntity> GetByUsernameAsync(string username);
+        Task<UserEntity> GetByUsernameAsync(string username);
     }
 }

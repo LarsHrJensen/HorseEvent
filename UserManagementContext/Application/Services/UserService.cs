@@ -46,21 +46,19 @@ namespace UserManagementContext.Application.Services
         {
             var user = await _userRepository.GetByUsernameAsync(request.UserName);
 
-            if (user == null)
-                throw new Exception("User not found.");
+            if (user == null) return null;
+            var verification = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
 
-            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
+            if (verification == PasswordVerificationResult.Failed)
+                return null;
 
-            if (result == PasswordVerificationResult.Failed)
-                throw new Exception("Invalid password.");
-
-            //string token = CreateToken(user);
+            var token = CreateToken(user);
 
             return new UserDto
             {
                 Username = user.UserName,
                 Email = user.Email,
-                //Token = token
+                Token = token
             };
         }
 

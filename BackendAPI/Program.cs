@@ -22,6 +22,9 @@ using UserManagementContext.Application.Services;
 using UserManagementContext.Infrastructure;
 using UserManagementContext.Infrastructure.Repositories;
 using BackendAPI.Controllers.ClubControllers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -66,7 +69,7 @@ builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 // 4. Services
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IDisciplineService, DisciplinService >();
+builder.Services.AddScoped<IDisciplineService, DisciplinService>();
 builder.Services.AddScoped<IClassLevelService, ClassLevelService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IHorseBreedService, HorseBreedService>();
@@ -93,11 +96,41 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>
     {
         policy.WithOrigins("http://localhost:3000", "http://localhost:3001",
-                           "http://localhost:3002", "http://localhost:3003")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+                            "http://localhost:3002", "http://localhost:3003")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
     });
 });
+
+
+
+
+
+// 9. JWT Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(Options =>
+{
+    var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
+
+    if (string.IsNullOrEmpty(secret))
+        throw new Exception("JWT_SECRET environment variable not set.");
+
+    Options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["AppSettings:Issuer"],
+        ValidAudience = builder.Configuration["AppSettings:Audience"],
+        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secret))
+    };
+});
+
+Console.WriteLine("SECRET LOADED: " + Environment.GetEnvironmentVariable("JWT_SECRET"));
 
 var app = builder.Build();
 
@@ -109,6 +142,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

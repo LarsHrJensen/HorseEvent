@@ -45,19 +45,18 @@ namespace BackendAPI.Controllers.UserManagement
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] UserLoginRequest request)
         {
-            var user = await _userService.LoginAsync(request);
-            if (user == null)
+            var userDto = await _userService.LoginAsync(request);
+            if (userDto == null)
                 return Unauthorized(new { message = "Invalid email or password" });
 
-            var response = new UserResponse
-            {
-                Id = user.Id,
-                UserName = user.Username,
-                Email = user.Email
-            };
+            // var response = new UserResponse
+            // {
+            //     Id = user.Id,
+            //     UserName = user.Username,
+            //     Email = user.Email
+            // };
 
-            return Ok(response);
-
+            return Ok(userDto);
         }
     }
 }
