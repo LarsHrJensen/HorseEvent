@@ -20,5 +20,41 @@ namespace HorseRiderContext.API.Controllers
             var data = await _repo.GetTopRidersAsync(year, top);
             return Ok(data);
         }
+
+        [HttpGet("riderconsistency")]
+        public async Task<IActionResult> GetRiderConsistency()
+        {
+            try
+            {
+                var data = await _repo.GetRiderConsistencyAsync(); 
+                if (data == null || !data.Any())
+                    return NotFound("Ingen data fundet");
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                // Log evt. fejl
+                return StatusCode(500, $"Intern serverfejl: {ex.Message}");
+            }
+        }
+
+        [HttpGet("RiderHorsePerformance")]
+        public async Task<IActionResult> GetRiderHorsePerformance()
+        {
+            try
+            {
+                var data = await _repo.GetRiderHorsePerformanceAsync();
+                if (data == null || !data.Any())
+                    return NotFound("Ingen data fundet");
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                // Log fejl hvis ønsket
+                return StatusCode(500, $"Intern serverfejl: {ex.Message}");
+            }
+        }
     }
 }
