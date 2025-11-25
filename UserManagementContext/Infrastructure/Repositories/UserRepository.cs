@@ -50,7 +50,7 @@ namespace UserManagementContext.Infrastructure.Repositories
 
             // Find brugeren i databasen asynkront
             return await _dbContext.Users
-                .FirstOrDefaultAsync(u => u.Username == username);
+                .FirstOrDefaultAsync(u => u.us == username);
         }
 
         public Task UpdateAsync(UserEntity entity)

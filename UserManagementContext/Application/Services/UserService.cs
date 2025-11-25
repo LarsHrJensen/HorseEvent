@@ -1,6 +1,9 @@
 ﻿using Contracts.User;
-using System.CodeDom.Compiler;
-using System.Security.Cryptography;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using UserManagementContext.Application.DTOs;
 using UserManagementContext.Application.Interfaces;
@@ -11,86 +14,79 @@ namespace UserManagementContext.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IConfiguration _configuration;
+        private readonly PasswordHasher<UserEntity> _passwordHasher;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IConfiguration configuration, IUserRepository userRepository)
         {
+            _configuration = configuration;
             _userRepository = userRepository;
+            _passwordHasher = new PasswordHasher<UserEntity>();
         }
+
         public async Task<UserDto> CreateUserAsync(CreateUserRequest dto)
         {
-            // Lav nyt domæne-objekt
-            var userEntity = new UserEntity();
-
-            userEntity.Username = dto.UserName;
-            userEntity.Salt = GenerateSalt();
-            userEntity.PasswordHash = HashPasswordWithSaltAndPepper(dto.Password, userEntity.Salt);
-            userEntity.Email = dto.Email;
-
-            // Gem i repository
-            await _userRepository.AddAsync(userEntity);
-
-            // Map til DTO
-            var userDto = new UserDto
+            var user = new UserEntity
             {
-                Id = userEntity.Id,
-                Username = userEntity.Username,
-                Email = userEntity.Email
+                UserName = dto.UserName,
+                Email = dto.Email,
+                PasswordHash = _passwordHasher.HashPassword(null!, dto.Password)
             };
 
-            return userDto;
-        }
+            await _userRepository.AddAsync(user);
 
-        private string GenerateSalt(int size = 16)
-        {
-            byte[] salt = new byte[size];
-            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            return new UserDto
             {
-                rng.GetBytes(salt);
-            }
-            return Convert.ToBase64String(salt);
-        }
-
-        //TODO SIKKERHED: Implementer en sikker hashing-algoritme med salt og pepper 
-        public string HashPasswordWithSaltAndPepper(string password, string salt)
-        {
-            string saltedAndPepperedPassword = password + salt; /*+ SecretPepper;*/
-
-
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(saltedAndPepperedPassword);
-
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
-                // Convert to a readable hexadecimal string
-                StringBuilder sb = new StringBuilder();
-                foreach (byte b in hashBytes)
-                {
-                    sb.Append(b.ToString("x2"));
-                }
-                return sb.ToString();
-            }
+                Username = user.UserName,
+                Email = user.Email
+            };
         }
 
         public async Task<UserDto?> LoginAsync(UserLoginRequest request)
         {
-           UserEntity userEntity = await _userRepository.GetByUsernameAsync(request.UserName);
-            if (userEntity == null)
-                return null;
-            string hashedInputPassword = HashPasswordWithSaltAndPepper(request.Password, userEntity.Salt);
+            var user = await _userRepository.GetByUsernameAsync(request.UserName);
 
-            if (hashedInputPassword == userEntity.PasswordHash)
+            if (user == null)
+                throw new Exception("User not found.");
+
+            var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
+
+            if (result == PasswordVerificationResult.Failed)
+                throw new Exception("Invalid password.");
+
+            string token = CreateToken(user);
+
+            return new UserDto
             {
-                return new UserDto
-                {
-                    Id = userEntity.Id,
-                    Username = userEntity.Username,
-                    Email = userEntity.Email
-                };
-            }
-            else return null;
+                Username = user.UserName,
+                Email = user.Email,
+                //Token = token
+            };
         }
 
-       
+        private string CreateToken(UserEntity user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("UserId", user.Id.ToString())
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                _configuration["AppSettings:Token"]!));
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["AppSettings:Issuer"],
+                audience: _configuration["AppSettings:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddDays(1),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
-    
 }
