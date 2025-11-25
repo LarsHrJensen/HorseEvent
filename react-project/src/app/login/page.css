@@ -17,7 +17,7 @@ max-width: 1000px;
 width: 100%;
 }
 
- /*flex layout: billede + knapper*/
+/*flex layout: billede + knapper*/
 .login-content{
 display: flex;
 flex-direction: row;

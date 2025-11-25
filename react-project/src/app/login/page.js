@@ -28,8 +28,6 @@ export default function Page() {
         }),
       });
 
-   
-
       let data = null;
       const text = await response.text();
       try {
