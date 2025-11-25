@@ -2,7 +2,6 @@
 using ClubContext.Domain.ValueObjects;
 using ClubContext.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using SharedKernel.Interfaces.Base;
 
 namespace ClubContext.ClubInfrastructure.Repositories
 {

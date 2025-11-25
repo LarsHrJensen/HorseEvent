@@ -3,42 +3,71 @@ using ClubContext.Application.Interfaces;
 using ClubContext.Domain.Entities;
 using ClubContext.Domain.ValueObjects;
 using ClubContext.Application.Mappers;
+using SharedKernel;
+using System.Text.Json;
 
 namespace ClubContext.Application.Services
 {
     public class ClubService:IClubService
     {
-        private readonly IClubRepository _clubRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ClubService(IClubRepository clubRepository)
+        public ClubService(IUnitOfWork unitOfWork)
         {
-            _clubRepository = clubRepository;
+            _unitOfWork = unitOfWork;
         }
-            public async Task<ClubDto> CreateClubAsync(string name, AddressDto address)
+        public async Task<ClubDto> CreateClubAsync(string name, AddressDto address, int? districtId )
         {
-            var club = new Club
+            await _unitOfWork.BeginTransactionAsync();
+
+            try
             {
-                Name = name,
-                Adress = new Adress(
-            streetName: address.StreetName,
-            houseNumber: address.StreetNumber,
-            postalCode: address.PostalCode,
-            city: address.City,
-            countryCode: address.CountryCode,
-            countryName: address.CountryName,
-            apartment: address.Apartment  // valgfri, kan udelades hvis null
-            )
-            };
+                var club = new Club
+                {
+                    Name = name,
+                    Adress = new Adress(
+                      streetName: address.StreetName,
+                      houseNumber: address.StreetNumber,
+                      postalCode: address.PostalCode,
+                      city: address.City,
+                      countryCode: address.CountryCode,
+                      countryName: address.CountryName,
+                      apartment: address.Apartment
+                    ),
+                    DistrictId= districtId  
+                };
 
-            await _clubRepository.AddAsync(club);
+                await _unitOfWork.Clubs.AddAsync(club);
+                await _unitOfWork.CompleteAsync();
 
-            return club.ToDto();
+                // Tilføj Outbox event
+                var outboxEvent = new OutboxEvent
+                {
+                    EventType = "ClubCreated",
+                    Payload = JsonSerializer.Serialize(club.ToDto())
+                };
+                await _unitOfWork.Outbox.AddAsync(outboxEvent);
+
+                // Commit begge ændringer i samme transaction
+                await _unitOfWork.CompleteAsync();
+
+                await _unitOfWork.CommitAsync();
+
+                return club.ToDto();
+            }
+            catch
+            {
+                await _unitOfWork.RollbackAsync();
+                throw;
+            }
         }
-        
 
-        public Task<IEnumerable<ClubDto>> GetAllClubsAsync()
+
+        public async Task<IEnumerable<ClubDto>> GetAllClubsAsync()
         {
-            throw new NotImplementedException();
+            List<Club> clubs = await _unitOfWork.Clubs.GetAllAsync();
+
+            return clubs.Select(c => c.ToDto());
         }
 
         public Task<ClubDto?> GetClubAsync(int id)

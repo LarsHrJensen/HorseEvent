@@ -5,11 +5,11 @@ using MediatR;
 
 namespace HorseRider.Application.Handlers
 {
-    public class GetHorsesHandler : IRequestHandler<GetHorsesQuery, List<HorseDTO>>
+    public class GetUsersHorsesHandler : IRequestHandler<GetHorsesQuery, List<HorseDTO>>
     {
         private readonly IHorseRepository _horseRepository;
 
-        public GetHorsesHandler(IHorseRepository _horseRepository)
+        public GetUsersHorsesHandler(IHorseRepository _horseRepository)
         {
             this._horseRepository = _horseRepository;
         }
@@ -25,8 +25,14 @@ namespace HorseRider.Application.Handlers
                 UELN = h.UELN,
                 HorseHeight = h.Height,
                 BirthYear = h.BirthYear,
-                Category = h.Category
-
+                Category = h.Category,
+                Gender = h.Gender,
+                Breeder = h.Breeder,
+                BreedId = h.BreedId,
+                BreedName = h.Breed?.Name,
+                DamId = h.DamId ,
+                SireId = h.SireId,
+                Color = h.Color
             }).ToList();
         }
     }

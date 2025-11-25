@@ -4,6 +4,7 @@
     {
         public string Name { get; set; }
         public AddressDto Address { get; set; }
+        public int? District { get; set; }
     }
     public class AddressDto
     {

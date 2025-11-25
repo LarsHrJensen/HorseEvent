@@ -73,3 +73,30 @@
     grid-template-columns: 1fr 1fr;
     gap: 2 rem;
 }
+
+.horseTable {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.horseEntry {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9fbff;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+    .horseEntry th {
+        text-align: left;
+        padding: 0.5rem 1rem;
+        width: 150px;
+        font-weight: 600;
+        color: #2a3a60;
+    }
+
+    .horseEntry td {
+        padding: 0.5rem 1rem;
+    }

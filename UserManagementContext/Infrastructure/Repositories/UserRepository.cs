@@ -15,7 +15,7 @@ namespace UserManagementContext.Infrastructure.Repositories
             _dbContext = dbContext;
         }
        
-        public async Task AddAsync(UserEntity entity)
+        public async Task<UserEntity> AddAsync(UserEntity entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
@@ -25,6 +25,7 @@ namespace UserManagementContext.Infrastructure.Repositories
 
             // Gem ændringer i databasen
             await _dbContext.SaveChangesAsync();
+            return entity;
         }
 
         public Task DeleteAsync(UserEntity entity)
@@ -49,7 +50,7 @@ namespace UserManagementContext.Infrastructure.Repositories
 
             // Find brugeren i databasen asynkront
             return await _dbContext.Users
-                .FirstOrDefaultAsync(u => u.Username == username);
+                .FirstOrDefaultAsync(u => u.UserName == username);
         }
 
         public Task UpdateAsync(UserEntity entity)

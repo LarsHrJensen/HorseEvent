@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "react-project", "react-project\", "{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "react-project(1)", "react-project\", "{13BC2A83-4F6D-44FD-9B28-812CD41F69EE}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_57184"
@@ -35,6 +35,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubContext", "ClubContext\ClubContext.csproj", "{976365C0-6C8F-46B0-AA9F-9BFD70534E74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementContext", "UserManagementContext\UserManagementContext.csproj", "{0A68191A-4943-4163-B435-8FA0D8E8B1A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSchedulingContext", "EventSchedulingContext\EventSchedulingContext.csproj", "{9BE45A78-48B1-4F67-92F3-D794F16C369E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompetitionExecutionContext", "CompetitionExecutionContext\CompetitionExecutionContext.csproj", "{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutboxWatcher", "OutboxWatcher\OutboxWatcher.csproj", "{A5290D35-8296-48F2-BA6C-24EB6F183F1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +76,18 @@ Global
 		{0A68191A-4943-4163-B435-8FA0D8E8B1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A68191A-4943-4163-B435-8FA0D8E8B1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A68191A-4943-4163-B435-8FA0D8E8B1A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE45A78-48B1-4F67-92F3-D794F16C369E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE45A78-48B1-4F67-92F3-D794F16C369E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE45A78-48B1-4F67-92F3-D794F16C369E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE45A78-48B1-4F67-92F3-D794F16C369E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D63B69B-99A0-4BCE-94CB-C08AAC78107F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5290D35-8296-48F2-BA6C-24EB6F183F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5290D35-8296-48F2-BA6C-24EB6F183F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5290D35-8296-48F2-BA6C-24EB6F183F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5290D35-8296-48F2-BA6C-24EB6F183F1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

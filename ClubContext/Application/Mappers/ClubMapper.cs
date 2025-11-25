@@ -9,7 +9,7 @@ namespace ClubContext.Application.Mappers
         {
             return new ClubDto
             {
-                Id = club.Id,
+                ClubId = club.ClubId,
                 Name = club.Name,
                 Address = new AddressDto
                 {
@@ -20,7 +20,8 @@ namespace ClubContext.Application.Mappers
                     City = club.Adress.City,               // direkte felt
                     CountryCode = club.Adress.CountryCode, // direkte felt
                     CountryName = club.Adress.CountryName  // direkte felt
-                }
+                },
+                DistrictId = club.DistrictId
             };
         }
     }

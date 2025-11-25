@@ -1,7 +1,7 @@
 ﻿using ClubContext.Domain.Entities;
-using ClubContext.Domain.Entities;
 using ClubContext.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
+using SharedKernel;
 
 namespace ClubContext.Infrastructure
 {
@@ -15,6 +15,9 @@ namespace ClubContext.Infrastructure
         // Reference-tabeller
         public DbSet<Country> Countries { get; set; }
         public DbSet<PostalCodeCity> PostalCodeCities { get; set; } // kun DK-postnumre
+        public DbSet<District> Districts { get; set; }
+
+        public DbSet<OutboxEvent> Outbox { get; set; }
 
         // Hovedtabel
         public DbSet<Club> Clubs { get; set; }
@@ -22,6 +25,19 @@ namespace ClubContext.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
+            // ---------------------------
+            // Outbox-konfiguration
+            // ---------------------------
+            modelBuilder.Entity<OutboxEvent>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.EventType).IsRequired();
+                entity.Property(e => e.Payload).IsRequired();
+                entity.Property(e => e.CreatedAt).IsRequired();
+                entity.Property(e => e.Processed).IsRequired();
+            });
 
             // ---------------------------
             // Country-konfiguration
@@ -58,14 +74,27 @@ namespace ClubContext.Infrastructure
             });
 
             // ---------------------------
+            // District-konfiguration
+            // ---------------------------
+            modelBuilder.Entity<District>(entity =>
+            {
+                entity.ToTable("district");
+                entity.HasKey(d => d.DistrictId);
+
+                entity.Property(d => d.Name)
+                      .HasMaxLength(100)
+                      .IsRequired();
+            });
+
+            // ---------------------------
             // Club-konfiguration med denormaliseret adresse
             // ---------------------------
             modelBuilder.Entity<Club>(entity =>
             {
                 entity.ToTable("clubs");
-                entity.HasKey(c => c.Id); // Kun definerer nøglen
+                entity.HasKey(c => c.ClubId); // Kun definerer nøglen
 
-                entity.Property(c => c.Id)   // Her mapper vi selve kolonnen
+                entity.Property(c => c.ClubId)   // Her mapper vi selve kolonnen
                       .HasColumnName("id");
 
 
@@ -73,6 +102,16 @@ namespace ClubContext.Infrastructure
                  .HasColumnName("name")
                       .HasMaxLength(255)
                       .IsRequired();
+
+                // --- FK til District (nullable) ---
+                entity.Property<int?>("DistrictId")
+                      .HasColumnName("district_id");
+
+                entity.HasOne<District>()
+                      .WithMany()
+                      .HasForeignKey("DistrictId")
+                      .IsRequired(false)        // <-- optional relation
+                      .OnDelete(DeleteBehavior.SetNull);
 
                 // Adresse som value object, gemt som kolonner
                 entity.OwnsOne(c => c.Adress, address =>
