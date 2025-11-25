@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (BackendAPI)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/BackendAPI/bin/Debug/net9.0/BackendAPI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/BackendAPI",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "JWT_SECRET": "qW8fS9rZ4uN7tK2yH4vP3mJ8bT6rV5xW0uA9kQ1dR3fE7hY2gT5uL9eM1sP8cR4qZ6nB7vD2yJ3wH5tR8pF1aC6dU=="
+            },
+            "requireExactSource": false
+        }
+    ]
+}

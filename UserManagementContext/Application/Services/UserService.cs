@@ -64,6 +64,11 @@ namespace UserManagementContext.Application.Services
 
         private string CreateToken(UserEntity user)
         {
+            var secret = Environment.GetEnvironmentVariable("JWT_SECRET")
+            ?? throw new Exception("JWT_SECRET enviroment variable not set.");
+
+            Console.WriteLine($"JWT SECRET FOUND: {secret}");
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
@@ -71,9 +76,7 @@ namespace UserManagementContext.Application.Services
                 new Claim("UserId", user.Id.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                _configuration["AppSettings:Token"]!));
-
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
             var token = new JwtSecurityToken(
