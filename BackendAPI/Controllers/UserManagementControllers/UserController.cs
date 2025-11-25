@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using UserManagementContext.Application.DTOs;
+﻿using Contracts.User;
+using Microsoft.AspNetCore.Mvc;
 using UserManagementContext.Application.Interfaces;
-using UserManagementContext.Application.Interfaces;
-using Contracts;
-using Contracts.User;
-using Microsoft.AspNetCore.Identity.Data;
 
 namespace BackendAPI.Controllers.UserManagement
 {

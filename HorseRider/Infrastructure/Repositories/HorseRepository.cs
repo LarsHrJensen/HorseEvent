@@ -20,7 +20,7 @@ namespace HorseRider.Infrastructure.Repositories
             _dbConnectionFactory = dbConnectionFactory;
         }
 
-        public async Task<int> AddAsync(Horse entity)
+        public async Task<Horse> AddAsync(Horse entity)
         {
             // Cast til SqlConnection
             await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
@@ -49,7 +49,7 @@ namespace HorseRider.Infrastructure.Repositories
             var id = (int)await cmd.ExecuteScalarAsync();
 
             Console.WriteLine($"Hesten {entity.Name} blev oprettet i databasen.");
-            return id;
+            return entity;
         }
 
         public async Task DeleteAsync(Horse entity)

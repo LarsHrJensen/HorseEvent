@@ -6,7 +6,7 @@ namespace ClubContext.Infrastructure.Repositories
     internal class MemberRepository : IMemberRepository
 
     {
-        public Task<int> AddAsync(Member entity)
+        public Task<Member> AddAsync(Member entity)
         {
             throw new NotImplementedException();
         }

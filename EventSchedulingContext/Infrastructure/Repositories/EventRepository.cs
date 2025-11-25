@@ -17,7 +17,7 @@ namespace EventSchedulingContext.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<int> AddAsync(Event entity)
+        public async Task<Event> AddAsync(Event entity)
         {
             
             if (entity == null)
@@ -29,7 +29,7 @@ namespace EventSchedulingContext.Infrastructure.Repositories
             // Gem ændringer i databasen
             await _dbContext.SaveChangesAsync();
             
-            return entity.Id;
+            return entity;
         }
 
         public Task DeleteAsync(Event entity)

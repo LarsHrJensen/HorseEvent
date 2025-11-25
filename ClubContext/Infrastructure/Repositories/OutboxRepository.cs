@@ -19,14 +19,14 @@ namespace ClubContext.Infrastructure.Repositories
             Context = context;
         }
 
-        public async  Task <int>AddAsync(OutboxEvent entity)
+        public async  Task <OutboxEvent>AddAsync(OutboxEvent entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
             var newClub = await Context.Outbox.AddAsync(entity);
 
-            return newClub.Entity.Id;    // INGEN SaveChanges her
+            return newClub.Entity;    // INGEN SaveChanges her
         }
 
      

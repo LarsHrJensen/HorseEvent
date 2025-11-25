@@ -14,14 +14,14 @@ namespace ClubContext.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<int> AddAsync(Club entity)
+        public async Task<Club> AddAsync(Club entity)
         {
             if (entity == null)
                 throw new ArgumentNullException(nameof(entity));
 
            var newClub = await _dbContext.Clubs.AddAsync(entity);
 
-            return newClub.Entity.ClubId;    // INGEN SaveChanges her
+            return newClub.Entity;    // INGEN SaveChanges her
         }
 
         public async Task<List<Club>> GetAllAsync()

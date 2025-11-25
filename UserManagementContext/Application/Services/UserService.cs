@@ -54,7 +54,7 @@ namespace UserManagementContext.Application.Services
             if (result == PasswordVerificationResult.Failed)
                 throw new Exception("Invalid password.");
 
-            string token = CreateToken(user);
+            //string token = CreateToken(user);
 
             return new UserDto
             {

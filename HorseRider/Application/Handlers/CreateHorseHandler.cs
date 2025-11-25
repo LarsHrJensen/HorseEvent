@@ -26,7 +26,7 @@ namespace HorseRider.Application.Handlers
 
             
 
-            horse.HorseId =await _horseRepository.AddAsync(horse);
+            horse =await _horseRepository.AddAsync(horse);
 
             // Mapper til DTO direkte
             return new HorseDTO

@@ -12,11 +12,11 @@ public class ClubReadRepository : IClubReadRepository
         _db = db;
     }
 
-    public async Task<int> AddAsync(ClubReadModel entity)
+    public async Task<ClubReadModel> AddAsync(ClubReadModel entity)
     {
         _db.Clubs.Add(entity);
         await _db.SaveChangesAsync();
-        return entity.ClubId;
+        return entity;
     }
 
     public async Task UpdateAsync(ClubReadModel entity)
