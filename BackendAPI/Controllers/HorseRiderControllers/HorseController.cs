@@ -102,5 +102,17 @@ namespace BackendAPI.Controllers.HorseRiderContext
 
             return Ok(response);
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<HorseResponse>> GetById(int id)
+        {
+
+            var horseDTO = await _mediator.Send(new GetHorseByIdQuery(id));
+
+            if (horseDTO == null)
+                return NotFound($"Hest med id {id} blev ikke fundet.");
+
+            return Ok(horseDTO);
+        }
     }
 }
