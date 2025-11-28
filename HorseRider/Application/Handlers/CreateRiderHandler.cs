@@ -2,12 +2,9 @@
 using HorseRider.Application.DTO_s;
 using HorseRider.Application.Interfaces;
 using HorseRider.Domain.Entities;
+using Ganss.Xss;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 
 namespace HorseRider.Application.Handlers
 {
@@ -22,8 +19,15 @@ namespace HorseRider.Application.Handlers
 
             public async Task<RiderDTO> Handle(CreateRiderCommand command, CancellationToken cancellationToken)
             {
+
+                var sanitizer = new HtmlSanitizer();
+
+                var cleanName = sanitizer.Sanitize(command.Name);
+                var cleanEmail = sanitizer.Sanitize(command.email);
+                var cleanBirthYear = command.BirthYear;
+
                 // Opretter og gemmer ny rytter
-                var rider = new Rider( command.Name,  command.email, command.BirthYear);
+                var rider = new Rider(cleanName, cleanEmail, cleanBirthYear);
                 await _riderRepository.AddAsync(rider);
 
                 // Mapper til DTO direkte
@@ -35,6 +39,5 @@ namespace HorseRider.Application.Handlers
                 };
             }
         }
-
     }
 }

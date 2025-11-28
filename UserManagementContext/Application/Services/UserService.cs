@@ -73,7 +73,8 @@ namespace UserManagementContext.Application.Services
             {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim("UserId", user.Id.ToString())
+                new Claim("UserId", user.Id.ToString()),
+                new Claim(ClaimTypes.Role, user.Role) //Added for future role implementation
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));

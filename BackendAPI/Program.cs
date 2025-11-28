@@ -142,7 +142,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 app.UseHttpsRedirection();
-app.UseAuthentication();
+app.UseAuthentication(); // Authentication er FØR authorization
 app.UseAuthorization();
 app.MapControllers();
 
