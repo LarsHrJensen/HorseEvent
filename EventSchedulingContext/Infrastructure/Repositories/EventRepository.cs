@@ -43,9 +43,11 @@ namespace EventSchedulingContext.Infrastructure.Repositories
                   .ToListAsync();
         }
 
-        public Task<Event?> GetByIdAsync(int id)
+        public async Task<Event?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Events
+                .Include(e => e.Classes) // Hent alle klasser til stævnet
+                .FirstOrDefaultAsync(e => e.Id == id); // Hent kun stævnet med det givne id
         }
 
         public Task UpdateAsync(Event entity)

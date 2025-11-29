@@ -48,6 +48,36 @@ namespace EventSchedulingContext.Application.Mapper
                 _ => throw new ArgumentException($"Invalid event status: {status}")
             };
         }
+
+        public static EventResponse MapToResponse(EventDTO dto)
+        {
+            return new EventResponse
+            {
+                Id = dto.Id ?? 0,
+                Name = dto.Name ?? string.Empty,
+                ClubId = dto.ClubId,
+                ClubName = dto.ClubName ?? string.Empty,
+                ClubDistrictId = dto.ClubDistrictId,
+                Level = dto.Level,
+                StartDate = dto.StartDate,
+                EndDate = dto.EndDate,
+                EntryDeadline = dto.EntryDeadline,
+                Status = dto.Status.ToString().ToLower(),
+                Classes = dto.Classes?.Select(c => new EventClassResponse
+                {
+                    Id = c.Id ?? 0,
+                    Name = c.Name ?? string.Empty,
+                    Level = c.Level ?? "E",
+                    DisciplineId = (int)c.DisciplineId,
+                    ////DisciplineName = c.Di ?? string.Empty,
+                    //ClassLevelId = c.ClassLevelId,
+                    //ClassLevelName = c.ClassLevelName ?? string.Empty,
+                    Date = c.Date,
+                    Price = c.Price,
+                    MaxParticipants = c.MaxParticipants
+                }).ToList() ?? new List<EventClassResponse>()
+            };
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using EventSchedulingContext.Application.DTOs;
 using EventSchedulingContext.Application.Interfaces;
 using EventSchedulingContext.Domain.Entities;
+using EventSchedulingContext.ReadModels;
 
 namespace EventSchedulingContext.Application.Services
 {
@@ -108,6 +109,46 @@ namespace EventSchedulingContext.Application.Services
                     EventId = c.EventId
                 }).ToList()
             });
+        }
+
+        public async Task<EventDTO> GetByIdAsync(int id)
+        {
+            // Hent stævnet
+            var evt = await _eventRepository.GetByIdAsync(id);
+            if (evt == null) return null; // Returnér null hvis stævnet ikke findes
+
+            // Hent klubben til stævnet
+            var club = await _clubReadRepository.GetByIdAsync(evt.ClubId);
+
+            // Map til DTO
+            var eventDto = new EventDTO
+            {
+                Id = evt.Id,
+                Name = evt.Name,
+                ClubId = evt.ClubId,
+                ClubDistrictId = club?.DistrictId,
+                ClubName = club?.Name ?? "Ukendt klub",
+                Level = evt.Level,
+                StartDate = evt.StartDate,
+                EndDate = evt.EndDate,
+                EntryDeadline = evt.EntryDeadline,
+                Status = MapStatus(evt.Status),
+
+                Classes = evt.Classes.Select(c => new ClassDTO
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Level = c.Level,
+                    DisciplineId = c.DisciplineId,
+                    ClassLevelId = c.ClassLevelId,
+                    Date = c.Date,
+                    Price = c.Price,
+                    MaxParticipants = c.MaxParticipants,
+                    EventId = c.EventId
+                }).ToList()
+            };
+
+            return eventDto;
         }
 
         private EventSchedulingContext.Domain.Entities.EventStatus MapStatus(EventSchedulingContext.Application.DTOs.EventStatus dtoStatus)

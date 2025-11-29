@@ -35,9 +35,10 @@ namespace ClubContext.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Club?> GetByIdAsync(int id)
+        public async Task<Club?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Clubs
+                               .FirstOrDefaultAsync(c => c.ClubId == id);
         }
 
         public Task UpdateAsync(Club entity)
