@@ -2,8 +2,10 @@
 using ClubContext.Application.Services;
 using Contracts.Club;
 using Contracts.Events;
+using Contracts.Horses;
 using EventSchedulingContext.Application.Interfaces;
 using EventSchedulingContext.Application.Mapper;
+using HorseRiderContext.Application.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,6 +56,19 @@ namespace BackendAPI.Controllers.EventSchedulingContext
             //Mapping
 
             return Ok(eventDTO);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<EventResponse>> GetById(int id)
+        {
+            var evt = await _eventService.GetByIdAsync(id); // mapper EF entity til EventResponse
+
+            if (evt == null)
+                return NotFound($"Stævne med id {id} blev ikke fundet.");
+
+            var response = EventMapper.MapToResponse(evt);
+
+            return Ok(evt); // sender EventResponse som JSON
         }
     }
 }

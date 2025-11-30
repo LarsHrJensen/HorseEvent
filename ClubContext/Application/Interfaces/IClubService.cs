@@ -10,8 +10,8 @@ namespace ClubContext.Application.Interfaces
     public interface IClubService
     {
         Task<ClubDto> CreateClubAsync(string name, AddressDto address, int? districtId);
-        Task<ClubDto?> GetClubAsync(int id);
+        Task<ClubDto?> GetClubByIdAsync(int id);
         Task<IEnumerable<ClubDto>> GetAllClubsAsync();
-      
+       
     }
 }

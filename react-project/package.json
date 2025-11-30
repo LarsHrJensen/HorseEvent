@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@lucide/lab": "^0.1.2",
     "axios": "^1.13.2",
     "cheerio": "^1.1.2",
     "lucide-react": "^0.553.0",

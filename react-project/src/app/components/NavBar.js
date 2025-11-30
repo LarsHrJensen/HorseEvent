@@ -1,5 +1,7 @@
 
-import {House, CircleUser, MessageCircleMore, CircleQuestionMark, CalendarDays, LogOut, Settings, Trophy} from "lucide-react";
+import { House, CircleUser, MessageCircleMore, CircleQuestionMark, CalendarDays, LogOut, Settings, Trophy } from "lucide-react";
+import { Icon } from "lucide-react";
+import { horseHead } from "@lucide/lab";
 import Link from "next/link";
 import "./NavBar.css"
 
@@ -26,8 +28,8 @@ export default function NavBar(){
                     <span className="text-colour-blue"> Profil </span>
                 </Link>
 
-                <Link href="/get-horses"
-                className="nav-link">
+                <Link href="/get-horses" className="nav-link">
+                    <Icon iconNode={horseHead} className="nav-icon" />
                     <span className="text-colour-blue">Mine Heste</span>
                 </Link>
 

@@ -1,5 +1,8 @@
 //import Image from "next/image";
-import {House, CircleUser, MessageCircleMore, CircleQuestionMark, Trophy} from "lucide-react";
+
+import { House, CircleUser, MessageCircleMore, CircleQuestionMark, Trophy } from "lucide-react";
+import { Icon } from "lucide-react";
+import { horseHead } from "@lucide/lab";
 import "./page.css"
 
 export default function Home() {
@@ -33,6 +36,7 @@ export default function Home() {
           </a>
 
           <a href="/hest" className="btn-icon">
+          <Icon iconNode={horseHead} className="icon" />
           <span> Hest </span>
           </a>
 

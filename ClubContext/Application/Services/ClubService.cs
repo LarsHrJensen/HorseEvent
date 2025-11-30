@@ -70,9 +70,14 @@ namespace ClubContext.Application.Services
             return clubs.Select(c => c.ToDto());
         }
 
-        public Task<ClubDto?> GetClubAsync(int id)
+        public async Task<ClubDto?> GetClubByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            Club? club = await _unitOfWork.Clubs.GetByIdAsync(id);
+
+            if (club == null)
+                return null;
+
+            return club.ToDto();
         }
     }
 }

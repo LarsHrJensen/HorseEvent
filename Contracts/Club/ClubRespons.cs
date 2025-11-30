@@ -10,6 +10,7 @@ namespace Contracts.Club
     {
         public int ClubId { get; set; }
         public string Name { get; set; }
+        public int? DistrictId { get; set; }
         public AddressDto Address { get; set; }
 
         public class AddressDto
@@ -18,6 +19,7 @@ namespace Contracts.Club
             public string StreetNumber { get; set; }
             public string PostalCode { get; set; }
             public string CountryCode { get; set; }
+            public string City { get; set; }
         }
     }
 }

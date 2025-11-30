@@ -48,9 +48,43 @@ namespace HorseRider.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Rider>> GetAllAsync()
+        public async Task<List<Rider>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var riders = new List<Rider>();
+
+            await using var conn = (SqlConnection)_dbConnectionFactory.CreateConnection();
+            await conn.OpenAsync();
+
+            string sql = @"
+                   SELECT 
+                       RiderId, 
+                       RiderName, 
+                       BirthDate, 
+                       MembershipStatus, 
+                       DRFLicenseNr
+                   FROM Rider;
+                  ";
+
+            await using var cmd = new SqlCommand(sql, conn);
+            await using var reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                var rider = new Rider
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("RiderId")),
+                    RiderName = reader.GetString(reader.GetOrdinal("RiderName")),
+                    BirthYear = reader.GetDateTime(reader.GetOrdinal("BirthDate")).Year,
+                    /*    MembershipStatus = reader.GetBoolean(reader.GetOrdinal("MembershipStatus"))*/
+                    DRFLicense = reader.IsDBNull(reader.GetOrdinal("DRFLicenseNr"))
+                                 ? null
+                                 : reader.GetString(reader.GetOrdinal("DRFLicenseNr"))
+                };
+
+                riders.Add(rider);
+            }
+
+            return riders;
         }
 
         public async Task<Rider?> GetByIdAsync(int id)

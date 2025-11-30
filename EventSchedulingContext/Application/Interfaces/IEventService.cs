@@ -11,5 +11,6 @@ namespace EventSchedulingContext.Application.Interfaces
     {
         Task<IEnumerable<EventDTO>> GetAllEventsAsync();
         Task<EventDTO> CreateEventAsync(EventDTO eventDTO);
+        Task<EventDTO> GetByIdAsync(int id);
     }
 }

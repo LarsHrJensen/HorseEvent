@@ -76,7 +76,9 @@ export default function HorseListPage() {
                 </thead>
                 <tbody>
                     {horses.map((horse) => (
-                        <tr key={horse.id}>
+                        <tr key={horse.id}
+                            onClick={() => router.push(`/horse-profile/${horse.id}`)}
+                            style={{ cursor: "pointer" }}>
                             <td style={{ textAlign: 'left' }}>{horse.name} ({horse.ueln})</td>
                             <td style={{ textAlign: 'left' }}>{horse.birthYear}</td>
                             <td style={{ textAlign: 'left' }}>{horse.category}</td>
