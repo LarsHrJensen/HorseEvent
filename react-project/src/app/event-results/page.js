@@ -1,17 +1,22 @@
 'use client'
 
+//import { getResults } from "@/services/resultsService";
 import { useEffect, useState } from "react";
 import "./page.css"
 
 
 export default function ResultsPage() {
     const [results, setResults] = useState ([]);
+//  const [loading, setLoading] = useState(true);
 
-    useEffect (() => {
-        fetch("link")
+
+    useEffect (() => { //DATA FETCHING 
+        fetch("link") //url not implemented -- conceptufally not functionally
         .then((res) => res.json())
         .then((data) => setResults(data))
         .catch((err) => console.error("Error fecting results>", err));
+
+
 
         // TEMP DATA for now (so it displays before backend is live)
         setResults([
@@ -89,6 +94,26 @@ export default function ResultsPage() {
         ]);
     }, []);
 
+    // DATA FECTHING FROM SERVICE GETRESULTS
+    // useEffect(() => {
+    //     const loadResults = async () => {
+    //         try {
+    //             const data = await getResults();
+    //             setResults(data);
+    //         } catch (err) {
+    //             console.error(err);
+    //             setResults([/* TEMP DATA */]);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+
+    //     loadResults();
+    // }, []);
+
+    // if (loading) return <p>Loading results…</p>;
+
+
     return(
         <main className="results-page">
             {/* HEADER */}
@@ -138,3 +163,16 @@ export default function ResultsPage() {
         </main>
     );
 }
+
+//EKSEMPEL PÅ SERVICE OPDELING AF ANSVAR MELLEM KOMPONENTER
+    // HER ER GETRESULTS
+// services/resultsService.js
+// export async function getResults() {
+//     const res = await fetch("REAL_API_URL");
+
+//     if (!res.ok) {
+//         throw new Error("Failed to fetch results");
+//     }
+
+//     return res.json();
+// }

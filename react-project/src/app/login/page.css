@@ -26,6 +26,11 @@ align-items: flex-start;
 gap: 40px;
 }
 
+.login-title {
+    color: black;
+    font-weight: bold;
+}
+
 /*billedet*/
 .login-image{
 flex-shrink: 0;
@@ -41,6 +46,7 @@ gap: 16px;
 .form-group{
 display: flex;
 flex-direction: column;
+color: black;
 }
 
 .form-group label{
@@ -52,6 +58,7 @@ font-weight:bold;
 padding: 10px;
 border: 1px solid #ccc;
 border-radius: 6px;
+color: black;
 }
 
 .login-button{
