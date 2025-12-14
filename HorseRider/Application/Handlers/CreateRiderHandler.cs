@@ -3,8 +3,8 @@ using HorseRider.Application.DTO_s;
 using HorseRider.Application.Interfaces;
 using HorseRider.Domain.Entities;
 using Ganss.Xss;
+
 using MediatR;
-using Microsoft.VisualBasic;
 
 namespace HorseRider.Application.Handlers
 {
@@ -19,7 +19,7 @@ namespace HorseRider.Application.Handlers
 
             public async Task<RiderDTO> Handle(CreateRiderCommand command, CancellationToken cancellationToken)
             {
-
+                // SANITIZATION AF BRUGER INPUT FRA FRONTEND
                 var sanitizer = new HtmlSanitizer();
 
                 var cleanName = sanitizer.Sanitize(command.Name);
